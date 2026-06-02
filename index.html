@@ -3,673 +3,285 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Marketing Manager · PDI · Mariana</title>
+<title>PDI · Mariana · Marketing Manager</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Sans+3:wght@300;400;500;600&display=swap');
-
 :root {
-  --black: #100f0f;
-  --green: #57df7f;
-  --white: #ffffff;
-  --green2: rgba(87,223,127,.12);
-  --green3: rgba(87,223,127,.22);
-  --t1: #f0efed;
-  --t2: #c4c3bf;
-  --t3: #7a7874;
-  --t4: #3a3836;
-  --card: #1a1918;
-  --border: rgba(255,255,255,.07);
-  --amber: #f0a030;
-  --coral: #f05c4a;
-  --violet: #8b6fe8;
-  --teal: #35c4a0;
-  --blue: #4db8f0;
+  --bg:       #f5f4f2;
+  --bg2:      #edecea;
+  --surface:  #ffffff;
+  --border:   rgba(0,0,0,.07);
+  --border2:  rgba(0,0,0,.12);
+  --t1:       #1a1918;
+  --t2:       #4a4846;
+  --t3:       #9a9896;
+  --t4:       #c8c6c4;
+  --green:    #1a9e4a;
+  --green-bg: rgba(26,158,74,.1);
+  --green-bd: rgba(26,158,74,.2);
+  --amber:    #d97706;
+  --amber-bg: rgba(217,119,6,.1);
+  --coral:    #e04a38;
+  --coral-bg: rgba(224,74,56,.1);
+  --violet:   #7c3aed;
+  --violet-bg:rgba(124,58,237,.1);
+  --teal:     #0d9488;
+  --teal-bg:  rgba(13,148,136,.1);
+  --blue:     #2563eb;
+  --blue-bg:  rgba(37,99,235,.1);
+  --sidebar:  #100f0f;
+  --sb-text:  rgba(255,255,255,.65);
+  --sb-act:   rgba(87,223,127,.15);
+  --sb-actc:  #57df7f;
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-html { scroll-behavior: smooth; }
-
-body {
-  background: var(--black);
-  color: var(--t1);
-  font-family: 'Source Sans 3', sans-serif;
-  font-weight: 400;
-  line-height: 1.5;
-  min-height: 100vh;
-  display: flex;
-}
-
-/* ─── SIDEBAR ─── */
-nav {
-  width: 240px;
-  min-height: 100vh;
-  background: #0c0b0b;
-  border-right: 1px solid var(--border);
-  display: flex;
-  flex-direction: column;
-  padding: 28px 0;
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  overflow-y: auto;
-  flex-shrink: 0;
-}
-
-.sb-logo {
-  padding: 0 20px 24px;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 20px;
-}
-
-.sb-logo-word {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 28px;
-  letter-spacing: 2px;
-  color: var(--green);
-  line-height: 1;
-}
-
-.sb-tagline {
-  font-size: 10px;
-  color: var(--t3);
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  margin-top: 4px;
-}
-
-.sb-sect {
-  padding: 0 12px 20px;
-}
-
-.sb-label {
-  font-size: 9px;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: var(--t3);
-  padding: 0 8px;
-  display: block;
-  margin-bottom: 8px;
-}
-
-.nav-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  width: 100%;
-  background: none;
-  border: none;
-  color: var(--t2);
-  font-family: 'Source Sans 3', sans-serif;
-  font-size: 13px;
-  font-weight: 400;
-  padding: 8px 10px;
-  border-radius: 8px;
-  cursor: pointer;
-  text-align: left;
-  transition: all .2s;
-  margin-bottom: 2px;
-}
-.nav-item:hover { background: rgba(255,255,255,.04); color: var(--t1); }
-.nav-item.active { background: var(--green2); color: var(--green); font-weight: 500; }
-
-.nav-dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: currentColor;
-  opacity: .6;
-  flex-shrink: 0;
-}
-
-.sb-person {
-  margin-top: auto;
-  padding: 16px 20px 0;
-  border-top: 1px solid var(--border);
-}
-
-.sb-av {
-  width: 36px; height: 36px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--green), #2ab85f);
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 18px; color: var(--black);
-  flex-shrink: 0;
-}
-
-.sb-person-row {
-  display: flex; align-items: center; gap: 10px;
-}
-
-.sb-pname { font-size: 13px; font-weight: 500; color: var(--t1); }
-.sb-prole { font-size: 11px; color: var(--t3); }
-
-.lvl-badge {
-  display: inline-block;
-  background: var(--green2);
-  color: var(--green);
-  border: 1px solid rgba(87,223,127,.25);
-  font-size: 10px;
-  font-weight: 600;
-  padding: 2px 7px;
-  border-radius: 20px;
-  margin-top: 6px;
-  letter-spacing: .5px;
-}
-
-/* ─── MAIN ─── */
-main { flex: 1; overflow-x: hidden; }
-
-.view { display: none; padding: 32px 36px 60px; max-width: 960px; }
-.view.active { display: block; }
-
-.topbar {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  margin-bottom: 28px;
-}
-
-.page-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 32px;
-  letter-spacing: 1px;
-  color: var(--t1);
-  line-height: 1;
-}
-
-.page-sub { font-size: 13px; color: var(--t3); margin-top: 4px; }
-
-/* ─── HERO ─── */
-.hero {
-  background: linear-gradient(135deg, #1a1918 60%, rgba(87,223,127,.06) 100%);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 24px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  margin-bottom: 24px;
-}
-
-.hero-av {
-  width: 60px; height: 60px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--green), #2ab85f);
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 28px; color: var(--black);
-  flex-shrink: 0;
-}
-
-.hero-info { flex: 1; }
-.hero-name { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: .5px; color: var(--t1); }
-.hero-role { font-size: 13px; color: var(--t3); margin-top: 2px; }
-.hero-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
-.hero-tag {
-  background: rgba(255,255,255,.06);
-  border: 1px solid var(--border);
-  font-size: 11px; color: var(--t2);
-  padding: 3px 9px; border-radius: 20px;
-}
-
-.hero-stats {
-  display: flex; gap: 24px;
-  flex-shrink: 0;
-}
-
-.h-sv {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 26px;
-  color: var(--green);
-  line-height: 1;
-}
-.h-sl { font-size: 11px; color: var(--t3); margin-top: 2px; text-align: center; }
-
-/* ─── SECTION ─── */
-.section { margin-bottom: 28px; }
-
-.sec-hd {
-  display: flex; align-items: center; justify-content: space-between;
-  margin-bottom: 14px;
-}
-
-.sec-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 16px;
-  letter-spacing: 1px;
-  color: var(--t2);
-}
-
-/* ─── GRIDS ─── */
-.g3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
-.g2 { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; }
-.g1 { display: grid; grid-template-columns: 1fr; gap: 14px; }
-
-/* ─── CARDS ─── */
-.card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 18px;
-}
-
-.kpi { position: relative; overflow: hidden; }
-.kpi-label { font-size: 11px; color: var(--t3); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
-.kpi-val { font-family: 'Bebas Neue', sans-serif; font-size: 36px; line-height: 1; color: var(--t1); }
-.kpi-delta { font-size: 11px; margin-top: 4px; color: var(--t3); }
-.kpi-meta { font-size: 11px; color: var(--t3); margin-top: 8px; }
-
-.bar-wrap { height: 4px; background: rgba(255,255,255,.07); border-radius: 2px; margin-top: 10px; }
-.bar-fill { height: 100%; border-radius: 2px; transition: width .8s cubic-bezier(.4,0,.2,1); }
-
-.a-brand .bar-fill { background: var(--green); }
-.a-brand .kpi-val { color: var(--green); }
-.a-coral .bar-fill { background: var(--coral); }
-.a-coral .kpi-val { color: var(--coral); }
-.a-amber .bar-fill { background: var(--amber); }
-.a-amber .kpi-val { color: var(--amber); }
-.a-violet .bar-fill { background: var(--violet); }
-.a-violet .kpi-val { color: var(--violet); }
-.a-teal .bar-fill { background: var(--teal); }
-.a-teal .kpi-val { color: var(--teal); }
-
-/* ─── CHART CARD ─── */
-.chart-card { padding: 20px; }
-.chart-title { font-size: 13px; font-weight: 600; color: var(--t1); }
-.chart-sub { font-size: 11px; color: var(--t3); margin-bottom: 14px; margin-top: 2px; }
-
-/* ─── SCORE ─── */
-.score-circle-wrap {
-  display: flex; flex-direction: column; align-items: center;
-  padding: 24px 0;
-}
-
-.score-circle {
-  --pct: 0;
-  width: 140px; height: 140px;
-  border-radius: 50%;
-  background: conic-gradient(var(--green) 0% calc(var(--pct) * 1%), rgba(255,255,255,.07) calc(var(--pct) * 1%) 100%);
-  display: flex; align-items: center; justify-content: center;
-  position: relative;
-}
-
-.score-circle::before {
-  content: '';
-  position: absolute;
-  width: 108px; height: 108px;
-  border-radius: 50%;
-  background: var(--card);
-}
-
-.score-inner { position: relative; z-index: 1; text-align: center; }
-.score-num { font-family: 'Bebas Neue', sans-serif; font-size: 44px; color: var(--green); line-height: 1; }
-.score-max { font-size: 11px; color: var(--t3); }
-.score-label { font-size: 12px; color: var(--t2); margin-top: 10px; text-align: center; }
-.score-desc { font-size: 11px; color: var(--t3); text-align: center; margin-top: 2px; }
-
-.score-dim { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-.sd-label { font-size: 11px; color: var(--t3); text-transform: uppercase; letter-spacing: .8px; width: 100px; flex-shrink: 0; }
-.sd-bar { flex: 1; height: 6px; background: rgba(255,255,255,.07); border-radius: 3px; overflow: hidden; }
-.sd-fill { height: 100%; border-radius: 3px; transition: width .8s; }
-.sd-val { font-size: 11px; color: var(--t2); width: 36px; text-align: right; flex-shrink: 0; }
-
-/* ─── READINESS ─── */
-.readiness-badge {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-size: 11px; font-weight: 600; letter-spacing: .8px; text-transform: uppercase;
-  padding: 5px 12px; border-radius: 20px;
-}
-.rb-dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
-.rb-ready { background: rgba(53,196,160,.15); color: var(--teal); border: 1px solid rgba(53,196,160,.3); }
-.rb-transition { background: rgba(240,160,48,.15); color: var(--amber); border: 1px solid rgba(240,160,48,.3); }
-.rb-developing { background: rgba(139,111,232,.15); color: var(--violet); border: 1px solid rgba(139,111,232,.3); }
-
-/* ─── SKILLS ─── */
-.tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
-.tab-item {
-  background: rgba(255,255,255,.04);
-  border: 1px solid var(--border);
-  color: var(--t3);
-  font-size: 12px;
-  padding: 5px 12px;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: all .2s;
-  font-family: 'Source Sans 3', sans-serif;
-}
-.tab-item:hover { color: var(--t1); }
-.tab-item.active { background: var(--green2); color: var(--green); border-color: rgba(87,223,127,.3); }
-
-.skill-row {
-  display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
-  padding: 14px 0;
-  border-bottom: 1px solid var(--border);
-}
-.skill-row:last-child { border-bottom: none; }
-
-.skill-name { font-size: 14px; font-weight: 500; color: var(--t1); }
-.skill-desc { font-size: 12px; color: var(--t3); margin-top: 2px; }
-.skill-obs { font-size: 11px; color: var(--t4); margin-top: 4px; font-style: italic; }
-
-.cat-row {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 12px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--t3);
-  padding: 12px 0 6px;
-  border-bottom: 1px solid rgba(255,255,255,.04);
-  margin-bottom: 2px;
-}
-
-.gap-pill {
-  font-size: 11px; font-weight: 600;
-  padding: 3px 10px; border-radius: 20px;
-  white-space: nowrap; flex-shrink: 0;
-  letter-spacing: .4px;
-}
-.gap-miss { background: rgba(240,92,74,.12); color: var(--coral); }
-.gap-prog { background: rgba(240,160,48,.12); color: var(--amber); }
-.gap-ok { background: rgba(87,223,127,.1); color: var(--green); }
-.gap-super { background: rgba(53,196,160,.12); color: var(--teal); }
-
-/* ─── PDI CARD ─── */
-.pdi-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 22px;
-  margin-bottom: 16px;
-  position: relative;
-  overflow: hidden;
-}
-
-.pdi-status-bar {
-  position: absolute; top: 0; left: 0; right: 0; height: 3px;
-}
-
-.pdi-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
-.pdi-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
-.pdi-title { font-size: 16px; font-weight: 600; color: var(--t1); flex: 1; }
-.pdi-ciclo { font-size: 11px; color: var(--t3); margin-top: 3px; }
-
-.pdi-st-badge {
-  font-size: 10px; font-weight: 600;
-  padding: 3px 9px; border-radius: 20px;
-  white-space: nowrap; flex-shrink: 0;
-  letter-spacing: .5px;
-}
-
-.pdi-progress-row { display: flex; align-items: center; gap: 10px; margin: 12px 0; }
-.pdi-prog-label { font-size: 11px; color: var(--t3); width: 70px; flex-shrink: 0; }
-.pdi-prog-bar { flex: 1; height: 6px; background: rgba(255,255,255,.07); border-radius: 3px; overflow: hidden; }
-.pdi-prog-fill { height: 100%; border-radius: 3px; transition: width .8s; }
-.pdi-prog-val { font-size: 11px; color: var(--t2); width: 30px; text-align: right; }
-
-.pdi-body { font-size: 13px; color: var(--t2); line-height: 1.6; }
-.pdi-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--t3); margin: 12px 0 4px; }
-.pdi-text { font-size: 13px; color: var(--t1); line-height: 1.6; }
-.pdi-actions { margin: 12px 0 0; }
-.pdi-action { display: flex; align-items: flex-start; gap: 8px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,.04); }
-.pdi-action:last-child { border-bottom: none; }
-.pdi-action-pct {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 16px; color: var(--green); flex-shrink: 0; width: 28px;
-}
-.pdi-action-text { font-size: 12px; color: var(--t2); }
-
-.ev-tag {
-  display: inline-block;
-  background: rgba(255,255,255,.05);
-  border: 1px solid var(--border);
-  font-size: 11px; color: var(--t3);
-  padding: 2px 8px; border-radius: 4px;
-  margin-top: 8px;
-}
-
-.evidencias-list { margin-top: 8px; }
-.ev-item {
-  display: flex; align-items: flex-start; gap: 6px;
-  font-size: 12px; color: var(--t3);
-  padding: 4px 0;
-}
-.ev-dot { color: var(--green); flex-shrink: 0; margin-top: 2px; }
-
-/* ─── CONTRATO ─── */
-.contrato-header {
-  display: flex; align-items: center; justify-content: space-between;
-  margin-bottom: 16px;
-}
-.mes-selector { display: flex; gap: 6px; }
-.mes-btn {
-  background: rgba(255,255,255,.04);
-  border: 1px solid var(--border);
-  color: var(--t3); font-size: 12px;
-  padding: 5px 12px; border-radius: 8px;
-  cursor: pointer; font-family: 'Source Sans 3', sans-serif;
-  transition: all .2s;
-}
-.mes-btn:hover { color: var(--t1); }
-.mes-btn.active { background: var(--green2); color: var(--green); border-color: rgba(87,223,127,.3); }
-
-.exp-item {
-  display: grid;
-  grid-template-columns: 28px 1fr auto;
-  gap: 10px;
-  align-items: start;
-  padding: 14px;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  margin-bottom: 8px;
-}
-
-.exp-tipo {
-  font-size: 14px;
-  flex-shrink: 0;
-}
-
-.exp-ponto { font-size: 13px; color: var(--t1); font-weight: 500; margin-bottom: 3px; }
-.exp-acao { font-size: 12px; color: var(--t3); }
-.exp-recurso { font-size: 11px; color: var(--t4); margin-top: 4px; }
-
-.exp-status-select {
-  background: rgba(255,255,255,.05);
-  border: 1px solid var(--border);
-  color: var(--t2);
-  font-size: 11px;
-  padding: 4px 8px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-family: 'Source Sans 3', sans-serif;
-}
-
-.exp-resultado-input {
-  width: 100%;
-  background: rgba(255,255,255,.04);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  color: var(--t1);
-  font-size: 12px;
-  padding: 6px 10px;
-  margin-top: 6px;
-  font-family: 'Source Sans 3', sans-serif;
-  resize: none;
-  grid-column: 1 / -1;
-}
-
-.exp-resultado-input:focus { outline: none; border-color: rgba(87,223,127,.4); }
-
-/* ─── CURADORIA ─── */
-.cur-item {
-  display: flex; align-items: flex-start; gap: 14px;
-  padding: 14px;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  margin-bottom: 8px;
-  text-decoration: none;
-  transition: border-color .2s;
-}
-.cur-item:hover { border-color: rgba(87,223,127,.3); }
-.cur-emoji { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
-.cur-title { font-size: 13px; font-weight: 500; color: var(--t1); }
-.cur-desc { font-size: 12px; color: var(--t3); margin-top: 3px; }
-.cur-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 6px; }
-.cur-tag {
-  font-size: 10px; color: var(--t3);
-  background: rgba(255,255,255,.05);
-  border: 1px solid var(--border);
-  padding: 2px 7px; border-radius: 20px;
-}
-
-/* ─── ADD BTN ─── */
-.add-btn {
-  display: inline-flex; align-items: center; gap: 6px;
-  background: var(--green2);
-  border: 1px solid rgba(87,223,127,.25);
-  color: var(--green);
-  font-family: 'Source Sans 3', sans-serif;
-  font-size: 12px; font-weight: 500;
-  padding: 7px 14px; border-radius: 8px;
-  cursor: pointer; transition: all .2s;
-}
-.add-btn:hover { background: var(--green3); }
-
-/* ─── PROMO CRITERIA ─── */
-.promo-skill-row {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--border);
-}
-.promo-skill-row:last-child { border-bottom: none; }
-.promo-skill-name { font-size: 13px; color: var(--t1); }
-.promo-skill-target { font-size: 11px; color: var(--t3); margin-top: 2px; }
-.promo-status { font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 20px; white-space: nowrap; }
-.ps-done { background: rgba(53,196,160,.1); color: var(--teal); }
-.ps-progress { background: rgba(240,160,48,.1); color: var(--amber); }
-
-/* ─── AUTO SCALE ─── */
-.auto-scale { display: flex; gap: 4px; margin-top: 8px; }
-.auto-step { width: 20px; height: 4px; border-radius: 2px; background: rgba(255,255,255,.08); }
-.auto-step.filled { background: var(--violet); }
-
-/* ─── TOAST ─── */
-.toast {
-  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(20px);
-  background: #2a2928; border: 1px solid var(--border);
-  color: var(--t1); font-size: 13px;
-  padding: 10px 20px; border-radius: 8px;
-  opacity: 0; transition: all .3s; pointer-events: none; z-index: 999;
-}
-.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-/* ─── MODAL ─── */
-.modal {
-  display: none; position: fixed; inset: 0;
-  background: rgba(0,0,0,.6); backdrop-filter: blur(4px);
-  z-index: 100; align-items: center; justify-content: center; padding: 24px;
-}
-.modal.open { display: flex; }
-.modal-box {
-  background: #1a1918; border: 1px solid var(--border);
-  border-radius: 16px; padding: 28px;
-  max-width: 520px; width: 100%; max-height: 80vh; overflow-y: auto;
-}
-.modal-title { font-family: 'Bebas Neue', sans-serif; font-size: 20px; color: var(--t1); margin-bottom: 18px; }
-.modal-field { margin-bottom: 14px; }
-.modal-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--t3); margin-bottom: 5px; display: block; }
-.modal-input, .modal-select, .modal-textarea {
-  width: 100%;
-  background: rgba(255,255,255,.05);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  color: var(--t1);
-  font-family: 'Source Sans 3', sans-serif;
-  font-size: 13px;
-  padding: 8px 12px;
-}
-.modal-textarea { resize: vertical; min-height: 80px; }
-.modal-input:focus, .modal-select:focus, .modal-textarea:focus { outline: none; border-color: rgba(87,223,127,.4); }
-.modal-actions { display: flex; gap: 8px; margin-top: 20px; justify-content: flex-end; }
-.modal-cancel {
-  background: rgba(255,255,255,.04); border: 1px solid var(--border);
-  color: var(--t2); font-family: 'Source Sans 3', sans-serif; font-size: 13px;
-  padding: 8px 16px; border-radius: 8px; cursor: pointer;
-}
-.modal-save {
-  background: var(--green2); border: 1px solid rgba(87,223,127,.25);
-  color: var(--green); font-family: 'Source Sans 3', sans-serif; font-size: 13px; font-weight: 500;
-  padding: 8px 16px; border-radius: 8px; cursor: pointer;
-}
-
-/* ─── EVOLUCOES ─── */
-.evol-item {
-  display: flex; align-items: flex-start; gap: 12px;
-  padding: 12px 0; border-bottom: 1px solid var(--border);
-}
-.evol-item:last-child { border-bottom: none; }
-.evol-date { font-size: 11px; color: var(--t3); white-space: nowrap; flex-shrink: 0; margin-top: 2px; }
-.evol-acao { font-size: 13px; color: var(--t1); }
-.evol-obs { font-size: 12px; color: var(--t3); margin-top: 3px; }
-.evol-badge {
-  font-size: 10px; font-weight: 600; padding: 2px 7px; border-radius: 20px;
-  white-space: nowrap; flex-shrink: 0;
-}
-.evol-positivo { background: rgba(87,223,127,.1); color: var(--green); }
-.evol-negativo { background: rgba(240,92,74,.1); color: var(--coral); }
-
-/* ─── RESPONSIVE ─── */
-@media (max-width: 768px) {
-  nav { width: 200px; }
-  .view { padding: 20px 16px 40px; }
-  .g3 { grid-template-columns: 1fr 1fr; }
-  .g2 { grid-template-columns: 1fr; }
-}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--t1);font-family:'DM Sans',sans-serif;font-weight:400;line-height:1.5;display:flex;min-height:100vh}
+
+/* ══ SIDEBAR ══ */
+nav{width:220px;min-height:100vh;background:var(--sidebar);display:flex;flex-direction:column;padding:24px 0;position:sticky;top:0;height:100vh;overflow-y:auto;flex-shrink:0}
+.sb-brand{padding:0 18px 20px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:16px}
+.sb-logo{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:3px;color:#57df7f;line-height:1}
+.sb-sub{font-size:9px;color:rgba(255,255,255,.3);letter-spacing:1.5px;text-transform:uppercase;margin-top:3px}
+.sb-sect{padding:0 10px 18px}
+.sb-lbl{font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,.25);padding:0 8px;display:block;margin-bottom:6px}
+.nav-btn{display:flex;align-items:center;gap:9px;width:100%;background:none;border:none;color:var(--sb-text);font-family:'DM Sans',sans-serif;font-size:13px;padding:7px 10px;border-radius:8px;cursor:pointer;text-align:left;transition:all .18s;margin-bottom:1px}
+.nav-btn:hover{background:rgba(255,255,255,.05);color:#fff}
+.nav-btn.active{background:var(--sb-act);color:var(--sb-actc);font-weight:500}
+.nav-dot{width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.7;flex-shrink:0}
+.sb-person{margin-top:auto;padding:16px 18px 0;border-top:1px solid rgba(255,255,255,.08)}
+.sb-av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#57df7f,#2ab85f);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:17px;color:#100f0f;flex-shrink:0}
+.sb-row{display:flex;align-items:center;gap:9px}
+.sb-pname{font-size:13px;font-weight:500;color:#fff}
+.sb-prole{font-size:10px;color:rgba(255,255,255,.35);margin-top:1px}
+.sb-badge{display:inline-block;background:rgba(87,223,127,.12);color:#57df7f;border:1px solid rgba(87,223,127,.22);font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;margin-top:7px;letter-spacing:.4px}
+
+/* ══ MAIN ══ */
+main{flex:1;min-width:0}
+.view{display:none;padding:36px 40px 64px;max-width:1040px}
+.view.active{display:block}
+
+/* ══ TOPBAR ══ */
+.topbar{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:32px}
+.pg-title{font-family:'Bebas Neue',sans-serif;font-size:40px;letter-spacing:1.5px;color:var(--t1);line-height:1}
+.pg-sub{font-size:13px;color:var(--t3);margin-top:5px}
+
+/* ══ HERO ══ */
+.hero{background:var(--sidebar);border-radius:20px;padding:28px 32px;display:flex;align-items:center;gap:24px;margin-bottom:28px}
+.hero-av{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#57df7f,#2ab85f);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:34px;color:#100f0f;flex-shrink:0}
+.hero-info{flex:1}
+.hero-name{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:.5px;color:#fff;line-height:1}
+.hero-role{font-size:13px;color:rgba(255,255,255,.45);margin-top:4px}
+.hero-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.hero-tag{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);font-size:11px;color:rgba(255,255,255,.6);padding:3px 10px;border-radius:20px}
+.hero-stats{display:flex;gap:32px;flex-shrink:0;text-align:center}
+.h-num{font-family:'Bebas Neue',sans-serif;font-size:36px;color:#57df7f;line-height:1}
+.h-lbl{font-size:10px;color:rgba(255,255,255,.35);margin-top:3px;text-transform:uppercase;letter-spacing:.8px}
+
+/* ══ SECTION ══ */
+.section{margin-bottom:32px}
+.sec-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.sec-title{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:1.5px;color:var(--t3);text-transform:uppercase}
+
+/* ══ GRID ══ */
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.g2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+
+/* ══ KPI CARD ══ */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px}
+.kpi-lbl{font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+.kpi-val{font-family:'Bebas Neue',sans-serif;font-size:52px;line-height:1;letter-spacing:-.5px}
+.kpi-delta{font-size:12px;color:var(--t3);margin-top:5px}
+.kpi-meta{font-size:11px;color:var(--t3);margin-top:12px}
+.bar-wrap{height:5px;background:var(--bg2);border-radius:3px;margin-top:14px;overflow:hidden}
+.bar-fill{height:100%;border-radius:3px;transition:width .9s cubic-bezier(.4,0,.2,1)}
+
+/* ══ CHART CARD ══ */
+.chart-card .chart-title{font-size:14px;font-weight:600;color:var(--t1)}
+.chart-card .chart-sub{font-size:12px;color:var(--t3);margin-bottom:16px;margin-top:3px}
+
+/* ══ READINESS ══ */
+.rb{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;padding:6px 14px;border-radius:20px}
+.rb-dot{width:7px;height:7px;border-radius:50%;background:currentColor}
+.rb-ready{background:var(--teal-bg);color:var(--teal);border:1px solid rgba(13,148,136,.25)}
+.rb-transition{background:var(--amber-bg);color:var(--amber);border:1px solid rgba(217,119,6,.25)}
+.rb-developing{background:var(--violet-bg);color:var(--violet);border:1px solid rgba(124,58,237,.25)}
+
+/* ══ AUTO SCALE ══ */
+.auto-scale{display:flex;gap:5px;margin-top:10px}
+.auto-step{flex:1;height:6px;border-radius:3px;background:var(--bg2)}
+.auto-step.filled{background:var(--violet)}
+
+/* ══ SCORE ══ */
+.score-circle-wrap{display:flex;flex-direction:column;align-items:center;padding:32px 0}
+.score-circle{--pct:0;width:160px;height:160px;border-radius:50%;background:conic-gradient(var(--green) 0% calc(var(--pct)*1%),var(--bg2) calc(var(--pct)*1%) 100%);display:flex;align-items:center;justify-content:center;position:relative}
+.score-circle::before{content:'';position:absolute;width:122px;height:122px;border-radius:50%;background:var(--surface)}
+.score-inner{position:relative;z-index:1;text-align:center}
+.score-num{font-family:'Bebas Neue',sans-serif;font-size:54px;color:var(--green);line-height:1}
+.score-max{font-size:12px;color:var(--t3)}
+.score-label{font-size:13px;color:var(--t2);margin-top:12px;text-align:center;font-weight:500}
+.score-desc{font-size:12px;color:var(--t3);text-align:center;margin-top:3px}
+
+.score-dim{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid var(--border)}
+.score-dim:last-child{border-bottom:none}
+.sd-label{font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:.8px;width:110px;flex-shrink:0}
+.sd-bar{flex:1;height:8px;background:var(--bg2);border-radius:4px;overflow:hidden}
+.sd-fill{height:100%;border-radius:4px;transition:width .9s}
+.sd-val{font-size:12px;font-weight:500;color:var(--t2);width:40px;text-align:right;flex-shrink:0}
+
+/* ══ SKILLS ══ */
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px}
+.tab{background:var(--bg2);border:1px solid var(--border);color:var(--t3);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;padding:6px 14px;border-radius:20px;cursor:pointer;transition:all .18s}
+.tab:hover{color:var(--t1)}
+.tab.active{background:var(--t1);color:#fff;border-color:var(--t1)}
+
+.skill-row{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;padding:16px 0;border-bottom:1px solid var(--border)}
+.skill-row:last-child{border-bottom:none}
+.skill-name{font-size:14px;font-weight:500;color:var(--t1)}
+.skill-desc{font-size:12px;color:var(--t3);margin-top:2px}
+.skill-obs{font-size:11px;color:var(--t4);margin-top:4px;font-style:italic}
+.cat-row{font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--t4);padding:14px 0 8px;border-bottom:1px solid var(--bg2)}
+
+.pill{font-size:11px;font-weight:600;padding:4px 11px;border-radius:20px;white-space:nowrap;flex-shrink:0}
+.p-nao{background:var(--coral-bg);color:var(--coral)}
+.p-dev{background:var(--amber-bg);color:var(--amber)}
+.p-ok{background:var(--green-bg);color:var(--green)}
+.p-sup{background:var(--teal-bg);color:var(--teal)}
+
+/* ══ PDI CARDS ══ */
+.pdi-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:26px;margin-bottom:18px;position:relative;overflow:hidden}
+.pdi-bar{position:absolute;top:0;left:0;right:0;height:4px}
+.pdi-header{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:16px}
+.pdi-icon{font-size:26px;flex-shrink:0;margin-top:2px}
+.pdi-title{font-size:17px;font-weight:600;color:var(--t1);flex:1;line-height:1.3}
+.pdi-sub{font-size:12px;color:var(--t3);margin-top:4px}
+.pdi-st-pill{font-size:10px;font-weight:600;padding:4px 10px;border-radius:20px;white-space:nowrap;flex-shrink:0;letter-spacing:.4px}
+
+.pdi-prog-row{display:flex;align-items:center;gap:12px;margin:14px 0}
+.pdi-prog-lbl{font-size:11px;color:var(--t3);width:72px;flex-shrink:0}
+.pdi-prog-bar{flex:1;height:8px;background:var(--bg2);border-radius:4px;overflow:hidden}
+.pdi-prog-fill{height:100%;border-radius:4px;transition:width .9s}
+.pdi-prog-pct{font-size:12px;font-weight:600;color:var(--t2);width:34px;text-align:right}
+
+.pdi-lbl{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--t3);margin:14px 0 5px}
+.pdi-txt{font-size:13px;color:var(--t2);line-height:1.65}
+
+/* 70/20/10 blocks */
+.pie-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:8px}
+.pie-block{border-radius:12px;padding:16px}
+.pie-pct{font-family:'Bebas Neue',sans-serif;font-size:32px;line-height:1;margin-bottom:8px}
+.pie-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px}
+.pie-items{font-size:12px;line-height:1.7}
+.pie-70{background:rgba(26,158,74,.07);border:1px solid var(--green-bd)}
+.pie-70 .pie-pct,.pie-70 .pie-label{color:var(--green)}
+.pie-20{background:var(--blue-bg);border:1px solid rgba(37,99,235,.18)}
+.pie-20 .pie-pct,.pie-20 .pie-label{color:var(--blue)}
+.pie-10{background:var(--violet-bg);border:1px solid rgba(124,58,237,.18)}
+.pie-10 .pie-pct,.pie-10 .pie-label{color:var(--violet)}
+
+.ev-tag{display:inline-block;background:var(--bg2);border:1px solid var(--border2);font-size:11px;color:var(--t3);padding:3px 9px;border-radius:6px;margin-right:5px;margin-top:10px}
+.ev-item{display:flex;align-items:flex-start;gap:7px;font-size:12px;color:var(--t3);padding:4px 0}
+.ev-dot{color:var(--green);flex-shrink:0;margin-top:2px}
+
+/* ══ PROMO CRITERIA ══ */
+.crit-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border)}
+.crit-row:last-child{border-bottom:none}
+.crit-name{font-size:13px;color:var(--t1);font-weight:500}
+.crit-val{font-size:12px;color:var(--t3);margin-top:2px}
+.ps-done{background:var(--teal-bg);color:var(--teal);font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px}
+.ps-prog{background:var(--amber-bg);color:var(--amber);font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px}
+
+/* ══ CONTRATO ══ */
+.mes-btns{display:flex;gap:7px;margin-bottom:20px;flex-wrap:wrap}
+.mes-btn{background:var(--bg2);border:1px solid var(--border);color:var(--t3);font-family:'DM Sans',sans-serif;font-size:12px;padding:6px 14px;border-radius:8px;cursor:pointer;transition:all .18s}
+.mes-btn.active{background:var(--t1);color:#fff;border-color:var(--t1)}
+
+.exp-card{display:grid;grid-template-columns:30px 1fr auto;gap:12px;align-items:start;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:12px;margin-bottom:10px}
+.exp-tipo{font-size:16px}
+.exp-ponto{font-size:13px;font-weight:500;color:var(--t1);margin-bottom:3px}
+.exp-acao{font-size:12px;color:var(--t3)}
+.exp-recurso{font-size:11px;color:var(--t4);margin-top:4px}
+.exp-result{font-size:11px;color:var(--green);margin-top:4px;font-weight:500}
+.exp-sel{background:var(--bg2);border:1px solid var(--border);color:var(--t2);font-size:11px;padding:4px 8px;border-radius:6px;cursor:pointer;font-family:'DM Sans',sans-serif}
+
+/* ══ CURADORIA ══ */
+.cur-card{display:flex;align-items:flex-start;gap:14px;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:12px;margin-bottom:10px;text-decoration:none;transition:border-color .2s}
+.cur-card:hover{border-color:var(--green-bd)}
+.cur-emoji{font-size:22px;flex-shrink:0;margin-top:1px}
+.cur-title{font-size:13px;font-weight:600;color:var(--t1)}
+.cur-desc{font-size:12px;color:var(--t3);margin-top:2px}
+.cur-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
+.cur-tag{font-size:10px;color:var(--t3);background:var(--bg2);border:1px solid var(--border);padding:2px 8px;border-radius:20px}
+
+/* ══ BUTTONS ══ */
+.add-btn{display:inline-flex;align-items:center;gap:6px;background:var(--t1);color:#fff;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;padding:8px 16px;border-radius:9px;border:none;cursor:pointer;transition:opacity .18s}
+.add-btn:hover{opacity:.85}
+
+/* ══ MODAL ══ */
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);z-index:100;align-items:center;justify-content:center;padding:24px}
+.modal.open{display:flex}
+.modal-box{background:#fff;border-radius:16px;padding:28px;max-width:520px;width:100%;max-height:82vh;overflow-y:auto}
+.modal-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:.5px;color:var(--t1);margin-bottom:18px}
+.mf{margin-bottom:13px}
+.ml{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--t3);margin-bottom:5px;display:block}
+.mi,.ms,.mt{width:100%;background:var(--bg);border:1px solid var(--border2);border-radius:8px;color:var(--t1);font-family:'DM Sans',sans-serif;font-size:13px;padding:9px 12px}
+.mt{resize:vertical;min-height:80px}
+.mi:focus,.ms:focus,.mt:focus{outline:none;border-color:var(--green)}
+.ma{display:flex;gap:8px;margin-top:20px;justify-content:flex-end}
+.m-cancel{background:var(--bg2);border:1px solid var(--border);color:var(--t2);font-family:'DM Sans',sans-serif;font-size:13px;padding:8px 16px;border-radius:8px;cursor:pointer}
+.m-save{background:var(--t1);border:none;color:#fff;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;padding:8px 16px;border-radius:8px;cursor:pointer}
+
+/* ══ TOAST ══ */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--t1);color:#fff;font-size:13px;padding:10px 20px;border-radius:9px;opacity:0;transition:all .3s;pointer-events:none;z-index:999}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ══ UPDATE ROW ══ */
+.update-row{display:flex;align-items:center;gap:8px;margin-top:14px;padding-top:14px;border-top:1px solid var(--border);flex-wrap:wrap}
+.update-row label{font-size:11px;color:var(--t3)}
+input[type=range]{accent-color:var(--green);width:90px}
 </style>
 </head>
 <body>
 
-<!-- SIDEBAR -->
+<!-- ══ SIDEBAR ══ -->
 <nav>
-  <div class="sb-logo">
-    <div class="sb-logo-word">SPUN</div>
-    <div class="sb-tagline">Marketing Manager · PDI</div>
+  <div class="sb-brand">
+    <div class="sb-logo">SPUN</div>
+    <div class="sb-sub">Marketing Manager · PDI</div>
   </div>
-
   <div class="sb-sect">
-    <span class="sb-label">Navegação</span>
-    <button class="nav-item active" onclick="gotoView('overview',this)"><span class="nav-dot"></span> Visão Geral</button>
-    <button class="nav-item" onclick="gotoView('score',this)"><span class="nav-dot"></span> Score Mensal</button>
-    <button class="nav-item" onclick="gotoView('skills',this)"><span class="nav-dot"></span> Matriz de Skills</button>
-    <button class="nav-item" onclick="gotoView('pdi',this)"><span class="nav-dot"></span> PDI</button>
-    <button class="nav-item" onclick="gotoView('contrato',this)"><span class="nav-dot"></span> Contrato de Evolução</button>
-    <button class="nav-item" onclick="gotoView('curadoria',this)"><span class="nav-dot"></span> Curadoria</button>
+    <span class="sb-lbl">Navegação</span>
+    <button class="nav-btn active" onclick="go('overview',this)"><span class="nav-dot"></span>Visão Geral</button>
+    <button class="nav-btn" onclick="go('score',this)"><span class="nav-dot"></span>Score Mensal</button>
+    <button class="nav-btn" onclick="go('skills',this)"><span class="nav-dot"></span>Matriz de Skills</button>
+    <button class="nav-btn" onclick="go('pdi',this)"><span class="nav-dot"></span>PDI</button>
+    <button class="nav-btn" onclick="go('contrato',this)"><span class="nav-dot"></span>Contrato de Evolução</button>
+    <button class="nav-btn" onclick="go('curadoria',this)"><span class="nav-dot"></span>Curadoria</button>
   </div>
-
   <div class="sb-person">
-    <div class="sb-person-row">
+    <div class="sb-row">
       <div class="sb-av">M</div>
       <div>
         <div class="sb-pname">Mariana B.</div>
         <div class="sb-prole">Marketing Manager</div>
       </div>
     </div>
-    <div class="lvl-badge">Sênior → Head</div>
+    <div class="sb-badge">Sênior → Head</div>
   </div>
 </nav>
 
-<!-- MAIN -->
-<main class="main">
+<!-- ══ MAIN ══ -->
+<main>
 
 <!-- OVERVIEW -->
 <div class="view active" id="view-overview">
   <div class="topbar">
     <div>
-      <div class="page-title">Visão Geral</div>
-      <div class="page-sub" id="ov-period">Jun/26 · Ciclo 2026.1</div>
+      <div class="pg-title">Visão Geral</div>
+      <div class="pg-sub" id="ov-period">Jun/26 · Ciclo 2026.1 · Dados de Mai/26 (últimos completos)</div>
     </div>
     <div id="ov-badge"></div>
   </div>
@@ -688,50 +300,52 @@ main { flex: 1; overflow-x: hidden; }
       </div>
     </div>
     <div class="hero-stats">
-      <div><div class="h-sv" id="hs-campanhas">—</div><div class="h-sl">Campanhas</div></div>
-      <div><div class="h-sv" id="hs-time">8</div><div class="h-sl">Pessoas</div></div>
-      <div><div class="h-sv" id="hs-pdis">4</div><div class="h-sl">PDIs ativos</div></div>
+      <div><div class="h-num" id="hs-prazo">—</div><div class="h-lbl">Prazo</div></div>
+      <div><div class="h-num">8</div><div class="h-lbl">Pessoas</div></div>
+      <div><div class="h-num">4</div><div class="h-lbl">PDIs</div></div>
     </div>
   </div>
+
+  <!-- baseline banner -->
+  <div id="ov-baseline-banner" style="margin-bottom:20px"></div>
 
   <div class="section">
     <div class="sec-hd"><span class="sec-title">KPIs do Mês</span></div>
     <div class="g3">
-      <div class="card kpi a-brand">
-        <div class="kpi-label">Campanhas no Prazo</div>
-        <div class="kpi-val" id="ov-prazo">—</div>
+      <div class="card">
+        <div class="kpi-lbl">Campanhas no Prazo</div>
+        <div class="kpi-val" id="ov-prazo" style="color:var(--green)">—</div>
         <div class="kpi-delta" id="ov-prazo-d">—</div>
-        <div class="bar-wrap"><div class="bar-fill" id="ov-prazo-bar"></div></div>
+        <div class="bar-wrap"><div class="bar-fill" id="ov-prazo-bar" style="background:var(--green)"></div></div>
         <div class="kpi-meta">meta · 100%</div>
       </div>
-      <div class="card kpi a-amber">
-        <div class="kpi-label">OKRs em Tracking</div>
-        <div class="kpi-val" id="ov-okrs">—</div>
+      <div class="card">
+        <div class="kpi-lbl">OKRs em Tracking</div>
+        <div class="kpi-val" id="ov-okrs" style="color:var(--amber)">—</div>
         <div class="kpi-delta" id="ov-okrs-d">—</div>
         <div class="bar-wrap"><div class="bar-fill" id="ov-okrs-bar" style="background:var(--amber)"></div></div>
         <div class="kpi-meta">meta · 80%</div>
       </div>
-      <div class="card kpi a-violet">
-        <div class="kpi-label">Influência Estratégica</div>
-        <div class="kpi-val" id="ov-inf">—</div>
+      <div class="card">
+        <div class="kpi-lbl">Influência Estratégica</div>
+        <div class="kpi-val" id="ov-inf" style="color:var(--violet)">—</div>
         <div class="kpi-delta" id="ov-inf-d">—</div>
         <div class="bar-wrap"><div class="bar-fill" id="ov-inf-bar" style="background:var(--violet)"></div></div>
-        <div class="kpi-meta">pautas lideradas/mês</div>
+        <div class="kpi-meta">pautas lideradas/mês · meta ≥ 7</div>
       </div>
     </div>
   </div>
 
   <div class="section">
-    <div class="sec-hd"><span class="sec-title">Dimensões Estratégicas</span></div>
     <div class="g3">
-      <div class="card kpi a-teal">
-        <div class="kpi-label">Autonomia Decisória</div>
-        <div class="kpi-val" id="i-auto-val" style="font-size:28px">—</div>
-        <div class="kpi-delta" id="i-auto-label" style="color:var(--t3)">—</div>
-        <div class="auto-scale mt-2" id="i-auto-bar" style="gap:5px"></div>
+      <div class="card">
+        <div class="kpi-lbl">Autonomia Decisória</div>
+        <div class="kpi-val" id="i-auto-val" style="font-size:40px;color:var(--teal)">—</div>
+        <div style="font-size:12px;color:var(--t3);margin-top:5px" id="i-auto-lbl">—</div>
+        <div class="auto-scale" id="i-auto-bar"></div>
         <div style="display:flex;justify-content:space-between;margin-top:5px">
-          <span style="font-size:9px;color:var(--t3)">operacional</span>
-          <span style="font-size:9px;color:var(--t3)">estratégica</span>
+          <span style="font-size:9px;color:var(--t4)">operacional</span>
+          <span style="font-size:9px;color:var(--t4)">estratégica</span>
         </div>
       </div>
     </div>
@@ -740,8 +354,8 @@ main { flex: 1; overflow-x: hidden; }
   <div class="section">
     <div class="g2">
       <div class="card chart-card">
-        <div class="chart-title">Entregas vs Baseline Q1</div>
-        <div class="chart-sub">prazo de campanhas por mês</div>
+        <div class="chart-title">Prazo de Campanhas vs Baseline Q1</div>
+        <div class="chart-sub">mês atual · média jan–mar · meta</div>
         <canvas id="prazoChart" height="130"></canvas>
       </div>
       <div class="card chart-card">
@@ -751,115 +365,101 @@ main { flex: 1; overflow-x: hidden; }
       </div>
     </div>
   </div>
+
+  <!-- tendência geral -->
+  <div class="section">
+    <div class="sec-hd"><span class="sec-title">Tendência de KPIs</span></div>
+    <div class="card chart-card">
+      <div class="chart-title">Prazo · OKRs · Influência · Baseline Q1</div>
+      <div class="chart-sub">evolução mensal Jan/26 – Mai/26</div>
+      <canvas id="tendenciaChart" height="130"></canvas>
+    </div>
+  </div>
 </div>
 
 <!-- SCORE -->
 <div class="view" id="view-score">
   <div class="topbar">
     <div>
-      <div class="page-title">Score Mensal</div>
-      <div class="page-sub">Desenvolvimento · Jun/26</div>
+      <div class="pg-title">Score Mensal</div>
+      <div class="pg-sub">Desenvolvimento · Jun/26</div>
     </div>
-    <div id="score-readiness-badge"></div>
+    <div id="score-rb"></div>
   </div>
-
   <div class="g2" style="margin-bottom:28px">
-    <div class="card" style="display:flex;flex-direction:column;align-items:center;padding:28px">
-      <div class="score-circle" id="score-circle-el">
+    <div class="card score-circle-wrap">
+      <div class="score-circle" id="score-circle">
         <div class="score-inner">
           <div class="score-num" id="score-num">—</div>
           <div class="score-max">/100</div>
         </div>
       </div>
-      <div class="score-label" id="score-label-text">—</div>
-      <div class="score-desc" id="score-desc-text">—</div>
+      <div class="score-label" id="score-lbl">—</div>
+      <div class="score-desc" id="score-desc">—</div>
     </div>
-    <div class="card">
-      <div class="chart-title" style="margin-bottom:16px">Radar de Competências</div>
-      <canvas id="scoreRadarChart" height="200"></canvas>
+    <div class="card chart-card">
+      <div class="chart-title">Radar de Competências</div>
+      <div class="chart-sub">atual vs meta Head</div>
+      <canvas id="radarChart" height="200"></canvas>
     </div>
   </div>
-
   <div class="section">
     <div class="sec-hd"><span class="sec-title">Dimensões do Score</span></div>
-    <div class="card">
-      <div id="score-dims"></div>
-    </div>
+    <div class="card" id="score-dims"></div>
   </div>
-
   <div class="section">
     <div class="sec-hd"><span class="sec-title">Evolução Histórica</span></div>
     <div class="card chart-card">
       <div class="chart-title">Score Total por Mês</div>
       <div class="chart-sub">meta para Head: 85+</div>
-      <canvas id="scoreHistChart" height="130"></canvas>
+      <canvas id="histChart" height="130"></canvas>
     </div>
   </div>
-
   <div class="section">
-    <div class="sec-hd"><span class="sec-title">Critérios de Progressão → Head</span></div>
-    <div class="card" id="promo-criteria-list"></div>
+    <div class="sec-hd"><span class="sec-title">Critérios de Progressão → Head de Marketing</span></div>
+    <div class="card" id="crit-list"></div>
   </div>
 </div>
 
 <!-- SKILLS -->
 <div class="view" id="view-skills">
   <div class="topbar">
-    <div>
-      <div class="page-title">Matriz de Skills</div>
-      <div class="page-sub">Competências da função</div>
-    </div>
+    <div><div class="pg-title">Matriz de Skills</div><div class="pg-sub">Competências da função</div></div>
   </div>
-
   <div class="tabs">
-    <button class="tab-item active" onclick="filterCat('all',this)">Todas</button>
-    <button class="tab-item" onclick="filterCat('estrategia',this)">Estratégia</button>
-    <button class="tab-item" onclick="filterCat('lideranca',this)">Liderança</button>
-    <button class="tab-item" onclick="filterCat('performance',this)">Performance</button>
-    <button class="tab-item" onclick="filterCat('comunicacao',this)">Comunicação</button>
-    <button class="tab-item" onclick="filterCat('gestao',this)">Gestão</button>
+    <button class="tab active" onclick="filterCat('all',this)">Todas</button>
+    <button class="tab" onclick="filterCat('estrategia',this)">Estratégia</button>
+    <button class="tab" onclick="filterCat('lideranca',this)">Liderança</button>
+    <button class="tab" onclick="filterCat('performance',this)">Performance</button>
+    <button class="tab" onclick="filterCat('comunicacao',this)">Comunicação</button>
+    <button class="tab" onclick="filterCat('gestao',this)">Gestão</button>
   </div>
-
   <div class="card" id="skills-body"></div>
 </div>
 
 <!-- PDI -->
 <div class="view" id="view-pdi">
   <div class="topbar">
-    <div>
-      <div class="page-title">PDI</div>
-      <div class="page-sub">Plano de Desenvolvimento Individual · 2026.1</div>
-    </div>
+    <div><div class="pg-title">PDI</div><div class="pg-sub">Plano de Desenvolvimento Individual · 2026 · Modelo 70–20–10</div></div>
     <button class="add-btn" onclick="openPDIModal()">+ Novo PDI</button>
   </div>
-
   <div id="pdi-body"></div>
 </div>
 
 <!-- CONTRATO -->
 <div class="view" id="view-contrato">
   <div class="topbar">
-    <div>
-      <div class="page-title">Contrato de Evolução</div>
-      <div class="page-sub">Experimentos mensais · Start · Stop · Continue</div>
-    </div>
+    <div><div class="pg-title">Contrato de Evolução</div><div class="pg-sub">Experimentos mensais · Start · Stop · Continue</div></div>
     <button class="add-btn" onclick="openExpModal()">+ Experimento</button>
   </div>
-
-  <div class="contrato-header">
-    <div class="mes-selector" id="mes-selector"></div>
-  </div>
-
+  <div class="mes-btns" id="mes-btns"></div>
   <div id="contrato-body"></div>
 </div>
 
 <!-- CURADORIA -->
 <div class="view" id="view-curadoria">
   <div class="topbar">
-    <div>
-      <div class="page-title">Curadoria</div>
-      <div class="page-sub">Recursos de desenvolvimento</div>
-    </div>
+    <div><div class="pg-title">Curadoria</div><div class="pg-sub">Recursos de desenvolvimento</div></div>
     <button class="add-btn" onclick="openCurModal()">+ Recurso</button>
   </div>
   <div id="curadoria-body"></div>
@@ -871,642 +471,484 @@ main { flex: 1; overflow-x: hidden; }
 <div class="toast" id="toast"></div>
 
 <!-- MODAL PDI -->
-<div class="modal" id="pdi-modal">
+<div class="modal" id="modal-pdi">
   <div class="modal-box">
     <div class="modal-title">Novo PDI</div>
-    <div class="modal-field"><label class="modal-label">Competência</label><input class="modal-input" id="m-comp" placeholder="Ex: Liderança de Equipe"></div>
-    <div class="modal-field"><label class="modal-label">Objetivo</label><textarea class="modal-textarea" id="m-obj" placeholder="O que quer atingir?"></textarea></div>
-    <div class="modal-field"><label class="modal-label">Por que importa</label><textarea class="modal-textarea" id="m-por" placeholder="Conexão com o cargo e carreira"></textarea></div>
-    <div class="modal-field"><label class="modal-label">Critério de Sucesso</label><input class="modal-input" id="m-crit" placeholder="Como saber que atingiu?"></div>
-    <div class="modal-field"><label class="modal-label">Ciclo</label><input class="modal-input" id="m-ciclo" placeholder="Ex: Jun/26 – Dez/26"></div>
-    <div class="modal-field"><label class="modal-label">Ícone</label><input class="modal-input" id="m-icon" placeholder="🎯" style="width:80px"></div>
-    <div class="modal-actions">
-      <button class="modal-cancel" onclick="closePDIModal()">Cancelar</button>
-      <button class="modal-save" onclick="savePDI()">Salvar PDI</button>
-    </div>
+    <div class="mf"><label class="ml">Competência</label><input class="mi" id="m-comp" placeholder="Ex: Delegação e Visão Estratégica"></div>
+    <div class="mf"><label class="ml">Objetivo</label><textarea class="mt" id="m-obj"></textarea></div>
+    <div class="mf"><label class="ml">Por que importa</label><textarea class="mt" id="m-por"></textarea></div>
+    <div class="mf"><label class="ml">Critério de Sucesso</label><input class="mi" id="m-crit"></div>
+    <div class="mf"><label class="ml">Ciclo</label><input class="mi" id="m-ciclo" placeholder="Jun/26 – Dez/26"></div>
+    <div class="mf"><label class="ml">Ícone</label><input class="mi" id="m-icon" placeholder="🎯" style="width:80px"></div>
+    <div class="ma"><button class="m-cancel" onclick="closeModal('modal-pdi')">Cancelar</button><button class="m-save" onclick="savePDI()">Salvar</button></div>
   </div>
 </div>
 
-<!-- MODAL EXPERIMENTO -->
-<div class="modal" id="exp-modal">
+<!-- MODAL EXP -->
+<div class="modal" id="modal-exp">
   <div class="modal-box">
     <div class="modal-title">Novo Experimento</div>
-    <div class="modal-field">
-      <label class="modal-label">Tipo</label>
-      <select class="modal-select" id="e-tipo">
-        <option value="start">🟢 Start — começar a fazer</option>
-        <option value="stop">🔴 Stop — parar de fazer</option>
-        <option value="continue">🟡 Continue — manter</option>
+    <div class="mf"><label class="ml">Tipo</label>
+      <select class="ms" id="e-tipo">
+        <option value="start">🟢 Start</option>
+        <option value="stop">🔴 Stop</option>
+        <option value="continue">🟡 Continue</option>
       </select>
     </div>
-    <div class="modal-field"><label class="modal-label">Ponto observado</label><input class="modal-input" id="e-ponto" placeholder="O que foi identificado?"></div>
-    <div class="modal-field"><label class="modal-label">Ação</label><textarea class="modal-textarea" id="e-acao" placeholder="O que vai ser feito?"></textarea></div>
-    <div class="modal-field"><label class="modal-label">Recurso</label><input class="modal-input" id="e-recurso" placeholder="Ferramenta, processo, pessoa..."></div>
-    <div class="modal-actions">
-      <button class="modal-cancel" onclick="closeExpModal()">Cancelar</button>
-      <button class="modal-save" onclick="saveExp()">Salvar</button>
-    </div>
+    <div class="mf"><label class="ml">Ponto observado</label><input class="mi" id="e-ponto"></div>
+    <div class="mf"><label class="ml">Ação</label><textarea class="mt" id="e-acao"></textarea></div>
+    <div class="mf"><label class="ml">Recurso</label><input class="mi" id="e-recurso"></div>
+    <div class="ma"><button class="m-cancel" onclick="closeModal('modal-exp')">Cancelar</button><button class="m-save" onclick="saveExp()">Salvar</button></div>
   </div>
 </div>
 
-<!-- MODAL CURADORIA -->
-<div class="modal" id="cur-modal">
+<!-- MODAL CUR -->
+<div class="modal" id="modal-cur">
   <div class="modal-box">
     <div class="modal-title">Novo Recurso</div>
-    <div class="modal-field"><label class="modal-label">Título</label><input class="modal-input" id="c-title" placeholder="Nome do recurso"></div>
-    <div class="modal-field"><label class="modal-label">Descrição</label><input class="modal-input" id="c-desc" placeholder="Por que é relevante?"></div>
-    <div class="modal-field"><label class="modal-label">URL</label><input class="modal-input" id="c-url" placeholder="https://..."></div>
-    <div class="modal-field"><label class="modal-label">Tags (separadas por vírgula)</label><input class="modal-input" id="c-tags" placeholder="liderança, estratégia, IA"></div>
-    <div class="modal-field"><label class="modal-label">Ícone</label><input class="modal-input" id="c-icon" placeholder="📚" style="width:80px"></div>
-    <div class="modal-actions">
-      <button class="modal-cancel" onclick="closeCurModal()">Cancelar</button>
-      <button class="modal-save" onclick="saveCur()">Salvar</button>
-    </div>
+    <div class="mf"><label class="ml">Título</label><input class="mi" id="c-title"></div>
+    <div class="mf"><label class="ml">Descrição</label><input class="mi" id="c-desc"></div>
+    <div class="mf"><label class="ml">URL</label><input class="mi" id="c-url" placeholder="https://..."></div>
+    <div class="mf"><label class="ml">Tags (vírgula)</label><input class="mi" id="c-tags"></div>
+    <div class="mf"><label class="ml">Ícone</label><input class="mi" id="c-icon" placeholder="📚" style="width:80px"></div>
+    <div class="ma"><button class="m-cancel" onclick="closeModal('modal-cur')">Cancelar</button><button class="m-save" onclick="saveCur()">Salvar</button></div>
   </div>
 </div>
 
 <script>
-// ═══════════════════════════════════════════════════════════════════
-// INIT DATA
-// ═══════════════════════════════════════════════════════════════════
+// ──────────────────────────────────────────────
+// DATA
+// ──────────────────────────────────────────────
 const INIT = {
-  currentDesigner: 'mari',
-  kpis: { mari: [
-    { mes:'2026-01', prazo:90, okrs:70, influencia:4, autonomia:3 },
-    { mes:'2026-02', prazo:95, okrs:75, influencia:5, autonomia:3 },
-    { mes:'2026-03', prazo:100, okrs:72, influencia:6, autonomia:4 },
-    { mes:'2026-04', prazo:95, okrs:78, influencia:7, autonomia:4 },
-    { mes:'2026-05', prazo:100, okrs:80, influencia:8, autonomia:4 },
-  ]},
-  skills: { mari: [
-    // Estratégia
-    { id:'pos', cat:'estrategia', name:'Posicionamento de Marca', desc:'Definição e execução do posicionamento B2B e institucional da Spun', status:'supera', obs:'Liderou rebranding Spun e manifesto South Summit' },
-    { id:'okrplan', cat:'estrategia', name:'Planejamento OKRs', desc:'Tradução de objetivos de negócio em plano de marketing mensurável', status:'atende', obs:'OKRs em 80% de tracking — meta: 100%' },
-    { id:'funnel', cat:'estrategia', name:'Estratégia de Funil', desc:'Construção de jornada de conteúdo e conversão end-to-end', status:'supera', obs:'Estruturou funis de conteúdo para WIBR, MIBR, Spun' },
-    { id:'campanha', cat:'estrategia', name:'Visão de Campanha Integrada', desc:'Coordenação de campanhas multicanal com briefing e mensuração', status:'atende', obs:'Boa execução; oportunidade de antecipar mensuração de resultado' },
-    // Liderança
-    { id:'lider1on1', cat:'lideranca', name:'1:1s e Desenvolvimento de Time', desc:'Qualidade dos feedbacks e acompanhamento individual', status:'atende', obs:'1:1s mensais — evoluir para feedbacks com evidência e PDI estruturado por pessoa' },
-    { id:'delegacao', cat:'lideranca', name:'Delegação Eficaz', desc:'Capacidade de transferir responsabilidade com clareza e confiança', status:'desenvolvendo', obs:'Oportunidade de soltar mais operacional e focar em estratégia' },
-    { id:'cultura', cat:'lideranca', name:'Cultura e Clima de Equipe', desc:'Engajamento, senso de pertencimento e ambiente de crescimento', status:'supera', obs:'Referência comportamental — Spun Voices, SPUNmers, rituais de time' },
-    { id:'recrutamento', cat:'lideranca', name:'Recrutamento e Onboarding', desc:'Atração, seleção e integração de novos membros', status:'atende', obs:'Criou trilha de onboarding de 90 dias para marketing' },
-    // Performance
-    { id:'perf', cat:'performance', name:'Marketing de Performance', desc:'Gestão de campanhas paid com ROAS e CAC como critérios', status:'atende', obs:'Gerencia afiliados Smiles, PicPay, SuperSIM, Itaú' },
-    { id:'prog', cat:'performance', name:'Mídia Programática', desc:'Entendimento de inventário, CPM, viewability e lógica de DSP', status:'desenvolvendo', obs:'MCM ativa — aprofundar visão técnica de programática' },
-    { id:'dados', cat:'performance', name:'Análise de Dados e Relatórios', desc:'Leitura de dashboards, extração de insights e comunicação de resultado', status:'atende', obs:'Relatórios mensais LOS Grandes; oportunidade de automatizar via ClickUp' },
-    // Comunicação
-    { id:'copy', cat:'comunicacao', name:'Copywriting Estratégico', desc:'Produção de copy institucional, editorial e de vendas com consistência de voz', status:'supera', obs:'Sistema de voz documentado para múltiplas marcas' },
-    { id:'branding', cat:'comunicacao', name:'Identidade Verbal de Marca', desc:'Construção e manutenção de tom de voz para portfólio de marcas', status:'supera', obs:'MIBR, WIBR, Spun, João Manetti — skills documentadas' },
-    { id:'stakeholder', cat:'comunicacao', name:'Comunicação com Stakeholders', desc:'Apresentações e alinhamentos com liderança e marcas parceiras', status:'atende', obs:'Apresentações para João e board — evoluir para comunicação proativa de riscos' },
-    // Gestão
-    { id:'ops', cat:'gestao', name:'Marketing Ops / Processos', desc:'Estruturação de fluxos, SOPs e ferramentas de operação de marketing', status:'supera', obs:'ClickUp architecture, Make automations, dashboard HTML, mLabs workflow' },
-    { id:'projetos', cat:'gestao', name:'Gestão de Projetos', desc:'Planejamento, priorização e acompanhamento de múltiplos projetos simultâneos', status:'atende', obs:'Alta volumetria; oportunidade de documentar processos críticos como SOP' },
-    { id:'budget', cat:'gestao', name:'Gestão de Budget', desc:'Planejamento e controle de verba de marketing', status:'desenvolvendo', obs:'Desenvolver visão de ROI por canal e controle de budget por projeto' },
-  ]},
-  pdis: { mari: [
+  kpis: [
+    { mes:'2026-01', prazo:90,  okrs:70, inf:4, auto:3 },
+    { mes:'2026-02', prazo:95,  okrs:75, inf:5, auto:3 },
+    { mes:'2026-03', prazo:100, okrs:72, inf:6, auto:4 },
+    { mes:'2026-04', prazo:95,  okrs:78, inf:7, auto:4 },
+    { mes:'2026-05', prazo:100, okrs:80, inf:8, auto:4 },
+  ],
+  skills: [
+    // estrategia
+    { id:'pos',  cat:'estrategia',  name:'Posicionamento de Marca',         desc:'Definição e execução do posicionamento B2B e institucional', status:'supera',      obs:'Liderou rebranding Spun e manifesto South Summit' },
+    { id:'okrp', cat:'estrategia',  name:'Planejamento Tático (OKRs)',       desc:'Traduzir visão do CEO em plano trimestral/anual mensurável',  status:'atende',      obs:'OKRs em 80% de tracking — meta: 100%' },
+    { id:'fun',  cat:'estrategia',  name:'Estratégia de Funil',              desc:'Construção de jornada de conteúdo e conversão end-to-end',    status:'supera',      obs:'Funis documentados para WIBR, MIBR, Spun' },
+    { id:'camp', cat:'estrategia',  name:'Arquitetura de Campanhas',         desc:'Coordenação de campanhas multicanal com calendário e dono',   status:'atende',      obs:'Oportunidade de criar Calendário Mestre anual com ownership por supervisor' },
+    // lideranca
+    { id:'11',   cat:'lideranca',   name:'1:1s e Desenvolvimento de Time',   desc:'Qualidade de feedbacks e acompanhamento individual',          status:'atende',      obs:'1:1s mensais — evoluir para feedbacks com evidência e PDI por pessoa' },
+    { id:'del',  cat:'lideranca',   name:'Delegação Eficaz',                 desc:'Transferência de responsabilidade com clareza e confiança',   status:'desenvolvendo',obs:'Principal gargalo para o Head — documentar 3 processos com SOP' },
+    { id:'cult', cat:'lideranca',   name:'Cultura e Clima de Equipe',        desc:'Engajamento e ambiente de crescimento',                       status:'supera',      obs:'Spun Voices, SPUNmers, rituais de time — referência comportamental' },
+    { id:'rec',  cat:'lideranca',   name:'Recrutamento e Onboarding',        desc:'Atração, seleção e integração de membros',                    status:'atende',      obs:'Trilha de onboarding de 90 dias criada' },
+    // performance
+    { id:'perf', cat:'performance', name:'Marketing de Performance',         desc:'Campanhas paid com ROAS e CAC como critérios',               status:'atende',      obs:'Afiliados Smiles, PicPay, SuperSIM, Itaú' },
+    { id:'prog', cat:'performance', name:'Mídia Programática',               desc:'Entendimento de inventário, CPM, viewability, DSP',          status:'desenvolvendo',obs:'MCM ativa — aprofundar visão técnica de programática' },
+    { id:'dados',cat:'performance', name:'Sistema de Performance e Decisão', desc:'Dashboard executivo + relatório mensal de decisão proposta',  status:'desenvolvendo',obs:'Criar dashboard macro com 10–15 KPIs e relatório mensal de decisão ao CEO' },
+    // comunicacao
+    { id:'copy', cat:'comunicacao', name:'Copywriting Estratégico',          desc:'Copy institucional, editorial e de vendas com voz consistente',status:'supera',     obs:'Sistema de voz documentado para múltiplas marcas' },
+    { id:'brand',cat:'comunicacao', name:'Identidade Verbal de Marca',       desc:'Construção e manutenção de tom de voz para portfólio',        status:'supera',      obs:'MIBR, WIBR, Spun, João Manetti — skills documentadas' },
+    { id:'stk',  cat:'comunicacao', name:'Narrativa Executiva (C-level)',     desc:'Apresentações e narrativas estratégicas para board e CEO',    status:'atende',      obs:'Evoluir de "reporta dado" para "recomenda decisão" — business cases' },
+    // gestao
+    { id:'ops',  cat:'gestao',      name:'Marketing Ops / Processos',        desc:'Fluxos, SOPs e ferramentas de operação de marketing',         status:'supera',      obs:'ClickUp arch, Make automations, dashboard HTML, mLabs workflow' },
+    { id:'proj', cat:'gestao',      name:'Gestão de Projetos',               desc:'Planejamento e acompanhamento de múltiplos projetos',         status:'atende',      obs:'Alta volumetria — documentar processos críticos como SOP' },
+    { id:'bud',  cat:'gestao',      name:'Gestão de Budget e ROI',           desc:'Controle de verba + visão de ROI por canal para o board',     status:'desenvolvendo',obs:'Criar dashboard budget + ROI apresentável trimestralmente' },
+  ],
+  pdis: [
     {
       id:'p1', status:'desenvolvimento', progress:40,
       cargoAtual:'Marketing Manager Sênior', cargoAlvo:'Head de Marketing',
       cicloLabel:'PDI 2026.1 · Mar–Set/26',
-      comp:'Delegação e Visão Estratégica',
-      obj:'Reduzir envolvimento operacional em 30% movendo responsabilidades claras para o time, liberando agenda para decisões estratégicas',
-      porqueImporta:'O principal gargalo para a progressão para Head é a ocupação de tempo em operacional. Delegar com clareza é o critério #1 para atuar em nível estratégico e influenciar o board diretamente.',
-      criterioSucesso:'3+ processos formalmente delegados com SOP documentado + 2h/semana de bloco protegido para estratégia + feedback do João confirmando mudança de postura',
-      acoes:'70: Documentar e transferir 3 processos recorrentes (relatório LOS Grandes, briefings afiliados, calendário editorial) | 20: Check semanal de 15min com responsáveis para tirar dependência sem microgestão | 10: Leitura de referências sobre liderança sênior',
-      metrica:'Horas semanais em operacional · Processos com SOP documentado · Feedbacks 1:1',
-      ciclo:'Mar/26 – Set/26', ev:'SOPs no ClickUp + registro de horas', icon:'🎯', bg:'rgba(87,223,127,.08)',
-      evidencias:['Trilha de onboarding de 90 dias criada (jan/26)', 'ClickUp architecture e automações estruturadas', 'Spun Voices criado com modelo de delegação dual-benefit']
+      comp:'Competência A — Direção e Plano Tático',
+      obj:'Traduzir a visão do CEO em planos táticos claros (trimestre/ano) que organizem trabalho, metas e prioridades para supervisores e times, com cara de "documento que diretor assina".',
+      porqueImporta:'Sair do perfil "super analista sênior" e consolidar o papel de quem cria direção, sistema e narrativa para a área. Entregáveis de alto valor para o CEO são o critério de progressão para Head.',
+      criterioSucesso:'Plano Tático Trimestral entregue (máx. 15 slides) + modelo padrão de plano validado com o CEO + revisão trimestral documentada',
+      pie70:'Plano Tático Trimestral da área de marketing (máx. 15 slides): contexto, objetivos ligados ao negócio, grandes apostas, metas por frente, roadmap macro e principais riscos.|A cada trimestre, revisar o plano com base nos resultados — documentando o que muda, por quê e o que será despriorizado.',
+      pie20:'1 sessão de alinhamento com o CEO: levar rascunho do modelo de plano tático, discutir o que ele espera e ajustar a estrutura com base no feedback (até mês 2).|Fazer shadowing de 1 planejamento de outra área (vendas/produto) ou conversar com 1 gerente/head para entender como estruturam planos e metas (até mês 3).',
+      pie10:'Estudar 1 referência forte de planejamento de marketing (curso ou guideline de plano anual/trimestral) e criar modelo padrão adaptado à sua realidade (até mês 2).|Ler 1 conteúdo sobre crescimento de carreira em liderança de marketing e anotar critérios de sucesso para gerentes e heads.',
+      ciclo:'Mar/26 – Set/26', ev:'Plano aprovado pelo CEO', icon:'🎯', bg:'',
+      evidencias:['Spun Voices proposta e aprovada pelo CEO', 'Estrutura WIBR (2 fases) aprovada pela Roberta', 'South Summit manifesto liderado']
     },
     {
-      id:'p2', status:'desenvolvimento', progress:55,
-      cargoAtual:'Marketing Manager Sênior', cargoAlvo:'Head de Marketing',
-      cicloLabel:'PDI 2026.1 · Jan–Jul/26',
-      comp:'Infoproduto e Marca Pessoal',
-      obj:'Lançar Centelha Masterclass e MAPA DIGITAL com resultado documentado — receita, audiência e NPS',
-      porqueImporta:'A construção de autoridade pública como especialista fortalece o posicionamento interno na Spun e cria um ativo de longo prazo. O infoproduto é o veículo para testar e provar capacidade de estratégia end-to-end fora da empresa.',
-      criterioSucesso:'Centelha lançada com mínimo 30 alunos + MAPA DIGITAL com seed launch documentado + 1 post/semana de conteúdo de autoridade publicado por 2 meses seguidos',
-      acoes:'70: Produção e lançamento da Centelha Masterclass | 20: Estruturação da jornada de venda do MAPA DIGITAL com Docência Digital | 10: Conteúdo semanal Instagram como prova de autoridade',
-      metrica:'Alunos por produto · Receita · Frequência de publicação',
-      ciclo:'Jan/26 – Jul/26', ev:'Links de vendas + print de métricas', icon:'💡', bg:'rgba(240,160,48,.08)',
-      evidencias:['Metodologia Docência Digital aplicada (Clara Marques)', 'Claude skills de voz criadas (mariana-voice, mariana-audience-public)', 'Estrutura da Centelha documentada']
-    },
-    {
-      id:'p3', status:'desenvolvimento', progress:30,
+      id:'p2', status:'desenvolvimento', progress:35,
       cargoAtual:'Marketing Manager Sênior', cargoAlvo:'Head de Marketing',
       cicloLabel:'PDI 2026.1 · Abr–Out/26',
-      comp:'Proficiência em Dados e Budget',
-      obj:'Criar e manter um dashboard de budget e ROI por canal — apresentável ao board trimestralmente',
+      comp:'Competência B — Sistema de Performance e Tomada de Decisão',
+      obj:'Sair do papel de "quem reporta dado" para ser "quem recomenda decisão", construindo um sistema de performance que permita ao CEO decidir rápido e confiar.',
       porqueImporta:'Head de Marketing precisa falar a língua do board: receita, CAC, ROAS, margem. Construir visibilidade de budget por projeto e canal é o que diferencia a postura gerencial da postura estratégica.',
-      criterioSucesso:'Dashboard de budget ativo em ClickUp ou HTML com visão mensal de verba vs resultado por canal + 1 apresentação ao board com essa lente',
-      acoes:'70: Construir dashboard de budget + ROI com dados das campanhas afiliadas e paid | 20: Revisão mensal dos dados com Andrews e time de performance | 10: Estudo de métricas SaaS/mídia aplicadas a esports e publishers',
-      metrica:'Dashboard atualizado mensalmente · Apresentação ao board entregue',
-      ciclo:'Abr/26 – Out/26', ev:'Print do dashboard + deck de apresentação', icon:'📊', bg:'rgba(77,184,240,.08)',
-      evidencias:['Dashboard HTML/CSS com dados ClickUp CSV construído', 'Campanhas afiliadas Smiles, PicPay, Itaú, SuperSIM gerenciadas', 'Relatórios mensais LOS Grandes como base']
+      criterioSucesso:'Dashboard Macro ativo (10–15 KPIs) + Relatório Mensal de Decisão rodando + 1 business case apresentado ao CEO trimestralmente',
+      pie70:'Criar um Dashboard Macro de Marketing focado em visão executiva (10–15 KPIs principais, visão por frente, leitura mensal em reunião fixa com CEO) — até mês 4.|Criar um Relatório Mensal de Decisão (máx. 5 páginas): o que aconteceu · por que aconteceu · o que vamos fazer (decisões propostas) · impacto esperado.|A cada trimestre, levar ao CEO 1 mini business case para 1 decisão relevante (mudar canal, aumentar investimento, trocar fornecedor) — com 2–3 cenários, recomendação e riscos.',
+      pie20:'Rodar 1 conversa estruturada com CEO + finanças/dados: quais números importam mais, em qual cadência e em qual formato (até mês 3).|Trocar com 1 gerente/head de vendas sobre como usam dados para propor decisões — não só para reportar — anotando estruturas de raciocínio replicáveis.',
+      pie10:'Fazer 1 curso ou trilha sobre métricas de marketing e funil orientado a negócio (CAC, LTV, pipeline, contribuição de receita) e revisar os KPIs que acompanha hoje.|Estudar 2 exemplos de dashboards executivos de marketing/vendas e mapear quais 10–15 KPIs são críticos para o CEO.',
+      ciclo:'Abr/26 – Out/26', ev:'Dashboard + relatório mensal + print de decisões tomadas', icon:'📊', bg:'',
+      evidencias:['Dashboard HTML/CSS com dados ClickUp CSV construído', 'Relatórios mensais LOS Grandes como base', 'Campanhas afiliadas Smiles, PicPay, Itaú gerenciadas']
+    },
+    {
+      id:'p3', status:'desenvolvimento', progress:25,
+      cargoAtual:'Marketing Manager Sênior', cargoAlvo:'Head de Marketing',
+      cicloLabel:'PDI 2026.1 · Mai–Nov/26',
+      comp:'Competência C — Arquitetura de Campanhas, Canais e Operação',
+      obj:'Deixar de operar "campanha a campanha" e passar a operar com uma arquitetura clara: quem faz o quê, como as frentes se conectam, qual o papel de cada canal.',
+      porqueImporta:'A progressão para Head exige entregáveis de gerente que organiza o sistema, não só projetos. Um Calendário Mestre e Guidelines Táticos por Canal mostram que você pensa como diretora.',
+      criterioSucesso:'Calendário Mestre de Campanhas anual criado + Guidelines Táticos por canal (1 por frente) + Ritual de Gestão documentado e rodando',
+      pie70:'Criar Calendário Mestre de Campanhas (anual/trimestral): campanhas e temas, objetivos, janelas de tempo, owner (supervisor) e prioridade — ligado ao plano tático.|Definir Guidelines Táticos por Canal (1–2 páginas cada): papel no funil, KPIs principais, regras de ouro (do/dont), faixas de budget.|Documentar 1 Ritual de Gestão da Área: cadência de reuniões (semanais com supervisores, mensal com CEO), pauta padrão, quem traz dado / quem leva problema / quem propõe solução.',
+      pie20:'Conversar com 1 gerente/head de outra empresa que tenha sistema de campanhas/canais bem definido — entender como organizam calendário e responsabilidade por nível.|Fazer 1 workshop interno com os supervisores para mapear: dores do fluxo atual, gargalos, sobreposição de canais, gaps de dono e coletar ideias para o novo modelo.',
+      pie10:'Estudar 1 conteúdo sobre gestão de portfólio de campanhas/canais e organização de marketing por funil ou jobs-to-be-done.|Ler sobre modelos simples de RACI e rituais de gestão leve — desenhar esqueleto para a área.',
+      ciclo:'Mai/26 – Nov/26', ev:'Documentos usados pelos supervisores + ritual rodando', icon:'🗺️', bg:'',
+      evidencias:['ClickUp workspace architecture redesign concluída', 'mLabs automation para social media criada', 'Spun Voices modelo operacional documentado']
     },
     {
       id:'p4', status:'acompanhamento', progress:20,
       cargoAtual:'Marketing Manager Sênior', cargoAlvo:'Head de Marketing',
-      cicloLabel:'PDI 2026.1 · Mai–Dez/26',
-      comp:'Influência Estratégica e Visibilidade Executiva',
-      obj:'Aumentar influência nas decisões estratégicas da Spun — sendo chamada proativamente pelo CEO para pautas de posicionamento e crescimento',
-      porqueImporta:'Head não é título, é postura. A percepção do João e do board sobre o nível de atuação da Mari precisa evoluir de "executa muito bem" para "pensa como a empresa". Isso se constrói com comunicação proativa, antecipação de problemas e presença em pautas de negócio.',
-      criterioSucesso:'2+ pautas estratégicas puxadas pela Mari no semestre + feedback positivo do João em 1:1 sobre evolução de postura + 1 documento estratégico (proposta, análise ou OKR) aprovado pelo board',
-      acoes:'70: Levar 1 pauta estratégica por mês para o João (tendência, risco, oportunidade) | 20: Documentar decisões e análises em formato executivo (uma página) | 10: Estudar cases de marketing líderes em esports e media',
-      metrica:'Pautas lideradas · Documentos aprovados · Feedback do João',
-      ciclo:'Mai/26 – Dez/26', ev:'Registro das pautas + documentos aprovados', icon:'🚀', bg:'rgba(139,111,232,.08)',
-      evidencias:['Spun Voices proposta e aprovada pelo João', 'South Summit manifesto liderado', 'WIBR estrutura dois fases aprovada pela Roberta']
+      cicloLabel:'PDI 2026.1 · Jun–Dez/26',
+      comp:'Competência D — Narrativa Executiva e Relacionamento com C-level',
+      obj:'Falar a língua de C-level, construindo narrativas claras, seguras e estratégicas sobre o que marketing está fazendo, por quê e o que vem depois — como as narrativas que VP leva para board.',
+      porqueImporta:'Head não é título, é postura. A percepção do CEO e do board precisa evoluir de "executa muito bem" para "pensa como a empresa". Isso se constrói com comunicação proativa, antecipação e presença em pautas de negócio.',
+      criterioSucesso:'1 case de marketing apresentado por trimestre em fórum relevante + template padrão de deck executivo criado e usado + feedback positivo do CEO sobre evolução de postura',
+      pie70:'A cada trimestre, apresentar 1 case de marketing em fórum relevante (reunião de diretoria, comitê de crescimento, all-hands): problema, tese, plano, resultado, aprendizados, próximos passos.|Criar um template padrão de deck executivo de marketing (para plano, resultados, business case) e usar esse formato em todas as conversas com C-level — você vira "quem sempre organiza a conversa".',
+      pie20:'Combinar com o CEO 1 espaço fixo bimestral de 30–45 min para apresentar um case ou atualização executiva (não status de tarefa) — pedir feedback sobre clareza, foco e confiança.|Pedir para 1 liderança revisar 1 deck importante antes de ir para fórum maior, pedindo sugestões diretas de como "subir o nível" da apresentação.',
+      pie10:'Fazer 1 curso de comunicação/apresentações estratégicas com foco em business storytelling (até mês 4).|Estudar 2–3 decks públicos de CMOs/diretores prestando atenção em como estruturam: contexto → tese → dados → recomendação.',
+      ciclo:'Jun/26 – Dez/26', ev:'Decks salvos + feedbacks positivos registrados', icon:'🎤', bg:'',
+      evidencias:['Sistema de voz documentado para MIBR, Spun, João Manetti', 'Apresentações para João e board rodando', 'Infoproduto Centelha como laboratório de narrativa']
     },
-  ]},
-  contratos: { mari: {
-    meses: {
-      '2026-06': {
-        mes: '2026-06',
-        experimentos: [
-          { id:'c1', tipo:'start', ponto:'Operacional acumulando na agenda', acao:'Bloquear 2h às terças para estratégia — sem reuniões, sem Slack', recurso:'Google Calendar — bloco fixo protegido', status:'em_teste', resultado:'' },
-          { id:'c2', tipo:'stop', ponto:'Responder mensagens fora do horário criando expectativa de disponibilidade 24h', acao:'Definir janela de resposta: 9h–18h NL — comunicar pro time', recurso:'', status:'aguardando', resultado:'' },
-          { id:'c3', tipo:'start', ponto:'Falta de documentação de processos críticos', acao:'Criar 1 SOP por semana para processos recorrentes — começar pelo relatório LOS Grandes', recurso:'ClickUp — seção SOPs', status:'em_teste', resultado:'' },
-          { id:'c4', tipo:'continue', ponto:'Qualidade de copy e consistência de voz nas marcas — ponto forte', acao:'Manter o nível + documentar sistema de voz do Absol e WIBR no próximo ciclo', recurso:'Claude skills de voz', status:'funcionou', resultado:'Sistema de voz documentado para MIBR, Spun, João Manetti.' },
-          { id:'c5', tipo:'start', ponto:'Pouca visibilidade pública de autoridade no LinkedIn', acao:'1 post por semana no LinkedIn com lente estratégica — não operacional', recurso:'Conteúdo da Centelha como base', status:'aguardando', resultado:'' },
-        ]
-      },
-      '2026-05': {
-        mes: '2026-05',
-        experimentos: [
-          { id:'m1', tipo:'start', ponto:'Entregas do time sem critério de qualidade formalizado', acao:'Criar checklist de aprovação para cada entregável antes de subir pro cliente ou board', recurso:'ClickUp — campo de checklist', status:'funcionou', resultado:'Checklist criado e adotado pelo time de design.' },
-          { id:'m2', tipo:'stop', ponto:'Assumir tarefas do time quando estão atrasadas — gerando dependência', acao:'Escalar bloqueio antes de resolver sozinha — comunicar risco pro João quando necessário', recurso:'', status:'em_teste', resultado:'' },
-          { id:'m3', tipo:'continue', ponto:'Rituais de cultura e comunicação interna', acao:'Manter Spun Voices, SPUNmers e 1:1s mensais com estrutura', recurso:'Discord, Notion, ClickUp', status:'funcionou', resultado:'SPUNmers com pauta de cultura interna estruturada.' },
-        ]
-      }
-    }
-  }},
-  curadoria: { mari: [
-    { id:'r1', title:'Obviously Awesome — April Dunford', desc:'Framework de posicionamento de produto. Referência direta para o posicionamento B2B da Spun.', url:'https://www.aprildunford.com/obviously-awesome', tags:['posicionamento','estratégia','B2B'], icon:'📖' },
-    { id:'r2', title:'Marketing Strategy — Mark Ritson', desc:'Curso intensivo sobre estratégia de marketing com base empírica. Referência para trabalhar com OKRs de marketing.', url:'https://minicoursesbymarkritson.com', tags:['estratégia','métricas','marca'], icon:'🎓' },
-    { id:'r3', title:'Docência Digital — Clara Marques', desc:'Metodologia de infoprodutos aplicada ao MAPA DIGITAL e Centelha. Base do processo de criação de produtos digitais.', url:'#', tags:['infoproduto','lançamento','método'], icon:'💡' },
-    { id:'r4', title:'Esports Business & Media — HBKU', desc:'Visão de negócio, monetização e patrocínio em esports. Relevante para estratégia MIBR e LOS Grandes.', url:'https://www.coursera.org', tags:['esports','monetização','mídia'], icon:'🎮' },
-    { id:'r5', title:'Radical Candor — Kim Scott', desc:'Framework de liderança e feedback direto. Aplicar nos 1:1s para evoluir para postura de Head.', url:'https://www.radicalcandor.com', tags:['liderança','feedback','gestão'], icon:'🧠' },
-    { id:'r6', title:'Maia Santos — Método de Conteúdo', desc:'Pilares de conteúdo aspiracional e narrativa para marca pessoal. Base da estratégia de autoridade da Mari.', url:'#', tags:['marca pessoal','conteúdo','autoridade'], icon:'✨' },
-  ]}
+  ],
+  contratos: {
+    '2026-06': { mes:'2026-06', experimentos:[
+      { id:'c1', tipo:'start',    ponto:'Operacional acumulando na agenda',                               acao:'Bloquear 2h às terças para estratégia — sem reuniões, sem Slack',            recurso:'Google Calendar — bloco fixo protegido',         status:'em_teste',  resultado:'' },
+      { id:'c2', tipo:'stop',     ponto:'Responder mensagens fora do horário',                            acao:'Definir janela de resposta 9h–18h NL e comunicar pro time',                  recurso:'',                                               status:'aguardando', resultado:'' },
+      { id:'c3', tipo:'start',    ponto:'Falta de documentação de processos críticos',                    acao:'Criar 1 SOP por semana — começar pelo relatório LOS Grandes',               recurso:'ClickUp — seção SOPs',                           status:'em_teste',  resultado:'' },
+      { id:'c4', tipo:'continue', ponto:'Qualidade de copy e consistência de voz — ponto forte',          acao:'Manter o nível + documentar sistema de voz do Absol e WIBR',               recurso:'Claude skills de voz',                           status:'funcionou', resultado:'Sistema de voz documentado para MIBR, Spun, João Manetti.' },
+      { id:'c5', tipo:'start',    ponto:'Pouca visibilidade pública de autoridade',                       acao:'1 post por semana no LinkedIn com lente estratégica',                        recurso:'Conteúdo da Centelha como base',                 status:'aguardando', resultado:'' },
+    ]},
+    '2026-05': { mes:'2026-05', experimentos:[
+      { id:'m1', tipo:'start',    ponto:'Entregas do time sem critério de qualidade formalizado',         acao:'Criar checklist de aprovação para cada entregável antes de subir pro cliente', recurso:'ClickUp — campo de checklist',                  status:'funcionou', resultado:'Checklist criado e adotado pelo time de design.' },
+      { id:'m2', tipo:'stop',     ponto:'Assumir tarefas do time quando estão atrasadas',                 acao:'Escalar bloqueio antes de resolver sozinha — comunicar risco pro CEO',        recurso:'',                                               status:'em_teste',  resultado:'' },
+      { id:'m3', tipo:'continue', ponto:'Rituais de cultura e comunicação interna',                       acao:'Manter Spun Voices, SPUNmers e 1:1s mensais com estrutura',                  recurso:'Discord, Notion, ClickUp',                      status:'funcionou', resultado:'SPUNmers com pauta de cultura interna estruturada.' },
+    ]},
+  },
+  curadoria: [
+    { id:'r1', title:'Obviously Awesome — April Dunford',    desc:'Framework de posicionamento de produto. Referência direta para o posicionamento B2B da Spun.',                       url:'https://www.aprildunford.com/obviously-awesome', tags:['posicionamento','estratégia','B2B'],          icon:'📖' },
+    { id:'r2', title:'Marketing Strategy — Mark Ritson',     desc:'Curso intensivo sobre estratégia com base empírica. Base para trabalhar OKRs de marketing com rigor.',              url:'https://minicoursesbymarkritson.com',             tags:['estratégia','métricas','marca'],               icon:'🎓' },
+    { id:'r3', title:'Docência Digital — Clara Marques',     desc:'Metodologia de infoprodutos aplicada ao MAPA DIGITAL e Centelha.',                                                   url:'#',                                              tags:['infoproduto','lançamento','método'],           icon:'💡' },
+    { id:'r4', title:'Radical Candor — Kim Scott',           desc:'Framework de liderança e feedback direto. Aplicar nos 1:1s para evoluir para postura de Head.',                     url:'https://www.radicalcandor.com',                  tags:['liderança','feedback','gestão'],               icon:'🧠' },
+    { id:'r5', title:'Esports Business & Media',             desc:'Visão de negócio, monetização e patrocínio em esports. Relevante para estratégia MIBR e LOS Grandes.',             url:'https://www.coursera.org',                       tags:['esports','monetização','mídia'],               icon:'🎮' },
+    { id:'r6', title:'Maia Santos — Conteúdo de Autoridade', desc:'Pilares de conteúdo aspiracional e narrativa para marca pessoal. Base da estratégia de autoridade da Mari.',        url:'#',                                              tags:['marca pessoal','conteúdo','autoridade'],       icon:'✨' },
+    { id:'r7', title:'Business Storytelling (curso)',        desc:'Comunicação e apresentações estratégicas com foco em C-level storytelling — Competência D do PDI.',                   url:'#',                                              tags:['narrativa','apresentação','C-level'],          icon:'🎤' },
+  ]
 };
 
-// ═══════════════════════════════════════════════════════════════════
-// STORE
-// ═══════════════════════════════════════════════════════════════════
-const KEY = 'spun_pdi_mari_v1';
-function load() { try { const r = localStorage.getItem(KEY); return r ? JSON.parse(r) : JSON.parse(JSON.stringify(INIT)); } catch { return JSON.parse(JSON.stringify(INIT)); } }
-function save(d) { localStorage.setItem(KEY, JSON.stringify(d)); }
+const KEY = 'spun_pdi_mari_v2';
+function load(){ try{ const r=localStorage.getItem(KEY); return r?JSON.parse(r):JSON.parse(JSON.stringify(INIT)); }catch{ return JSON.parse(JSON.stringify(INIT)); } }
+function save(d){ localStorage.setItem(KEY,JSON.stringify(d)); }
 let S = load();
-if (!S.contratos) S.contratos = JSON.parse(JSON.stringify(INIT.contratos));
-if (!S.curadoria) S.curadoria = JSON.parse(JSON.stringify(INIT.curadoria));
 
-// ═══════════════════════════════════════════════════════════════════
-// NAV
-// ═══════════════════════════════════════════════════════════════════
-function gotoView(id, btn) {
-  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  document.getElementById('view-' + id).classList.add('active');
-  btn.classList.add('active');
-  if (id === 'overview') renderOverview();
-  if (id === 'score') renderScore();
-  if (id === 'skills') renderSkills();
-  if (id === 'pdi') renderPDIs();
-  if (id === 'contrato') renderContrato();
-  if (id === 'curadoria') renderCuradoria();
-}
-
-// ═══════════════════════════════════════════════════════════════════
+// ──────────────────────────────────────────────
 // CONSTANTS
-// ═══════════════════════════════════════════════════════════════════
+// ──────────────────────────────────────────────
 const AUTO_DESCS = ['Executora operacional','Executa com checkpoints','Autonomia funcional','Autonomia estratégica','Antecipa e influencia'];
-const SM = { 'nao-atende': { lbl:'Não atende', cls:'gap-miss', val:0 }, 'desenvolvendo': { lbl:'Desenvolvendo', cls:'gap-prog', val:33 }, 'atende': { lbl:'Atende', cls:'gap-ok', val:66 }, 'supera': { lbl:'Supera', cls:'gap-super', val:100 } };
-const CAT = { estrategia:'Estratégia e Posicionamento', lideranca:'Liderança e Gestão de Time', performance:'Performance e Dados', comunicacao:'Comunicação e Branding', gestao:'Marketing Ops e Gestão' };
+const SM = { 'nao-atende':{lbl:'Não atende',cls:'p-nao',val:0}, 'desenvolvendo':{lbl:'Desenvolvendo',cls:'p-dev',val:33}, 'atende':{lbl:'Atende',cls:'p-ok',val:66}, 'supera':{lbl:'Supera',cls:'p-sup',val:100} };
+const CAT_NAMES = { estrategia:'Estratégia e Posicionamento', lideranca:'Liderança e Gestão de Time', performance:'Performance e Dados', comunicacao:'Comunicação e Branding', gestao:'Marketing Ops e Gestão' };
 const PDI_ST = {
-  acompanhamento: { lbl:'Em Acompanhamento', c:'rgba(139,111,232,.12)', t:'var(--violet)' },
-  desenvolvimento: { lbl:'Em Desenvolvimento', c:'rgba(240,160,48,.14)', t:'var(--amber)' },
-  concluido: { lbl:'Concluído', c:'rgba(53,196,160,.12)', t:'var(--teal)' }
+  acompanhamento:{ lbl:'Em Acompanhamento', bar:'var(--violet)', pill:'background:var(--violet-bg);color:var(--violet);border:1px solid rgba(124,58,237,.2)' },
+  desenvolvimento:{ lbl:'Em Desenvolvimento',  bar:'var(--amber)',  pill:'background:var(--amber-bg);color:var(--amber);border:1px solid rgba(217,119,6,.2)' },
+  concluido:      { lbl:'Concluído',           bar:'var(--teal)',   pill:'background:var(--teal-bg);color:var(--teal);border:1px solid rgba(13,148,136,.2)' }
 };
 
-// ═══════════════════════════════════════════════════════════════════
-// SCORE ENGINE
-// ═══════════════════════════════════════════════════════════════════
-function calcMonthScore(d) {
-  const kpis = S.kpis[d] || [];
-  const l = kpis[kpis.length - 1] || {};
-  const prazo = l.prazo ?? 90;
-  const okrs = l.okrs ?? 70;
-  const inf = l.influencia ?? 4;
-  const autoLvl = l.autonomia ?? 3;
-
-  let exec = prazo >= 95 ? 25 : prazo >= 90 ? 20 : prazo >= 80 ? 14 : 8;
-  let okrScore = okrs >= 80 ? 20 : okrs >= 70 ? 15 : okrs >= 60 ? 10 : 6;
-  let auto = [5, 8, 12, 16, 20][Math.min(4, autoLvl)];
-  const skills = S.skills[d] || [];
-  const maxPts = skills.length * 2;
-  const got = skills.reduce((a, s) => a + ({'nao-atende':0,'desenvolvendo':1,'atende':2,'supera':3}[s.status] || 0), 0);
-  const pct = maxPts > 0 ? got / maxPts : 0;
-  let skl = pct >= 0.7 ? 20 : pct >= 0.5 ? 14 : pct >= 0.3 ? 8 : 4;
-  let infScore = inf >= 7 ? 15 : inf >= 5 ? 10 : inf >= 3 ? 6 : 3;
-
-  return { total: exec + okrScore + auto + skl + infScore, exec, okrScore, auto, skl, infScore, autoLvl, prazo, okrs, inf };
-}
-
-function getReadinessBadge(sc) {
-  if (sc.total >= 85 && sc.autoLvl >= 4) return { cls: 'rb-ready', label: 'ELEGÍVEL PARA HEAD' };
-  if (sc.total >= 72) return { cls: 'rb-transition', label: 'EM TRANSIÇÃO' };
-  return { cls: 'rb-developing', label: 'EM DESENVOLVIMENTO' };
-}
-
-function calcReadiness(d) {
-  const sk = S.skills[d] || [];
-  if (!sk.length) return 0;
-  return Math.round(sk.reduce((a, s) => a + (SM[s.status]?.val || 0), 0) / sk.length);
-}
-
-function fmt(mes) {
-  const [y, m] = mes.split('-');
-  const mn = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
-  return (mn[parseInt(m) - 1] || m) + '/' + y.slice(2);
-}
-
-// ═══════════════════════════════════════════════════════════════════
-// OVERVIEW
-// ═══════════════════════════════════════════════════════════════════
-let prazoC = null, okrsC = null;
-function renderOverview() {
-  const d = S.currentDesigner;
-  const kpis = S.kpis[d] || [];
-  const l = kpis[kpis.length - 1] || {};
-  const sc = calcMonthScore(d);
-  const rb = getReadinessBadge(sc);
-
-  document.getElementById('ov-badge').innerHTML = `<span class="readiness-badge ${rb.cls}"><span class="rb-dot"></span>${rb.label}</span>`;
-
-  // KPIs
-  const prazo = l.prazo ?? 0;
-  const okrs = l.okrs ?? 0;
-  const inf = l.influencia ?? 0;
-  setKPI('ov-prazo', prazo + '%', '', 'ov-prazo-bar', prazo, 'var(--green)');
-  setKPI('ov-okrs', okrs + '%', '', 'ov-okrs-bar', okrs, 'var(--amber)');
-  setKPI('ov-inf', inf, '/mês', 'ov-inf-bar', (inf / 10) * 100, 'var(--violet)');
-
-  document.getElementById('hs-campanhas').textContent = prazo + '%';
-
-  // Autonomia
-  const autoLvl = l.autonomia ?? 3;
-  document.getElementById('i-auto-val').textContent = 'N' + autoLvl;
-  document.getElementById('i-auto-label').textContent = AUTO_DESCS[autoLvl] || '—';
-  const barEl = document.getElementById('i-auto-bar');
-  barEl.innerHTML = '';
-  for (let i = 0; i < 5; i++) {
-    const b = document.createElement('div');
-    b.className = 'auto-step' + (i <= autoLvl ? ' filled' : '');
-    barEl.appendChild(b);
-  }
-
-  // Charts
-  renderPrazoChart(kpis);
-  renderOkrsChart(kpis);
-}
-
-function setKPI(valId, val, suffix, barId, pct, color) {
-  const el = document.getElementById(valId);
-  if (el) el.textContent = val + suffix;
-  const bar = document.getElementById(barId);
-  if (bar) { bar.style.width = Math.min(pct, 100) + '%'; bar.style.background = color; }
-}
-
-function renderPrazoChart(kpis) {
-  const ctx = document.getElementById('prazoChart');
-  if (!ctx) return;
-  if (prazoC) prazoC.destroy();
-  const q1 = kpis.slice(0, 3);
-  const avgPrazo = q1.reduce((a, k) => a + (k.prazo || 0), 0) / Math.max(q1.length, 1);
-  prazoC = new Chart(ctx, { type: 'line', data: {
-    labels: kpis.map(k => fmt(k.mes)),
-    datasets: [
-      { label: 'Prazo %', data: kpis.map(k => k.prazo), borderColor: '#57df7f', backgroundColor: 'rgba(87,223,127,.08)', tension: .4, fill: true, pointRadius: 4, pointBackgroundColor: '#57df7f' },
-      { label: 'Meta (100%)', data: kpis.map(() => 100), borderColor: 'rgba(53,196,160,.5)', borderDash: [5, 3], pointRadius: 0, borderWidth: 1.5 },
-      { label: `Baseline Q1 (${Math.round(avgPrazo)}%)`, data: kpis.map(() => Math.round(avgPrazo)), borderColor: 'rgba(240,160,48,.5)', borderDash: [2, 4], pointRadius: 0, borderWidth: 1.5 },
-    ]
-  }, options: { responsive: true, plugins: { legend: { display: true, position: 'top', labels: { usePointStyle: true, font: { size: 10 }, color: '#a09eb8' } } }, scales: { x: { grid: { color: 'rgba(255,255,255,.04)' }, ticks: { font: { size: 10 }, color: '#7a7874' } }, y: { min: 80, max: 105, grid: { color: 'rgba(255,255,255,.04)' }, ticks: { font: { size: 10 }, color: '#7a7874', callback: v => v + '%' } } } } });
-}
-
-function renderOkrsChart(kpis) {
-  const ctx = document.getElementById('okrsChart');
-  if (!ctx) return;
-  if (okrsC) okrsC.destroy();
-  okrsC = new Chart(ctx, { type: 'line', data: {
-    labels: kpis.map(k => fmt(k.mes)),
-    datasets: [
-      { label: 'OKRs %', data: kpis.map(k => k.okrs), borderColor: '#f0a030', backgroundColor: 'rgba(240,160,48,.08)', tension: .4, fill: true, pointRadius: 4, pointBackgroundColor: '#f0a030' },
-      { label: 'Meta (80%)', data: kpis.map(() => 80), borderColor: 'rgba(53,196,160,.5)', borderDash: [5, 3], pointRadius: 0, borderWidth: 1.5 },
-    ]
-  }, options: { responsive: true, plugins: { legend: { display: true, position: 'top', labels: { usePointStyle: true, font: { size: 10 }, color: '#a09eb8' } } }, scales: { x: { grid: { color: 'rgba(255,255,255,.04)' }, ticks: { font: { size: 10 }, color: '#7a7874' } }, y: { min: 50, max: 100, grid: { color: 'rgba(255,255,255,.04)' }, ticks: { font: { size: 10 }, color: '#7a7874', callback: v => v + '%' } } } } });
-}
-
-// ═══════════════════════════════════════════════════════════════════
-// SCORE
-// ═══════════════════════════════════════════════════════════════════
-let scoreRadarC = null, scoreHistC = null;
-function renderScore() {
-  const d = S.currentDesigner;
-  const kpis = S.kpis[d] || [];
-  const sc = calcMonthScore(d);
-  const rb = getReadinessBadge(sc);
-
-  document.getElementById('score-readiness-badge').innerHTML = `<span class="readiness-badge ${rb.cls}"><span class="rb-dot"></span>${rb.label}</span>`;
-  document.getElementById('score-num').textContent = sc.total;
-  document.getElementById('score-circle-el').style.setProperty('--pct', sc.total);
-  document.getElementById('score-label-text').textContent = sc.total >= 85 ? 'Pronta para Head' : sc.total >= 72 ? 'Em transição' : 'Desenvolvimento ativo';
-  document.getElementById('score-desc-text').textContent = 'Score mensal · ' + fmt(kpis[kpis.length - 1]?.mes || '2026-05');
-
-  const dims = [
-    { l: 'EXECUÇÃO', v: sc.exec, m: 25, c: 'var(--green)' },
-    { l: 'OKRs', v: sc.okrScore, m: 20, c: 'var(--amber)' },
-    { l: 'AUTONOMIA', v: sc.auto, m: 20, c: 'var(--violet)' },
-    { l: 'SKILLS', v: sc.skl, m: 20, c: 'var(--teal)' },
-    { l: 'INFLUÊNCIA', v: sc.infScore, m: 15, c: 'var(--coral)' }
-  ];
-  document.getElementById('score-dims').innerHTML = dims.map(dim => `<div class="score-dim"><div class="sd-label">${dim.l}</div><div class="sd-bar"><div class="sd-fill" style="width:${(dim.v / dim.m) * 100}%;background:${dim.c}"></div></div><div class="sd-val">${dim.v}/${dim.m}</div></div>`).join('');
-
-  // Radar
-  const ctx = document.getElementById('scoreRadarChart');
-  if (!ctx) return;
-  if (scoreRadarC) scoreRadarC.destroy();
-  scoreRadarC = new Chart(ctx, { type: 'radar', data: { labels: ['Execução', 'OKRs', 'Autonomia', 'Skills', 'Influência'], datasets: [
-    { label: 'Atual', data: [sc.exec / 25 * 100, sc.okrScore / 20 * 100, sc.auto / 20 * 100, sc.skl / 20 * 100, sc.infScore / 15 * 100], backgroundColor: 'rgba(87,223,127,.12)', borderColor: '#57df7f', borderWidth: 2, pointBackgroundColor: '#57df7f', pointRadius: 4 },
-    { label: 'Meta Head', data: [88, 80, 80, 75, 80], backgroundColor: 'transparent', borderColor: 'rgba(53,196,160,.35)', borderDash: [4, 2], borderWidth: 1.5, pointRadius: 0 }
-  ] }, options: { responsive: true, plugins: { legend: { display: true, position: 'top', labels: { usePointStyle: true, font: { size: 10 }, color: '#a09eb8' } } }, scales: { r: { beginAtZero: true, max: 100, ticks: { font: { size: 9 }, color: '#a09eb8', stepSize: 33 }, grid: { color: 'rgba(255,255,255,.06)' }, pointLabels: { font: { size: 11 }, color: '#5c5a6e' } } } } });
-
-  // Hist
-  const ctx2 = document.getElementById('scoreHistChart');
-  if (!ctx2) return;
-  if (scoreHistC) scoreHistC.destroy();
-  const scores = kpis.map(k => {
-    const prazo = k.prazo ?? 90, okrs = k.okrs ?? 70, inf = k.influencia ?? 4, autoLvl = k.autonomia ?? 3;
-    let exec = prazo >= 95 ? 25 : prazo >= 90 ? 20 : 14;
-    let okrScore = okrs >= 80 ? 20 : okrs >= 70 ? 15 : 10;
-    let auto = [5, 8, 12, 16, 20][Math.min(4, autoLvl)];
-    const skills = S.skills[d] || [];
-    const maxPts = skills.length * 2;
-    const got = skills.reduce((a, s) => a + ({'nao-atende':0,'desenvolvendo':1,'atende':2,'supera':3}[s.status] || 0), 0);
-    const pct = maxPts ? got / maxPts : 0;
-    let skl = pct >= 0.7 ? 20 : pct >= 0.5 ? 14 : 8;
-    let infScore = inf >= 7 ? 15 : inf >= 5 ? 10 : 6;
-    return { mes: fmt(k.mes), total: exec + okrScore + auto + skl + infScore };
-  });
-  scoreHistC = new Chart(ctx2, { type: 'line', data: { labels: scores.map(s => s.mes), datasets: [
-    { label: 'Score Total', data: scores.map(s => s.total), borderColor: '#57df7f', backgroundColor: 'rgba(87,223,127,.08)', tension: .4, fill: true, pointRadius: 4, pointBackgroundColor: '#57df7f' },
-    { label: 'Meta Head (85)', data: scores.map(() => 85), borderColor: 'rgba(53,196,160,.45)', borderDash: [4, 2], pointRadius: 0, borderWidth: 1.5 }
-  ] }, options: { responsive: true, plugins: { legend: { display: true, position: 'top', labels: { usePointStyle: true, font: { size: 10 }, color: '#a09eb8' } } }, scales: { x: { grid: { color: 'rgba(255,255,255,.04)' }, ticks: { font: { size: 10 }, color: '#7a7874' } }, y: { min: 0, max: 100, grid: { color: 'rgba(255,255,255,.04)' }, ticks: { font: { size: 10 }, color: '#7a7874' } } } } });
-
-  // Criteria
-  const dSkills = S.skills[d] || [];
-  const dOk = dSkills.filter(s => s.status === 'atende' || s.status === 'supera').length;
-  const dPct = dSkills.length ? dOk / dSkills.length : 0;
-  const criteria = [
-    { label: 'Score ≥ 85', check: sc.total >= 85, val: `Atual: ${sc.total}` },
-    { label: 'Autonomia ≥ Nível 4', check: sc.autoLvl >= 4, val: `Atual: nível ${sc.autoLvl}` },
-    { label: 'OKRs ≥ 80% tracking', check: sc.okrs >= 80, val: `Atual: ${sc.okrs}%` },
-    { label: 'Skills ≥ 70% atende', check: dPct >= 0.7, val: `Atual: ${Math.round(dPct * 100)}%` },
-    { label: 'Influência ≥ 7 pautas/mês', check: sc.inf >= 7, val: `Atual: ${sc.inf}/mês` },
-    { label: 'Prazo ≥ 95%', check: sc.prazo >= 95, val: `Atual: ${sc.prazo}%` },
-  ];
-  document.getElementById('promo-criteria-list').innerHTML = criteria.map(c => `<div class="promo-skill-row"><div><div class="promo-skill-name">${c.label}</div><div class="promo-skill-target">${c.val}</div></div><span class="promo-status ${c.check ? 'ps-done' : 'ps-progress'}">${c.check ? '✓ Atingido' : 'Pendente'}</span></div>`).join('');
-}
-
-// ═══════════════════════════════════════════════════════════════════
-// SKILLS
-// ═══════════════════════════════════════════════════════════════════
-let activeCat = 'all';
-function filterCat(cat, btn) {
-  activeCat = cat;
-  document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
+// ──────────────────────────────────────────────
+// NAV
+// ──────────────────────────────────────────────
+function go(id,btn){
+  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('view-'+id).classList.add('active');
   btn.classList.add('active');
-  renderSkills();
-}
-function renderSkills() {
-  const d = S.currentDesigner;
-  const skills = S.skills[d] || [];
-  const filtered = activeCat === 'all' ? skills : skills.filter(s => s.cat === activeCat);
-  const grouped = {};
-  filtered.forEach(s => { if (!grouped[s.cat]) grouped[s.cat] = []; grouped[s.cat].push(s); });
-  document.getElementById('skills-body').innerHTML = Object.entries(grouped).map(([cat, items]) => `
-    <div class="cat-row">${CAT[cat] || cat}</div>
-    ${items.map(s => { const st = SM[s.status] || SM['desenvolvendo']; return `<div class="skill-row"><div><div class="skill-name">${s.name}</div><div class="skill-desc">${s.desc}</div>${s.obs ? `<div class="skill-obs">↳ ${s.obs}</div>` : ''}</div>
-    <span class="gap-pill ${st.cls}">${st.lbl}</span></div>`; }).join('')}
-  `).join('');
+  const fn = {overview:renderOverview,score:renderScore,skills:renderSkills,pdi:renderPDIs,contrato:renderContrato,curadoria:renderCuradoria};
+  if(fn[id]) fn[id]();
 }
 
-// ═══════════════════════════════════════════════════════════════════
+// ──────────────────────────────────────────────
+// SCORE ENGINE
+// ──────────────────────────────────────────────
+function calcScore(){
+  const l = S.kpis[S.kpis.length-1]||{};
+  const prazo=l.prazo??90, okrs=l.okrs??70, inf=l.inf??4, auto=l.auto??3;
+  const exec   = prazo>=95?25:prazo>=90?20:prazo>=80?14:8;
+  const okrS   = okrs>=80?20:okrs>=70?15:okrs>=60?10:6;
+  const autoS  = [5,8,12,16,20][Math.min(4,auto)];
+  const sk = S.skills||[]; const maxP=sk.length*2;
+  const got=sk.reduce((a,s)=>a+({'nao-atende':0,'desenvolvendo':1,'atende':2,'supera':3}[s.status]||0),0);
+  const pct=maxP>0?got/maxP:0;
+  const sklS   = pct>=0.7?20:pct>=0.5?14:pct>=0.3?8:4;
+  const infS   = inf>=7?15:inf>=5?10:inf>=3?6:3;
+  return { total:exec+okrS+autoS+sklS+infS, exec, okrS, autoS, sklS, infS, autoLvl:auto, prazo, okrs, inf };
+}
+
+// ──────────────────────────────────────────────
+// OVERVIEW
+// ──────────────────────────────────────────────
+let cPrazo,cOkrs,cTend;
+function renderOverview(){
+  const sc=calcScore();
+  const rb=getRB(sc);
+  document.getElementById('ov-badge').innerHTML=`<span class="rb ${rb.cls}"><span class="rb-dot"></span>${rb.label}</span>`;
+  const l=S.kpis[S.kpis.length-1]||{};
+  const prev=S.kpis[S.kpis.length-2]||{};
+  setKPI('ov-prazo',l.prazo+'%','ov-prazo-bar',l.prazo,'ov-prazo-d',l.prazo,prev.prazo,'%');
+  setKPI('ov-okrs', l.okrs+'%', 'ov-okrs-bar', l.okrs, 'ov-okrs-d', l.okrs, prev.okrs,'%');
+  setKPI('ov-inf',  l.inf,     'ov-inf-bar',  (l.inf/10)*100,'ov-inf-d',l.inf,prev.inf,' pautas');
+  document.getElementById('hs-prazo').textContent=l.prazo+'%';
+  document.getElementById('i-auto-val').textContent='N'+l.auto;
+  document.getElementById('i-auto-lbl').textContent=AUTO_DESCS[l.auto]||'—';
+  const bar=document.getElementById('i-auto-bar'); bar.innerHTML='';
+  for(let i=0;i<5;i++){const b=document.createElement('div');b.className='auto-step'+(i<=l.auto?' filled':'');bar.appendChild(b);}
+  // baseline banner
+  const q1=S.kpis.slice(0,3);
+  const avgP=Math.round(q1.reduce((a,k)=>a+(k.prazo||0),0)/q1.length);
+  const avgO=Math.round(q1.reduce((a,k)=>a+(k.okrs||0),0)/q1.length);
+  const curP=l.prazo; const curO=l.okrs;
+  document.getElementById('ov-baseline-banner').innerHTML=`
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:20px 24px;display:flex;align-items:center;gap:32px;flex-wrap:wrap">
+    <div style="font-size:11px;text-transform:uppercase;letter-spacing:1.2px;color:var(--t3);font-weight:600">Comparativo Q1 2026 · Baseline Jan–Mar</div>
+    ${mkCmp('Prazo',avgP,curP,'%')} ${mkCmp('OKRs',avgO,curO,'%')}
+  </div>`;
+  // charts
+  if(cPrazo)cPrazo.destroy();
+  if(cOkrs)cOkrs.destroy();
+  if(cTend)cTend.destroy();
+  cPrazo=mkLineChart('prazoChart',S.kpis.map(k=>fmt(k.mes)),
+    [{label:'Prazo %',data:S.kpis.map(k=>k.prazo),borderColor:'#1a9e4a',bg:'rgba(26,158,74,.08)'},{label:'Meta (100%)',data:S.kpis.map(()=>100),borderColor:'rgba(13,148,136,.5)',dash:[5,3],noFill:true},{label:`Baseline Q1 (${avgP}%)`,data:S.kpis.map(()=>avgP),borderColor:'rgba(217,119,6,.5)',dash:[2,4],noFill:true}],80,105,'%');
+  cOkrs=mkLineChart('okrsChart',S.kpis.map(k=>fmt(k.mes)),
+    [{label:'OKRs %',data:S.kpis.map(k=>k.okrs),borderColor:'#d97706',bg:'rgba(217,119,6,.08)'},{label:'Meta (80%)',data:S.kpis.map(()=>80),borderColor:'rgba(13,148,136,.5)',dash:[5,3],noFill:true}],50,100,'%');
+  cTend=mkLineChart('tendenciaChart',S.kpis.map(k=>fmt(k.mes)),
+    [{label:'Prazo %',data:S.kpis.map(k=>k.prazo),borderColor:'#1a9e4a',bg:'transparent',noFill:true},{label:'OKRs %',data:S.kpis.map(k=>k.okrs),borderColor:'#d97706',bg:'transparent',noFill:true},{label:'Influência (×10)',data:S.kpis.map(k=>k.inf*10),borderColor:'#7c3aed',bg:'transparent',noFill:true},{label:`Baseline Prazo Q1 (${avgP}%)`,data:S.kpis.map(()=>avgP),borderColor:'rgba(26,158,74,.35)',dash:[3,4],noFill:true},{label:`Baseline OKRs Q1 (${avgO}%)`,data:S.kpis.map(()=>avgO),borderColor:'rgba(217,119,6,.35)',dash:[3,4],noFill:true}],0,110,'%');
+}
+
+function mkCmp(lbl,base,cur,suf){
+  const diff=cur-base; const up=diff>=0;
+  return `<div style="display:flex;align-items:center;gap:14px">
+    <div><div style="font-size:11px;color:var(--t3);margin-bottom:4px">${lbl} · Baseline Q1</div><div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--t3)">${base}${suf}</div></div>
+    <div style="font-size:22px;color:var(--t4)">${up?'→':'→'}</div>
+    <div><div style="font-size:11px;color:var(--t3);margin-bottom:4px">${lbl} · Atual</div><div style="font-family:'Bebas Neue',sans-serif;font-size:28px;color:${up?'var(--green)':'var(--coral)'}">${cur}${suf}</div><div style="font-size:11px;color:${up?'var(--green)':'var(--coral)'}">${up?'+':''}${diff}${suf} vs baseline</div></div>
+  </div>`;
+}
+
+function setKPI(vid,val,bid,pct,did,cur,prev,suf){
+  const el=document.getElementById(vid); if(el)el.textContent=val;
+  const bar=document.getElementById(bid); if(bar){bar.style.width=Math.min(pct,100)+'%';}
+  const d=document.getElementById(did); if(d){
+    if(prev!=null){const diff=cur-prev; d.textContent=(diff>=0?'+':'')+diff+suf+' vs mês anterior'; d.style.color=diff>=0?'var(--green)':'var(--coral)';}
+    else d.textContent='—';
+  }
+}
+
+// ──────────────────────────────────────────────
+// SCORE VIEW
+// ──────────────────────────────────────────────
+let cRadar,cHist;
+function renderScore(){
+  const sc=calcScore(); const rb=getRB(sc);
+  document.getElementById('score-rb').innerHTML=`<span class="rb ${rb.cls}"><span class="rb-dot"></span>${rb.label}</span>`;
+  document.getElementById('score-num').textContent=sc.total;
+  document.getElementById('score-circle').style.setProperty('--pct',sc.total);
+  document.getElementById('score-lbl').textContent=sc.total>=85?'Pronta para Head':sc.total>=72?'Em transição para Head':'Desenvolvimento ativo';
+  document.getElementById('score-desc').textContent='Score mensal · '+fmt(S.kpis[S.kpis.length-1]?.mes||'2026-05');
+  const dims=[
+    {l:'EXECUÇÃO',    v:sc.exec,  m:25,c:'var(--green)'},
+    {l:'OKRs',        v:sc.okrS,  m:20,c:'var(--amber)'},
+    {l:'AUTONOMIA',   v:sc.autoS, m:20,c:'var(--violet)'},
+    {l:'SKILLS',      v:sc.sklS,  m:20,c:'var(--teal)'},
+    {l:'INFLUÊNCIA',  v:sc.infS,  m:15,c:'var(--coral)'},
+  ];
+  document.getElementById('score-dims').innerHTML=dims.map(d=>`<div class="score-dim"><div class="sd-label">${d.l}</div><div class="sd-bar"><div class="sd-fill" style="width:${(d.v/d.m)*100}%;background:${d.c}"></div></div><div class="sd-val">${d.v}/${d.m}</div></div>`).join('');
+  if(cRadar)cRadar.destroy();
+  const ctx=document.getElementById('radarChart');
+  cRadar=new Chart(ctx,{type:'radar',data:{labels:['Execução','OKRs','Autonomia','Skills','Influência'],datasets:[
+    {label:'Atual',data:[sc.exec/25*100,sc.okrS/20*100,sc.autoS/20*100,sc.sklS/20*100,sc.infS/15*100],backgroundColor:'rgba(26,158,74,.12)',borderColor:'#1a9e4a',borderWidth:2,pointBackgroundColor:'#1a9e4a',pointRadius:4},
+    {label:'Meta Head',data:[88,80,80,75,80],backgroundColor:'transparent',borderColor:'rgba(13,148,136,.35)',borderDash:[4,2],borderWidth:1.5,pointRadius:0}
+  ]},options:{responsive:true,plugins:{legend:{display:true,position:'top',labels:{usePointStyle:true,font:{size:10},color:'#9a9896'}}},scales:{r:{beginAtZero:true,max:100,ticks:{font:{size:9},color:'#9a9896',stepSize:33},grid:{color:'rgba(0,0,0,.06)'},pointLabels:{font:{size:11},color:'#4a4846'}}}}});
+  if(cHist)cHist.destroy();
+  const scores=S.kpis.map(k=>{
+    const pr=k.prazo??90,ok=k.okrs??70,i=k.inf??4,a=k.auto??3;
+    const e=pr>=95?25:pr>=90?20:14,o=ok>=80?20:ok>=70?15:10,au=[5,8,12,16,20][Math.min(4,a)];
+    const sk2=S.skills||[];const mp=sk2.length*2;const g=sk2.reduce((a,s)=>a+({'nao-atende':0,'desenvolvendo':1,'atende':2,'supera':3}[s.status]||0),0);
+    const p=mp?g/mp:0;const sl=p>=0.7?20:p>=0.5?14:8;const inf=i>=7?15:i>=5?10:6;
+    return{mes:fmt(k.mes),total:e+o+au+sl+inf};
+  });
+  cHist=mkLineChart('histChart',scores.map(s=>s.mes),
+    [{label:'Score Total',data:scores.map(s=>s.total),borderColor:'#1a9e4a',bg:'rgba(26,158,74,.08)'},{label:'Meta Head (85)',data:scores.map(()=>85),borderColor:'rgba(13,148,136,.45)',dash:[4,2],noFill:true}],0,100,'');
+  const sk=S.skills||[];const ok2=sk.filter(s=>s.status==='atende'||s.status==='supera').length;const pct2=sk.length?ok2/sk.length:0;
+  const crit=[
+    {lbl:'Score ≥ 85',       chk:sc.total>=85,   val:`Atual: ${sc.total}`},
+    {lbl:'Autonomia ≥ N4',   chk:sc.autoLvl>=4,  val:`Atual: N${sc.autoLvl}`},
+    {lbl:'OKRs ≥ 80%',       chk:sc.okrs>=80,    val:`Atual: ${sc.okrs}%`},
+    {lbl:'Skills ≥ 70% ok',  chk:pct2>=0.7,      val:`Atual: ${Math.round(pct2*100)}%`},
+    {lbl:'Influência ≥ 7/mês',chk:sc.inf>=7,     val:`Atual: ${sc.inf}/mês`},
+    {lbl:'Prazo ≥ 95%',      chk:sc.prazo>=95,   val:`Atual: ${sc.prazo}%`},
+  ];
+  document.getElementById('crit-list').innerHTML=crit.map(c=>`<div class="crit-row"><div><div class="crit-name">${c.lbl}</div><div class="crit-val">${c.val}</div></div><span class="${c.chk?'ps-done':'ps-prog'}">${c.chk?'✓ Atingido':'Pendente'}</span></div>`).join('');
+}
+
+function getRB(sc){
+  if(sc.total>=85&&sc.autoLvl>=4)return{cls:'rb-ready',label:'ELEGÍVEL PARA HEAD'};
+  if(sc.total>=72)return{cls:'rb-transition',label:'EM TRANSIÇÃO'};
+  return{cls:'rb-developing',label:'EM DESENVOLVIMENTO'};
+}
+
+// ──────────────────────────────────────────────
+// SKILLS
+// ──────────────────────────────────────────────
+let activeCat='all';
+function filterCat(cat,btn){activeCat=cat;document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');renderSkills();}
+function renderSkills(){
+  const sk=S.skills||[];
+  const filtered=activeCat==='all'?sk:sk.filter(s=>s.cat===activeCat);
+  const grouped={};filtered.forEach(s=>{if(!grouped[s.cat])grouped[s.cat]=[];grouped[s.cat].push(s);});
+  document.getElementById('skills-body').innerHTML=Object.entries(grouped).map(([cat,items])=>
+    `<div class="cat-row">${CAT_NAMES[cat]||cat}</div>${items.map(s=>{const st=SM[s.status]||SM['desenvolvendo'];return`<div class="skill-row"><div><div class="skill-name">${s.name}</div><div class="skill-desc">${s.desc}</div>${s.obs?`<div class="skill-obs">↳ ${s.obs}</div>`:''}</div><span class="pill ${st.cls}">${st.lbl}</span></div>`;}).join('')}`
+  ).join('');
+}
+
+// ──────────────────────────────────────────────
 // PDIs
-// ═══════════════════════════════════════════════════════════════════
-function renderPDIs() {
-  const d = S.currentDesigner;
-  const pdis = S.pdis[d] || [];
-  document.getElementById('pdi-body').innerHTML = pdis.map(p => {
-    const st = PDI_ST[p.status] || PDI_ST['desenvolvimento'];
-    const actions = (p.acoes || '').split('|').map(a => a.trim()).filter(Boolean);
+// ──────────────────────────────────────────────
+function renderPDIs(){
+  document.getElementById('pdi-body').innerHTML=(S.pdis||[]).map(p=>{
+    const st=PDI_ST[p.status]||PDI_ST['desenvolvimento'];
+    const mk70=parseActions(p.pie70); const mk20=parseActions(p.pie20); const mk10=parseActions(p.pie10);
     return `
-    <div class="pdi-card" style="background:${p.bg || 'var(--card)'}">
-      <div class="pdi-status-bar" style="background:${st.t}"></div>
-      <div class="pdi-header">
-        <div class="pdi-icon">${p.icon || '🎯'}</div>
-        <div style="flex:1">
-          <div class="pdi-title">${p.comp}</div>
-          <div class="pdi-ciclo">${p.cicloLabel} · ${p.cargoAtual} → ${p.cargoAlvo}</div>
-        </div>
-        <span class="pdi-st-badge" style="background:${st.c};color:${st.t};border:1px solid ${st.t}33">${st.lbl}</span>
-      </div>
-      <div class="pdi-progress-row">
-        <div class="pdi-prog-label">Progresso</div>
-        <div class="pdi-prog-bar"><div class="pdi-prog-fill" style="width:${p.progress}%;background:${st.t}"></div></div>
-        <div class="pdi-prog-val">${p.progress}%</div>
-      </div>
-      <div class="pdi-label">Objetivo</div>
-      <div class="pdi-text">${p.obj}</div>
-      <div class="pdi-label">Por que importa</div>
-      <div class="pdi-text">${p.porqueImporta}</div>
-      <div class="pdi-label">Critério de Sucesso</div>
-      <div class="pdi-text">${p.criterioSucesso}</div>
-      <div class="pdi-label">Plano de Ação (70/20/10)</div>
-      <div class="pdi-actions">${actions.map(a => {
-        const parts = a.match(/^(\d+):\s*(.+)/);
-        if (parts) return `<div class="pdi-action"><div class="pdi-action-pct">${parts[1]}</div><div class="pdi-action-text">${parts[2]}</div></div>`;
-        return `<div class="pdi-action"><div class="pdi-action-pct">·</div><div class="pdi-action-text">${a}</div></div>`;
-      }).join('')}</div>
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px;flex-wrap:wrap;gap:8px">
-        <div>
-          <span class="ev-tag">📋 Evidência: ${p.ev}</span>
-          <span class="ev-tag" style="margin-left:4px">📅 ${p.ciclo}</span>
-        </div>
-        <div style="display:flex;gap:6px;align-items:center">
-          <span style="font-size:11px;color:var(--t3)">Progresso:</span>
-          <input type="range" min="0" max="100" value="${p.progress}" style="width:80px;accent-color:var(--green)" onchange="updateProgress('${p.id}',this.value)">
-          <select style="background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--t2);font-size:11px;padding:3px 7px;border-radius:6px;font-family:'Source Sans 3',sans-serif" onchange="updatePDIStatus('${p.id}',this.value)">
-            ${Object.entries(PDI_ST).map(([k, v]) => `<option value="${k}" ${p.status === k ? 'selected' : ''}>${v.lbl}</option>`).join('')}
-          </select>
-        </div>
-      </div>
-      ${p.evidencias && p.evidencias.length ? `
-      <div class="pdi-label" style="margin-top:12px">Evidências Registradas</div>
-      <div class="evidencias-list">${p.evidencias.map(e => `<div class="ev-item"><span class="ev-dot">▸</span><span>${e}</span></div>`).join('')}</div>
-      ` : ''}
-    </div>`;
+<div class="pdi-card">
+  <div class="pdi-bar" style="background:${st.bar}"></div>
+  <div class="pdi-header">
+    <div class="pdi-icon">${p.icon||'🎯'}</div>
+    <div style="flex:1">
+      <div class="pdi-title">${p.comp}</div>
+      <div class="pdi-sub">${p.cicloLabel} · ${p.cargoAtual} → ${p.cargoAlvo}</div>
+    </div>
+    <span class="pdi-st-pill" style="${st.pill}">${st.lbl}</span>
+  </div>
+  <div class="pdi-prog-row">
+    <div class="pdi-prog-lbl">Progresso</div>
+    <div class="pdi-prog-bar"><div class="pdi-prog-fill" style="width:${p.progress}%;background:${st.bar}"></div></div>
+    <div class="pdi-prog-pct">${p.progress}%</div>
+  </div>
+  <div class="pdi-lbl">Objetivo</div>
+  <div class="pdi-txt">${p.obj}</div>
+  <div class="pdi-lbl">Por que importa</div>
+  <div class="pdi-txt">${p.porqueImporta}</div>
+  <div class="pdi-lbl">Critério de Sucesso</div>
+  <div class="pdi-txt">${p.criterioSucesso}</div>
+  <div class="pdi-lbl">Plano 70 · 20 · 10</div>
+  <div class="pie-grid">
+    <div class="pie-block pie-70"><div class="pie-pct">70</div><div class="pie-label">Prática</div><div class="pie-items">${mk70}</div></div>
+    <div class="pie-block pie-20"><div class="pie-pct">20</div><div class="pie-label">Social</div><div class="pie-items">${mk20}</div></div>
+    <div class="pie-block pie-10"><div class="pie-pct">10</div><div class="pie-label">Formal</div><div class="pie-items">${mk10}</div></div>
+  </div>
+  <div style="margin-top:14px">
+    <span class="ev-tag">📋 Evidência: ${p.ev}</span>
+    <span class="ev-tag">📅 ${p.ciclo}</span>
+  </div>
+  ${p.evidencias&&p.evidencias.length?`<div class="pdi-lbl" style="margin-top:14px">Evidências Registradas</div><div>${p.evidencias.map(e=>`<div class="ev-item"><span class="ev-dot">▸</span><span>${e}</span></div>`).join('')}</div>`:''}
+  <div class="update-row">
+    <label>Progresso:</label>
+    <input type="range" min="0" max="100" value="${p.progress}" onchange="updProg('${p.id}',this.value)">
+    <span style="font-size:12px;color:var(--t3);min-width:28px">${p.progress}%</span>
+    <select class="exp-sel" onchange="updPDISt('${p.id}',this.value)" style="margin-left:8px">
+      ${Object.entries(PDI_ST).map(([k,v])=>`<option value="${k}" ${p.status===k?'selected':''}>${v.lbl}</option>`).join('')}
+    </select>
+  </div>
+</div>`;
   }).join('');
 }
 
-function updateProgress(id, val) {
-  const d = S.currentDesigner;
-  const pdis = S.pdis[d] || [];
-  const i = pdis.findIndex(p => p.id === id);
-  if (i >= 0) pdis[i].progress = parseInt(val);
-  save(S); toast('✅ Progresso atualizado!');
+function parseActions(str){
+  if(!str)return'';
+  return str.split('|').map(a=>a.trim()).filter(Boolean).map(a=>`<div style="margin-bottom:6px">· ${a}</div>`).join('');
 }
 
-function updatePDIStatus(id, val) {
-  const d = S.currentDesigner;
-  const pdis = S.pdis[d] || [];
-  const i = pdis.findIndex(p => p.id === id);
-  if (i >= 0) pdis[i].status = val;
-  save(S); renderPDIs(); toast('✅ Status atualizado!');
+function updProg(id,val){
+  const i=S.pdis.findIndex(p=>p.id===id); if(i<0)return;
+  S.pdis[i].progress=parseInt(val); save(S); renderPDIs(); toast('✅ Progresso atualizado!');
+}
+function updPDISt(id,val){
+  const i=S.pdis.findIndex(p=>p.id===id); if(i<0)return;
+  S.pdis[i].status=val; save(S); renderPDIs(); toast('✅ Status atualizado!');
 }
 
-// Modal PDI
-function openPDIModal() { document.getElementById('pdi-modal').classList.add('open'); }
-function closePDIModal() { document.getElementById('pdi-modal').classList.remove('open'); }
-function savePDI() {
-  const d = S.currentDesigner;
-  if (!S.pdis[d]) S.pdis[d] = [];
-  S.pdis[d].push({
-    id: 'p' + Date.now(), status: 'desenvolvimento', progress: 0,
-    cargoAtual: 'Marketing Manager Sênior', cargoAlvo: 'Head de Marketing',
-    cicloLabel: 'PDI 2026', comp: document.getElementById('m-comp').value,
-    obj: document.getElementById('m-obj').value, porqueImporta: document.getElementById('m-por').value,
-    criterioSucesso: document.getElementById('m-crit').value, ciclo: document.getElementById('m-ciclo').value,
-    acoes: '', metrica: '', ev: '', icon: document.getElementById('m-icon').value || '🎯', bg: 'var(--card)', evidencias: []
-  });
-  save(S); closePDIModal(); renderPDIs(); toast('✅ PDI criado!');
+function openPDIModal(){document.getElementById('modal-pdi').classList.add('open');}
+function savePDI(){
+  S.pdis.push({id:'p'+Date.now(),status:'desenvolvimento',progress:0,cargoAtual:'Marketing Manager Sênior',cargoAlvo:'Head de Marketing',cicloLabel:'PDI 2026',comp:document.getElementById('m-comp').value,obj:document.getElementById('m-obj').value,porqueImporta:document.getElementById('m-por').value,criterioSucesso:document.getElementById('m-crit').value,ciclo:document.getElementById('m-ciclo').value,pie70:'',pie20:'',pie10:'',ev:'',icon:document.getElementById('m-icon').value||'🎯',evidencias:[]});
+  save(S);closeModal('modal-pdi');renderPDIs();toast('✅ PDI criado!');
 }
 
-// ═══════════════════════════════════════════════════════════════════
+// ──────────────────────────────────────────────
 // CONTRATO
-// ═══════════════════════════════════════════════════════════════════
-let currentMes = '2026-06';
-function renderContrato() {
-  const d = S.currentDesigner;
-  const meses = Object.keys((S.contratos[d] || {}).meses || {}).sort((a, b) => b.localeCompare(a));
-  if (!meses.includes(currentMes)) currentMes = meses[0] || '2026-06';
-
-  document.getElementById('mes-selector').innerHTML = meses.map(m => `<button class="mes-btn ${m === currentMes ? 'active' : ''}" onclick="selectMes('${m}',this)">${fmt(m)}</button>`).join('');
-
-  const exp = ((S.contratos[d] || {}).meses || {})[currentMes]?.experimentos || [];
-  const tipoMap = { start: { e: '🟢', label: 'Start' }, stop: { e: '🔴', label: 'Stop' }, continue: { e: '🟡', label: 'Continue' } };
-
-  document.getElementById('contrato-body').innerHTML = exp.length ? exp.map(item => {
-    const t = tipoMap[item.tipo] || { e: '⚪', label: item.tipo };
-    return `
-    <div class="exp-item">
-      <div class="exp-tipo">${t.e}</div>
-      <div>
-        <div class="exp-ponto">${item.ponto}</div>
-        <div class="exp-acao">${item.acao}</div>
-        ${item.recurso ? `<div class="exp-recurso">📌 ${item.recurso}</div>` : ''}
-        ${item.resultado ? `<div class="exp-recurso" style="color:var(--green);margin-top:4px">✅ ${item.resultado}</div>` : ''}
-      </div>
-      <select class="exp-status-select" onchange="updateExpStatus('${currentMes}','${item.id}',this.value)">
-        <option value="aguardando" ${item.status === 'aguardando' ? 'selected' : ''}>Aguardando</option>
-        <option value="em_teste" ${item.status === 'em_teste' ? 'selected' : ''}>Em teste</option>
-        <option value="funcionou" ${item.status === 'funcionou' ? 'selected' : ''}>Funcionou</option>
-        <option value="nao_funcionou" ${item.status === 'nao_funcionou' ? 'selected' : ''}>Não funcionou</option>
-      </select>
-    </div>`;
-  }).join('') : `<div class="card" style="text-align:center;padding:32px;color:var(--t3)">Nenhum experimento para ${fmt(currentMes)}. Adicione um experimento acima.</div>`;
+// ──────────────────────────────────────────────
+let currentMes='2026-06';
+function renderContrato(){
+  const meses=Object.keys(S.contratos||{}).sort((a,b)=>b.localeCompare(a));
+  if(!meses.includes(currentMes))currentMes=meses[0]||'2026-06';
+  document.getElementById('mes-btns').innerHTML=meses.map(m=>`<button class="mes-btn ${m===currentMes?'active':''}" onclick="selMes('${m}',this)">${fmt(m)}</button>`).join('');
+  const exp=(S.contratos[currentMes]||{}).experimentos||[];
+  const TM={start:'🟢',stop:'🔴',continue:'🟡'};
+  document.getElementById('contrato-body').innerHTML=exp.length?exp.map(item=>`
+  <div class="exp-card">
+    <div class="exp-tipo">${TM[item.tipo]||'⚪'}</div>
+    <div>
+      <div class="exp-ponto">${item.ponto}</div>
+      <div class="exp-acao">${item.acao}</div>
+      ${item.recurso?`<div class="exp-recurso">📌 ${item.recurso}</div>`:''}
+      ${item.resultado?`<div class="exp-result">✅ ${item.resultado}</div>`:''}
+    </div>
+    <select class="exp-sel" onchange="updExp('${currentMes}','${item.id}',this.value)">
+      <option value="aguardando" ${item.status==='aguardando'?'selected':''}>Aguardando</option>
+      <option value="em_teste"   ${item.status==='em_teste'?'selected':''}>Em teste</option>
+      <option value="funcionou"  ${item.status==='funcionou'?'selected':''}>Funcionou ✓</option>
+      <option value="nao_funcionou" ${item.status==='nao_funcionou'?'selected':''}>Não funcionou</option>
+    </select>
+  </div>`).join(''):`<div class="card" style="text-align:center;padding:32px;color:var(--t3)">Nenhum experimento para ${fmt(currentMes)}.</div>`;
+}
+function selMes(m,btn){currentMes=m;document.querySelectorAll('.mes-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderContrato();}
+function updExp(mes,id,val){const m=S.contratos[mes];if(!m)return;const i=m.experimentos.findIndex(e=>e.id===id);if(i>=0)m.experimentos[i].status=val;save(S);toast('✅ Atualizado!');}
+function openExpModal(){document.getElementById('modal-exp').classList.add('open');}
+function saveExp(){
+  if(!S.contratos[currentMes])S.contratos[currentMes]={mes:currentMes,experimentos:[]};
+  S.contratos[currentMes].experimentos.push({id:'e'+Date.now(),tipo:document.getElementById('e-tipo').value,ponto:document.getElementById('e-ponto').value,acao:document.getElementById('e-acao').value,recurso:document.getElementById('e-recurso').value,status:'aguardando',resultado:''});
+  save(S);closeModal('modal-exp');renderContrato();toast('✅ Experimento adicionado!');
 }
 
-function selectMes(mes, btn) {
-  currentMes = mes;
-  document.querySelectorAll('.mes-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  renderContrato();
-}
-
-function updateExpStatus(mes, id, val) {
-  const d = S.currentDesigner;
-  const mData = ((S.contratos[d] || {}).meses || {})[mes];
-  if (!mData) return;
-  const i = mData.experimentos.findIndex(e => e.id === id);
-  if (i >= 0) mData.experimentos[i].status = val;
-  save(S); toast('✅ Status atualizado!');
-}
-
-// Modal Experimento
-function openExpModal() { document.getElementById('exp-modal').classList.add('open'); }
-function closeExpModal() { document.getElementById('exp-modal').classList.remove('open'); }
-function saveExp() {
-  const d = S.currentDesigner;
-  if (!S.contratos[d]) S.contratos[d] = { meses: {} };
-  if (!S.contratos[d].meses[currentMes]) S.contratos[d].meses[currentMes] = { mes: currentMes, experimentos: [] };
-  S.contratos[d].meses[currentMes].experimentos.push({
-    id: 'e' + Date.now(),
-    tipo: document.getElementById('e-tipo').value,
-    ponto: document.getElementById('e-ponto').value,
-    acao: document.getElementById('e-acao').value,
-    recurso: document.getElementById('e-recurso').value,
-    status: 'aguardando', resultado: ''
-  });
-  save(S); closeExpModal(); renderContrato(); toast('✅ Experimento adicionado!');
-}
-
-// ═══════════════════════════════════════════════════════════════════
+// ──────────────────────────────────────────────
 // CURADORIA
-// ═══════════════════════════════════════════════════════════════════
-function renderCuradoria() {
-  const d = S.currentDesigner;
-  const items = S.curadoria[d] || [];
-  document.getElementById('curadoria-body').innerHTML = items.length ? items.map(item => `
-    <a class="cur-item" href="${item.url || '#'}" target="_blank" rel="noopener">
-      <div class="cur-emoji">${item.icon || '📚'}</div>
-      <div>
-        <div class="cur-title">${item.title}</div>
-        <div class="cur-desc">${item.desc}</div>
-        <div class="cur-tags">${(item.tags || []).map(t => `<span class="cur-tag">${t}</span>`).join('')}</div>
-      </div>
-    </a>
-  `).join('') : `<div class="card" style="text-align:center;padding:32px;color:var(--t3)">Nenhum recurso adicionado ainda.</div>`;
+// ──────────────────────────────────────────────
+function renderCuradoria(){
+  const items=S.curadoria||[];
+  document.getElementById('curadoria-body').innerHTML=items.length?items.map(item=>`
+  <a class="cur-card" href="${item.url||'#'}" target="_blank" rel="noopener">
+    <div class="cur-emoji">${item.icon||'📚'}</div>
+    <div><div class="cur-title">${item.title}</div><div class="cur-desc">${item.desc}</div>
+    <div class="cur-tags">${(item.tags||[]).map(t=>`<span class="cur-tag">${t}</span>`).join('')}</div></div>
+  </a>`).join(''):`<div class="card" style="text-align:center;padding:32px;color:var(--t3)">Nenhum recurso ainda.</div>`;
+}
+function openCurModal(){document.getElementById('modal-cur').classList.add('open');}
+function saveCur(){
+  if(!S.curadoria)S.curadoria=[];
+  S.curadoria.push({id:'r'+Date.now(),title:document.getElementById('c-title').value,desc:document.getElementById('c-desc').value,url:document.getElementById('c-url').value,tags:document.getElementById('c-tags').value.split(',').map(t=>t.trim()).filter(Boolean),icon:document.getElementById('c-icon').value||'📚'});
+  save(S);closeModal('modal-cur');renderCuradoria();toast('✅ Recurso adicionado!');
 }
 
-function openCurModal() { document.getElementById('cur-modal').classList.add('open'); }
-function closeCurModal() { document.getElementById('cur-modal').classList.remove('open'); }
-function saveCur() {
-  const d = S.currentDesigner;
-  if (!S.curadoria[d]) S.curadoria[d] = [];
-  S.curadoria[d].push({
-    id: 'r' + Date.now(),
-    title: document.getElementById('c-title').value,
-    desc: document.getElementById('c-desc').value,
-    url: document.getElementById('c-url').value,
-    tags: document.getElementById('c-tags').value.split(',').map(t => t.trim()).filter(Boolean),
-    icon: document.getElementById('c-icon').value || '📚'
-  });
-  save(S); closeCurModal(); renderCuradoria(); toast('✅ Recurso adicionado!');
+// ──────────────────────────────────────────────
+// CHART HELPER
+// ──────────────────────────────────────────────
+function mkLineChart(id,labels,datasets,yMin,yMax,ySuf){
+  const ctx=document.getElementById(id);if(!ctx)return null;
+  return new Chart(ctx,{type:'line',data:{labels,datasets:datasets.map(d=>({label:d.label,data:d.data,borderColor:d.borderColor,backgroundColor:d.noFill?'transparent':(d.bg||'transparent'),fill:!d.noFill,tension:.4,borderDash:d.dash||[],pointRadius:d.dash?0:4,pointBackgroundColor:d.borderColor,borderWidth:d.dash?1.5:2}))},options:{responsive:true,plugins:{legend:{display:true,position:'top',labels:{usePointStyle:true,font:{size:10},color:'#9a9896'}}},scales:{x:{grid:{color:'rgba(0,0,0,.04)'},ticks:{font:{size:10},color:'#9a9896'}},y:{min:yMin,max:yMax,grid:{color:'rgba(0,0,0,.04)'},ticks:{font:{size:10},color:'#9a9896',callback:v=>v+(ySuf||'')}}}}}});
 }
 
-// ═══════════════════════════════════════════════════════════════════
-// TOAST + CLOSE MODALS
-// ═══════════════════════════════════════════════════════════════════
-function toast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2600); }
-document.addEventListener('click', e => {
-  ['pdi-modal', 'exp-modal', 'cur-modal'].forEach(id => {
-    const m = document.getElementById(id);
-    if (m && e.target === m) m.classList.remove('open');
-  });
-});
+// ──────────────────────────────────────────────
+// UTILS
+// ──────────────────────────────────────────────
+function fmt(mes){const[y,m]=mes.split('-');const mn=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];return(mn[parseInt(m)-1]||m)+'/'+y.slice(2);}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2600);}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+document.addEventListener('click',e=>{['modal-pdi','modal-exp','modal-cur'].forEach(id=>{const m=document.getElementById(id);if(m&&e.target===m)m.classList.remove('open');});});
 
-// ═══════════════════════════════════════════════════════════════════
-// INIT
-// ═══════════════════════════════════════════════════════════════════
-document.addEventListener('DOMContentLoaded', () => { renderOverview(); });
+document.addEventListener('DOMContentLoaded',()=>renderOverview());
 </script>
 </body>
 </html>
