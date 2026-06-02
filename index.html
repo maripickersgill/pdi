@@ -191,6 +191,19 @@ input[type=range]{accent-color:var(--grn);width:88px}
 /* toast */
 .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(16px);background:var(--t1);color:#fff;font-size:13px;padding:9px 18px;border-radius:8px;opacity:0;transition:all .28s;pointer-events:none;z-index:999}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ═══ PIE TRACKER SCOPED CSS ═══ */
+#pie-tab-wrap {
+  background: #100f0f;
+  border-radius: 16px;
+  overflow: hidden;
+  min-height: 80vh;
+  font-family: "Source Sans 3", "DM Sans", sans-serif;
+}
+#pie-tab-wrap .sidebar { display: none !important; }
+#pie-tab-wrap .main { margin-left: 0 !important; min-height: 80vh; }
+#pie-tab-wrap .header { padding: 20px 28px 0; }
+
 </style>
 </head>
 <body>
@@ -207,6 +220,8 @@ input[type=range]{accent-color:var(--grn);width:88px}
     <button class="nb" id="nb-skills"   onclick="goView('skills')"><span class="nd"></span>Matriz de Skills</button>
     <button class="nb" id="nb-pdi"      onclick="goView('pdi')"><span class="nd"></span>PDI</button>
     <button class="nb" id="nb-contrato" onclick="goView('contrato')"><span class="nd"></span>Contrato de Evolucao</button>
+    
+    <button class="nb" id="nb-pie" onclick="goView('pie')"><span class="nd"></span>PIE Tracker</button>
     <button class="nb" id="nb-curadoria"onclick="goView('curadoria')"><span class="nd"></span>Curadoria</button>
   </div>
   <div class="sb-foot">
@@ -320,6 +335,811 @@ input[type=range]{accent-color:var(--grn);width:88px}
   <div id="cur-body"></div>
 </div>
 
+
+<div class="view" id="view-pie">
+  <div id="pie-tab-wrap">
+<div class="main">
+  <div class="header">
+    <div class="header-top">
+      <div>
+        <div class="header-title" id="page-title">Overview</div>
+        <div class="header-year">2025 Review Year</div>
+      </div>
+      <button class="btn-add" onclick="openAddModal()">+ Add Task</button>
+    </div>
+    <div class="tabs">
+      <div class="tab active" onclick="switchTab('overview', null, this)">Overview</div>
+      <div class="tab" onclick="switchTab('tasks', null, this)">All Tasks</div>
+      <div class="tab" onclick="switchTab('quarter', null, this)">By Quarter</div>
+      <div class="tab" onclick="switchTab('plan', null, this)">Plano</div>
+      <div class="tab" onclick="switchTab('brag', null, this)">Brag Doc</div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- OVERVIEW -->
+    <div class="page active" id="page-overview">
+      <div class="metric-row" id="metric-row"></div>
+      <div class="overview-grid">
+        <div class="panel">
+          <div class="panel-title">PIE Framework Breakdown</div>
+          <div id="pie-breakdown"></div>
+          <div class="coaching-note">
+            <strong>Referência:</strong> High performers distribuem ~50% Performance, ~30% Image, ~20% Exposure. Se o E está baixo, busque projetos cross-funcionais e visibilidade com stakeholders sênior.
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-title">Quarterly Completion Tracker</div>
+          <div class="quarter-grid" id="quarter-tracker"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ALL TASKS -->
+    <div class="page" id="page-tasks">
+      <div class="filter-bar" id="filter-bar-tasks"></div>
+      <table class="task-table">
+        <thead>
+          <tr>
+            <th>Task</th>
+            <th>Status</th>
+            <th>Prioridade</th>
+            <th>PIE</th>
+            <th>Quarter</th>
+            <th>Visibilidade</th>
+          </tr>
+        </thead>
+        <tbody id="task-tbody"></tbody>
+      </table>
+      <div class="empty-state" id="tasks-empty" style="display:none">Nenhuma task encontrada.</div>
+    </div>
+
+    <!-- BY QUARTER -->
+    <div class="page" id="page-quarter">
+      <div id="quarter-sections"></div>
+    </div>
+
+    <!-- PLANO -->
+    <div class="page" id="page-plan">
+      <div class="plan-header">
+        <div class="plan-desc">Coisas que você quer fazer. Quando virar entrega real, promove para task.</div>
+        <button class="btn-add" onclick="openPlanModal()">+ Add Plano</button>
+      </div>
+      <div class="plan-grid">
+        <div>
+          <div class="plan-col-title want"><span class="col-dot"></span>Quero fazer</div>
+          <div class="plan-col" id="plan-col-want"></div>
+        </div>
+        <div>
+          <div class="plan-col-title planning"><span class="col-dot"></span>Planejando</div>
+          <div class="plan-col" id="plan-col-planning"></div>
+        </div>
+        <div>
+          <div class="plan-col-title wip"><span class="col-dot"></span>Em andamento</div>
+          <div class="plan-col" id="plan-col-wip"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BRAG DOC -->
+    <div class="page" id="page-brag">
+      <div style="font-size:13px;color:var(--gray-6);margin-bottom:24px;">Tarefas concluídas formatadas para conversas de performance review. Use para contar sua história.</div>
+      <div class="brag-list" id="brag-list"></div>
+      <div class="no-brag" id="brag-empty" style="display:none">Conclua tasks para aparecerem aqui.</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ADD/EDIT MODAL -->
+<div class="modal-overlay" id="modal-add">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-add')">✕</button>
+    <div class="modal-title" id="modal-add-title">Add Task</div>
+
+    <div class="form-section">Informações Básicas</div>
+    <div class="form-group">
+      <label>Nome da Task <span class="req">*</span></label>
+      <input type="text" id="f-name" placeholder="O que você fez?">
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Status</label>
+        <select id="f-status">
+          <option value="not_started">Not Started</option>
+          <option value="in_progress">In Progress</option>
+          <option value="blocked">Blocked</option>
+          <option value="done">Done</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Prioridade</label>
+        <select id="f-priority">
+          <option value="high">High</option>
+          <option value="medium">Medium</option>
+          <option value="low">Low</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Categoria PIE</label>
+        <select id="f-pie">
+          <option value="p">P — Performance</option>
+          <option value="i">I — Image</option>
+          <option value="e">E — Exposure</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Quarter</label>
+        <select id="f-quarter">
+          <option value="Q1">Q1</option>
+          <option value="Q2">Q2</option>
+          <option value="Q3">Q3</option>
+          <option value="Q4">Q4</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-section">Contexto</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Quem pode validar</label>
+        <input type="text" id="f-validator" placeholder="Nome e cargo">
+      </div>
+      <div class="form-group">
+        <label>Objetivo estratégico</label>
+        <input type="text" id="f-goal" placeholder="Qual meta isso apoia?">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Descrição</label>
+      <textarea id="f-desc" placeholder="O que você fez? Seja específica."></textarea>
+    </div>
+
+    <div class="form-section">Impacto & Visibilidade</div>
+    <div class="form-group">
+      <label>Impacto Quantificável <span class="req">*</span> — campo mais importante</label>
+      <textarea id="f-impact" placeholder="Use números reais. Ex: '40% mais rápido', 'aumentou X em Y%', 'entregou Z em N dias'."></textarea>
+    </div>
+    <div class="form-group">
+      <label>Nível de Visibilidade</label>
+      <select id="f-visibility">
+        <option value="Manager only">Manager only</option>
+        <option value="Cross-functional">Cross-functional</option>
+        <option value="Director">Director</option>
+        <option value="Exec/C-Suite">Exec/C-Suite</option>
+        <option value="VP">VP</option>
+        <option value="Pública">Pública</option>
+      </select>
+    </div>
+
+    <div class="form-section">Evidência & Feedback</div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Evidência / Link</label>
+        <input type="text" id="f-evidence" placeholder="URL, Notion, Google Drive...">
+      </div>
+      <div class="form-group">
+        <label>Feedback Recebido</label>
+        <input type="text" id="f-feedback" placeholder='"Citação exata" — Nome, Cargo'>
+      </div>
+    </div>
+
+    <div class="form-section">Skills Demonstradas</div>
+    <div class="skills-checkboxes" id="skills-checkboxes"></div>
+
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('modal-add')">Cancelar</button>
+      <button class="btn-save" onclick="saveTask()">Salvar Task</button>
+    </div>
+  </div>
+</div>
+
+<!-- DETAIL MODAL -->
+<div class="modal-overlay" id="modal-detail">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-detail')">✕</button>
+    <div class="modal-title" id="detail-title"></div>
+    <div class="modal-header-tags" id="detail-tags"></div>
+    <div id="detail-body"></div>
+    <div class="detail-actions">
+      <button class="btn-delete" onclick="deleteCurrentTask()">Deletar task</button>
+      <button class="btn-edit" onclick="editCurrentTask()">Editar</button>
+    </div>
+  </div>
+</div>
+
+<!-- PLAN MODAL -->
+<div class="modal-overlay" id="modal-plan">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-plan')">✕</button>
+    <div class="modal-title" id="modal-plan-title">Add Plano</div>
+
+    <div class="form-section">O que você quer fazer</div>
+    <div class="form-group">
+      <label>Nome <span class="req">*</span></label>
+      <input type="text" id="p-name" placeholder="Ex: Participar de um painel de esports">
+    </div>
+    <div class="form-group">
+      <label>Por que isso importa pra você</label>
+      <textarea id="p-why" placeholder="Qual o impacto esperado? O que isso muda na sua carreira?"></textarea>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Categoria PIE</label>
+        <select id="p-pie">
+          <option value="p">P — Performance</option>
+          <option value="i">I — Image</option>
+          <option value="e">E — Exposure</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Status</label>
+        <select id="p-status">
+          <option value="want">Quero fazer</option>
+          <option value="planning">Planejando</option>
+          <option value="wip">Em andamento</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Quarter pretendido</label>
+        <select id="p-quarter">
+          <option value="Q1">Q1</option>
+          <option value="Q2">Q2</option>
+          <option value="Q3">Q3</option>
+          <option value="Q4">Q4</option>
+          <option value="—">Sem prazo</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Prioridade</label>
+        <select id="p-priority">
+          <option value="high">High</option>
+          <option value="medium">Medium</option>
+          <option value="low">Low</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Próximo passo concreto</label>
+      <input type="text" id="p-next" placeholder="O que você precisa fazer pra isso sair do papel?">
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('modal-plan')">Cancelar</button>
+      <button class="btn-save" onclick="savePlan()">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<!-- PLAN DETAIL MODAL -->
+<div class="modal-overlay" id="modal-plan-detail">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('modal-plan-detail')">✕</button>
+    <div class="modal-title" id="pd-title"></div>
+    <div class="modal-header-tags" id="pd-tags"></div>
+    <div id="pd-body"></div>
+    <div class="detail-actions">
+      <button class="btn-delete" onclick="deletePlanItem()">Deletar</button>
+      <div style="display:flex;gap:10px;">
+        <button class="btn-cancel" onclick="editPlanItem()">Editar</button>
+        <button class="btn-promote" onclick="promoteToTask()">↑ Promover para Task</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const SKILLS_LIST = ['Strategy','Communication','Leadership','Analytics','Project Management','Relationship Building','Innovation','Operations','Content','Performance','Branding','Copywriting'];
+
+let tasks = JSON.parse(localStorage.getItem('pie_tasks') || '[]');
+let plans = JSON.parse(localStorage.getItem('pie_plans') || '[]');
+let activeFilters = { status: 'all', pie: 'all', quarter: 'all' };
+let currentDetailId = null;
+let currentPlanId = null;
+let editingId = null;
+let editingPlanId = null;
+let selectedSkills = [];
+
+function save() {
+  localStorage.setItem('pie_tasks', JSON.stringify(tasks));
+}
+
+function savePlans() {
+  localStorage.setItem('pie_plans', JSON.stringify(plans));
+}
+
+function uid() {
+  return Date.now().toString(36) + Math.random().toString(36).slice(2);
+}
+
+// TAB SWITCHING
+const tabNames = { overview:'Overview', tasks:'All Tasks', quarter:'By Quarter', plan:'Plano', brag:'Brag Doc' };
+function switchTab(name, navEl, tabEl) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  if (navEl) navEl.classList.add('active');
+  if (tabEl) tabEl.classList.add('active');
+  const navAll = document.querySelectorAll('.nav-item');
+  const tabAll = document.querySelectorAll('.tab');
+  const order = ['overview','tasks','quarter','plan','brag'];
+  const idx = order.indexOf(name);
+  if (navAll[idx]) navAll[idx].classList.add('active');
+  if (tabAll[idx]) tabAll[idx].classList.add('active');
+  document.getElementById('page-title').textContent = tabNames[name];
+  render();
+}
+
+// MODALS
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+function openAddModal() {
+  editingId = null;
+  selectedSkills = [];
+  document.getElementById('modal-add-title').textContent = 'Add Task';
+  ['f-name','f-desc','f-validator','f-goal','f-impact','f-evidence','f-feedback'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  document.getElementById('f-status').value = 'not_started';
+  document.getElementById('f-priority').value = 'high';
+  document.getElementById('f-pie').value = 'p';
+  document.getElementById('f-quarter').value = 'Q1';
+  document.getElementById('f-visibility').value = 'Manager only';
+  renderSkillsCheckboxes();
+  openModal('modal-add');
+}
+
+function renderSkillsCheckboxes() {
+  const wrap = document.getElementById('skills-checkboxes');
+  wrap.innerHTML = SKILLS_LIST.map(s => `
+    <div class="skill-check ${selectedSkills.includes(s)?'selected':''}" onclick="toggleSkill('${s}',this)">${s}</div>
+  `).join('');
+}
+
+function toggleSkill(s, el) {
+  if (selectedSkills.includes(s)) {
+    selectedSkills = selectedSkills.filter(x => x !== s);
+    el.classList.remove('selected');
+  } else {
+    selectedSkills.push(s);
+    el.classList.add('selected');
+  }
+}
+
+function saveTask() {
+  const name = document.getElementById('f-name').value.trim();
+  if (!name) { document.getElementById('f-name').focus(); return; }
+
+  const task = {
+    id: editingId || uid(),
+    name,
+    desc: document.getElementById('f-desc').value.trim(),
+    status: document.getElementById('f-status').value,
+    priority: document.getElementById('f-priority').value,
+    pie: document.getElementById('f-pie').value,
+    quarter: document.getElementById('f-quarter').value,
+    validator: document.getElementById('f-validator').value.trim(),
+    goal: document.getElementById('f-goal').value.trim(),
+    impact: document.getElementById('f-impact').value.trim(),
+    visibility: document.getElementById('f-visibility').value,
+    evidence: document.getElementById('f-evidence').value.trim(),
+    feedback: document.getElementById('f-feedback').value.trim(),
+    skills: [...selectedSkills],
+    createdAt: editingId ? (tasks.find(t=>t.id===editingId)?.createdAt || Date.now()) : Date.now()
+  };
+
+  if (editingId) {
+    tasks = tasks.map(t => t.id === editingId ? task : t);
+  } else {
+    tasks.push(task);
+  }
+  save();
+  closeModal('modal-add');
+  render();
+}
+
+function openDetailModal(id) {
+  const t = tasks.find(x => x.id === id);
+  if (!t) return;
+  currentDetailId = id;
+  document.getElementById('detail-title').textContent = t.name;
+  document.getElementById('detail-tags').innerHTML = [
+    badgeStatus(t.status),
+    badgePriority(t.priority),
+    badgePie(t.pie),
+    `<span class="badge badge-notstarted">${t.quarter}</span>`,
+    t.visibility ? `<span class="badge badge-notstarted">${t.visibility}</span>` : ''
+  ].join('');
+  
+  let body = '';
+  if (t.desc) body += field('Descrição', t.desc);
+  if (t.goal) body += field('Objetivo Estratégico', t.goal);
+  if (t.impact) body += `<div class="detail-field"><div class="detail-field-label">Impacto Quantificável</div><div class="detail-impact">${t.impact}</div></div>`;
+  if (t.feedback) body += field('Feedback Recebido', `<em>${t.feedback}</em>`);
+  if (t.validator) body += field('Validado por', t.validator);
+  if (t.evidence) body += field('Evidência', `<a href="${t.evidence}" target="_blank" style="color:var(--green)">${t.evidence}</a>`);
+  if (t.skills && t.skills.length) body += `<div class="detail-field"><div class="detail-field-label">Skills Demonstradas</div><div class="brag-skills">${t.skills.map(s=>`<span class="skill-tag">${s}</span>`).join('')}</div></div>`;
+  
+  document.getElementById('detail-body').innerHTML = body;
+  openModal('modal-detail');
+}
+
+function field(label, val) {
+  return `<div class="detail-field"><div class="detail-field-label">${label}</div><div class="detail-field-value">${val}</div></div>`;
+}
+
+function deleteCurrentTask() {
+  if (!currentDetailId) return;
+  tasks = tasks.filter(t => t.id !== currentDetailId);
+  save();
+  closeModal('modal-detail');
+  render();
+}
+
+function editCurrentTask() {
+  const t = tasks.find(x => x.id === currentDetailId);
+  if (!t) return;
+  editingId = t.id;
+  selectedSkills = [...(t.skills || [])];
+  document.getElementById('modal-add-title').textContent = 'Editar Task';
+  document.getElementById('f-name').value = t.name;
+  document.getElementById('f-desc').value = t.desc || '';
+  document.getElementById('f-status').value = t.status;
+  document.getElementById('f-priority').value = t.priority;
+  document.getElementById('f-pie').value = t.pie;
+  document.getElementById('f-quarter').value = t.quarter;
+  document.getElementById('f-validator').value = t.validator || '';
+  document.getElementById('f-goal').value = t.goal || '';
+  document.getElementById('f-impact').value = t.impact || '';
+  document.getElementById('f-visibility').value = t.visibility || 'Manager only';
+  document.getElementById('f-evidence').value = t.evidence || '';
+  document.getElementById('f-feedback').value = t.feedback || '';
+  renderSkillsCheckboxes();
+  closeModal('modal-detail');
+  openModal('modal-add');
+}
+
+// BADGES
+function badgeStatus(s) {
+  const map = { done:['badge-done','Done'], in_progress:['badge-progress','In Progress'], blocked:['badge-blocked','Blocked'], not_started:['badge-notstarted','Not Started'] };
+  const [cls, label] = map[s] || ['badge-notstarted', s];
+  return `<span class="badge ${cls}">${label}</span>`;
+}
+
+function badgePriority(p) {
+  const map = { high:'badge-high', medium:'badge-medium', low:'badge-low' };
+  return `<span class="badge ${map[p]||'badge-low'}">${p.charAt(0).toUpperCase()+p.slice(1)}</span>`;
+}
+
+function badgePie(p) {
+  const map = { p:['badge-p','P — Performance'], i:['badge-i','I — Image'], e:['badge-e','E — Exposure'] };
+  const [cls, label] = map[p] || ['badge-notstarted', p];
+  return `<span class="badge ${cls}">${label}</span>`;
+}
+
+// PLAN FUNCTIONS
+function openPlanModal(prefill) {
+  editingPlanId = null;
+  document.getElementById('modal-plan-title').textContent = 'Add Plano';
+  document.getElementById('p-name').value = prefill?.name || '';
+  document.getElementById('p-why').value = prefill?.why || '';
+  document.getElementById('p-pie').value = prefill?.pie || 'p';
+  document.getElementById('p-status').value = prefill?.status || 'want';
+  document.getElementById('p-quarter').value = prefill?.quarter || 'Q2';
+  document.getElementById('p-priority').value = prefill?.priority || 'high';
+  document.getElementById('p-next').value = prefill?.next || '';
+  openModal('modal-plan');
+}
+
+function savePlan() {
+  const name = document.getElementById('p-name').value.trim();
+  if (!name) { document.getElementById('p-name').focus(); return; }
+  const item = {
+    id: editingPlanId || uid(),
+    name,
+    why: document.getElementById('p-why').value.trim(),
+    pie: document.getElementById('p-pie').value,
+    status: document.getElementById('p-status').value,
+    quarter: document.getElementById('p-quarter').value,
+    priority: document.getElementById('p-priority').value,
+    next: document.getElementById('p-next').value.trim(),
+    createdAt: editingPlanId ? (plans.find(p=>p.id===editingPlanId)?.createdAt || Date.now()) : Date.now()
+  };
+  if (editingPlanId) {
+    plans = plans.map(p => p.id === editingPlanId ? item : p);
+  } else {
+    plans.push(item);
+  }
+  savePlans();
+  closeModal('modal-plan');
+  renderPlan();
+}
+
+function openPlanDetail(id) {
+  const p = plans.find(x => x.id === id);
+  if (!p) return;
+  currentPlanId = id;
+  document.getElementById('pd-title').textContent = p.name;
+  const planStatusLabel = { want: 'Quero fazer', planning: 'Planejando', wip: 'Em andamento' };
+  const planStatusClass = { want: 'badge-notstarted', planning: 'badge-medium', wip: 'badge-progress' };
+  document.getElementById('pd-tags').innerHTML = [
+    `<span class="badge ${planStatusClass[p.status]||'badge-notstarted'}">${planStatusLabel[p.status]||p.status}</span>`,
+    badgePie(p.pie),
+    badgePriority(p.priority),
+    p.quarter !== '—' ? `<span class="badge badge-notstarted">${p.quarter}</span>` : ''
+  ].join('');
+  let body = '';
+  if (p.why) body += field('Por que isso importa', p.why);
+  if (p.next) body += field('Próximo passo', p.next);
+  document.getElementById('pd-body').innerHTML = body;
+  openModal('modal-plan-detail');
+}
+
+function deletePlanItem() {
+  if (!currentPlanId) return;
+  plans = plans.filter(p => p.id !== currentPlanId);
+  savePlans();
+  closeModal('modal-plan-detail');
+  renderPlan();
+}
+
+function editPlanItem() {
+  const p = plans.find(x => x.id === currentPlanId);
+  if (!p) return;
+  editingPlanId = p.id;
+  document.getElementById('modal-plan-title').textContent = 'Editar Plano';
+  document.getElementById('p-name').value = p.name;
+  document.getElementById('p-why').value = p.why || '';
+  document.getElementById('p-pie').value = p.pie;
+  document.getElementById('p-status').value = p.status;
+  document.getElementById('p-quarter').value = p.quarter;
+  document.getElementById('p-priority').value = p.priority;
+  document.getElementById('p-next').value = p.next || '';
+  closeModal('modal-plan-detail');
+  openModal('modal-plan');
+}
+
+function promoteToTask() {
+  const p = plans.find(x => x.id === currentPlanId);
+  if (!p) return;
+  // pre-fill the task modal with plan data
+  editingId = null;
+  selectedSkills = [];
+  document.getElementById('modal-add-title').textContent = 'Add Task';
+  document.getElementById('f-name').value = p.name;
+  document.getElementById('f-desc').value = p.why || '';
+  document.getElementById('f-status').value = 'not_started';
+  document.getElementById('f-priority').value = p.priority;
+  document.getElementById('f-pie').value = p.pie;
+  document.getElementById('f-quarter').value = p.quarter !== '—' ? p.quarter : 'Q2';
+  document.getElementById('f-validator').value = '';
+  document.getElementById('f-goal').value = p.next || '';
+  document.getElementById('f-impact').value = '';
+  document.getElementById('f-visibility').value = 'Manager only';
+  document.getElementById('f-evidence').value = '';
+  document.getElementById('f-feedback').value = '';
+  renderSkillsCheckboxes();
+  // remove from plans
+  plans = plans.filter(x => x.id !== currentPlanId);
+  savePlans();
+  closeModal('modal-plan-detail');
+  openModal('modal-add');
+  renderPlan();
+}
+
+function renderPlan() {
+  const cols = { want: 'plan-col-want', planning: 'plan-col-planning', wip: 'plan-col-wip' };
+  Object.entries(cols).forEach(([status, colId]) => {
+    const col = document.getElementById(colId);
+    if (!col) return;
+    const items = plans.filter(p => p.status === status);
+    if (!items.length) {
+      col.innerHTML = '<div class="plan-col-empty">Nenhum item aqui ainda.</div>';
+      return;
+    }
+    col.innerHTML = items.map(p => `
+      <div class="plan-card" onclick="openPlanDetail('${p.id}')">
+        <div class="plan-card-name">${p.name}</div>
+        ${p.why ? `<div class="plan-card-desc">${p.why.length > 80 ? p.why.slice(0,80)+'…' : p.why}</div>` : ''}
+        <div class="plan-card-footer">
+          ${badgePie(p.pie)}
+          ${p.quarter !== '—' ? `<span class="badge badge-notstarted" style="font-size:10px;">${p.quarter}</span>` : ''}
+          ${badgePriority(p.priority)}
+        </div>
+      </div>
+    `).join('');
+  });
+}
+
+// RENDER
+function render() {
+  renderOverview();
+  renderTasks();
+  renderQuarter();
+  renderPlan();
+  renderBrag();
+}
+
+function renderOverview() {
+  const total = tasks.length;
+  const done = tasks.filter(t=>t.status==='done').length;
+  const inProg = tasks.filter(t=>t.status==='in_progress').length;
+  const highDone = tasks.filter(t=>t.status==='done'&&t.priority==='high').length;
+  const withImpact = tasks.filter(t=>t.status==='done'&&t.impact).length;
+
+  document.getElementById('metric-row').innerHTML = `
+    <div class="metric-card"><div class="metric-number">${total}</div><div class="metric-label">Total Tasks</div></div>
+    <div class="metric-card"><div class="metric-number green">${done}</div><div class="metric-label">Completed</div></div>
+    <div class="metric-card"><div class="metric-number blue">${inProg}</div><div class="metric-label">In Progress</div></div>
+    <div class="metric-card"><div class="metric-number yellow">${highDone}</div><div class="metric-label">High Priority Done</div></div>
+    <div class="metric-card"><div class="metric-number green">${withImpact}</div><div class="metric-label">Com Prova de Impacto</div></div>
+  `;
+
+  const pCount = tasks.filter(t=>t.pie==='p').length;
+  const iCount = tasks.filter(t=>t.pie==='i').length;
+  const eCount = tasks.filter(t=>t.pie==='e').length;
+  const maxPIE = Math.max(pCount, iCount, eCount, 1);
+
+  document.getElementById('pie-breakdown').innerHTML = `
+    <div class="pie-row">
+      <div class="pie-row-header">
+        <div><div class="pie-label">Performance</div><div class="pie-sub">Core job responsibilities & results</div></div>
+        <div class="pie-count">${pCount} task${pCount!==1?'s':''}</div>
+      </div>
+      <div class="pie-bar"><div class="pie-fill p" style="width:${pCount/maxPIE*100}%"></div></div>
+    </div>
+    <div class="pie-row">
+      <div class="pie-row-header">
+        <div><div class="pie-label">Image</div><div class="pie-sub">Como os outros percebem sua marca</div></div>
+        <div class="pie-count">${iCount} task${iCount!==1?'s':''}</div>
+      </div>
+      <div class="pie-bar"><div class="pie-fill i" style="width:${iCount/maxPIE*100}%"></div></div>
+    </div>
+    <div class="pie-row">
+      <div class="pie-row-header">
+        <div><div class="pie-label">Exposure</div><div class="pie-sub">Visibilidade com stakeholders sênior</div></div>
+        <div class="pie-count">${eCount} task${eCount!==1?'s':''}</div>
+      </div>
+      <div class="pie-bar"><div class="pie-fill e" style="width:${eCount/maxPIE*100}%"></div></div>
+    </div>
+  `;
+
+  const quarters = ['Q1','Q2','Q3','Q4'];
+  document.getElementById('quarter-tracker').innerHTML = quarters.map(q => {
+    const qtasks = tasks.filter(t=>t.quarter===q);
+    const qdone = qtasks.filter(t=>t.status==='done').length;
+    const pct = qtasks.length ? qdone/qtasks.length : 0;
+    return `
+      <div class="quarter-item">
+        <span class="quarter-name">${q}</span>
+        <div class="quarter-bar-wrap"><div class="quarter-bar-fill" style="width:${pct*100}%"></div></div>
+        <span class="quarter-frac">${qdone}/${qtasks.length}</span>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderTasks() {
+  const filterBar = document.getElementById('filter-bar-tasks');
+  const statusFilters = ['all','not_started','in_progress','blocked','done'];
+  const pieFilters = ['all','p','i','e'];
+  const qFilters = ['all','Q1','Q2','Q3','Q4'];
+
+  filterBar.innerHTML = `
+    <span class="filter-label">Status</span>
+    ${statusFilters.map(f => `<button class="filter-btn ${activeFilters.status===f?'active':''}" onclick="setFilter('status','${f}')">${f==='all'?'Todos':f==='not_started'?'Not Started':f==='in_progress'?'In Progress':f.charAt(0).toUpperCase()+f.slice(1)}</button>`).join('')}
+    <div class="filter-sep"></div>
+    <span class="filter-label">PIE</span>
+    ${pieFilters.map(f => `<button class="filter-btn ${activeFilters.pie===f?'active':''}" onclick="setFilter('pie','${f}')">${f==='all'?'Todos':f==='p'?'Performance':f==='i'?'Image':'Exposure'}</button>`).join('')}
+    <div class="filter-sep"></div>
+    ${qFilters.map(f => `<button class="filter-btn ${activeFilters.quarter===f?'active':''}" onclick="setFilter('quarter','${f}')">${f==='all'?'Todos':f}</button>`).join('')}
+  `;
+
+  let filtered = tasks.filter(t => {
+    if (activeFilters.status !== 'all' && t.status !== activeFilters.status) return false;
+    if (activeFilters.pie !== 'all' && t.pie !== activeFilters.pie) return false;
+    if (activeFilters.quarter !== 'all' && t.quarter !== activeFilters.quarter) return false;
+    return true;
+  });
+
+  const tbody = document.getElementById('task-tbody');
+  const empty = document.getElementById('tasks-empty');
+  if (!filtered.length) {
+    tbody.innerHTML = '';
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+  tbody.innerHTML = filtered.map(t => `
+    <tr onclick="openDetailModal('${t.id}')">
+      <td><div class="task-name">${t.name}</div>${t.desc?`<div class="task-desc">${t.desc}</div>`:''}</td>
+      <td>${badgeStatus(t.status)}</td>
+      <td>${badgePriority(t.priority)}</td>
+      <td>${badgePie(t.pie)}</td>
+      <td><span class="badge badge-notstarted">${t.quarter}</span></td>
+      <td><span class="vis-badge">${t.visibility||'—'}</span></td>
+    </tr>
+  `).join('');
+}
+
+function setFilter(key, val) {
+  activeFilters[key] = val;
+  renderTasks();
+}
+
+function renderQuarter() {
+  const quarters = ['Q1','Q2','Q3','Q4'];
+  document.getElementById('quarter-sections').innerHTML = quarters.map(q => {
+    const qtasks = tasks.filter(t => t.quarter === q);
+    const done = qtasks.filter(t=>t.status==='done').length;
+    return `
+      <div style="margin-bottom:32px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:var(--white);">${q}</div>
+          <div style="font-size:12px;color:var(--gray-6);">${done} de ${qtasks.length} concluídas</div>
+        </div>
+        ${qtasks.length ? `
+        <table class="task-table">
+          <thead><tr><th>Task</th><th>Status</th><th>Prioridade</th><th>PIE</th><th>Visibilidade</th></tr></thead>
+          <tbody>${qtasks.map(t=>`
+            <tr onclick="openDetailModal('${t.id}')">
+              <td><div class="task-name">${t.name}</div>${t.desc?`<div class="task-desc">${t.desc}</div>`:''}</td>
+              <td>${badgeStatus(t.status)}</td>
+              <td>${badgePriority(t.priority)}</td>
+              <td>${badgePie(t.pie)}</td>
+              <td><span class="vis-badge">${t.visibility||'—'}</span></td>
+            </tr>
+          `).join('')}</tbody>
+        </table>` : `<div class="empty-state" style="padding:30px;">Nenhuma task nesse quarter.</div>`}
+      </div>
+    `;
+  }).join('');
+}
+
+function renderBrag() {
+  const done = tasks.filter(t => t.status === 'done');
+  const list = document.getElementById('brag-list');
+  const empty = document.getElementById('brag-empty');
+  if (!done.length) {
+    list.innerHTML = '';
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+  list.innerHTML = done.map(t => `
+    <div class="brag-card" onclick="openDetailModal('${t.id}')">
+      <div class="brag-top">
+        <div>
+          <div class="brag-task-name">${t.name}</div>
+          ${t.desc?`<div class="brag-desc">${t.desc}</div>`:''}
+        </div>
+        <div class="brag-tags">
+          ${badgePie(t.pie)}
+          ${badgePriority(t.priority)}
+          <span class="badge badge-notstarted">${t.quarter}</span>
+          ${t.visibility?`<span class="badge badge-notstarted">${t.visibility}</span>`:''}
+        </div>
+      </div>
+      ${t.impact?`<div class="brag-impact-label">Impact</div><div class="brag-impact-text">${t.impact}</div>`:''}
+      ${t.feedback?`<div class="brag-quote">${t.feedback}</div>`:''}
+      ${t.skills&&t.skills.length?`<div class="brag-skills">${t.skills.map(s=>`<span class="skill-tag">${s}</span>`).join('')}</div>`:''}
+    </div>
+  `).join('');
+}
+
+// INIT
+render();
+</script>
+  </div>
+</div>
+
 </main>
 
 <div class="toast" id="toast"></div>
@@ -373,8 +1193,8 @@ var PDIST={
 };
 
 /* ── navigation ── */
-var VIEWS=["overview","score","skills","pdi","contrato","curadoria"];
-var RENDERS={overview:renderOverview,score:renderScore,skills:renderSkills,pdi:renderPDIs,contrato:renderContrato,curadoria:renderCuradoria};
+var VIEWS=["overview","score","skills","pdi","contrato","curadoria","pie"];
+var RENDERS={overview:renderOverview,pie:pieRender,score:renderScore,skills:renderSkills,pdi:renderPDIs,contrato:renderContrato,curadoria:renderCuradoria};
 function goView(id){
   VIEWS.forEach(function(v){
     var el=document.getElementById("view-"+v);
@@ -634,8 +1454,931 @@ function openModal(id){document.getElementById(id).classList.add("open");}
 function closeModal(id){document.getElementById(id).classList.remove("open");}
 document.addEventListener("click",function(e){["modal-pdi","modal-exp","modal-cur"].forEach(function(id){var m=document.getElementById(id);if(m&&e.target===m)m.classList.remove("open");});});
 
+
+function pieRender() {
+  // re-render PIE tracker when tab becomes active
+  if (typeof render === "function") { render(); }
+}
+
 /* ── init ── */
 window.addEventListener("load",function(){renderOverview();});
 </script>
+<style>
+
+  :root {
+    --black: #100f0f;
+    --green: #57df7f;
+    --white: #ffffff;
+    --gray-1: #1a1a1a;
+    --gray-2: #242424;
+    --gray-3: #2e2e2e;
+    --gray-4: #3a3a3a;
+    --gray-5: #555555;
+    --gray-6: #888888;
+    --gray-7: #bbbbbb;
+    --text: #e8e8e8;
+    --green-dim: rgba(87,223,127,0.15);
+    --green-mid: rgba(87,223,127,0.35);
+    --red: #ff5c5c;
+    --yellow: #f5c842;
+    --blue: #5c9fff;
+    --purple: #a78bfa;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 400;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* SIDEBAR */
+  .sidebar {
+    position: fixed;
+    top: 0; left: 0;
+    width: 220px;
+    height: 100vh;
+    background: var(--gray-1);
+    border-right: 1px solid var(--gray-3);
+    display: flex;
+    flex-direction: column;
+    padding: 28px 20px;
+    z-index: 100;
+  }
+
+  .sidebar-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 2px;
+    color: var(--green);
+    margin-bottom: 4px;
+  }
+
+  .sidebar-sub {
+    font-size: 11px;
+    color: var(--gray-6);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 36px;
+  }
+
+  .nav-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray-5);
+    margin-bottom: 10px;
+    margin-top: 20px;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13.5px;
+    color: var(--gray-7);
+    transition: all 0.15s;
+    margin-bottom: 2px;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+  }
+
+  .nav-item:hover { background: var(--gray-3); color: var(--text); }
+  .nav-item.active { background: var(--green-dim); color: var(--green); }
+
+  .nav-icon { font-size: 15px; width: 18px; text-align: center; }
+
+  .sidebar-footer {
+    margin-top: auto;
+    font-size: 11px;
+    color: var(--gray-5);
+    padding-top: 20px;
+    border-top: 1px solid var(--gray-3);
+  }
+
+  /* MAIN */
+  .main {
+    margin-left: 220px;
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  /* HEADER */
+  .header {
+    padding: 28px 40px 0;
+    border-bottom: 1px solid var(--gray-3);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .header-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: 2px;
+    color: var(--white);
+  }
+
+  .header-year {
+    font-size: 12px;
+    color: var(--gray-6);
+    letter-spacing: 1px;
+    margin-top: -4px;
+  }
+
+  .btn-add {
+    background: var(--green);
+    color: var(--black);
+    border: none;
+    border-radius: 6px;
+    padding: 9px 18px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    transition: opacity 0.15s;
+    letter-spacing: 0.3px;
+  }
+
+  .btn-add:hover { opacity: 0.85; }
+
+  .tabs {
+    display: flex;
+    gap: 0;
+  }
+
+  .tab {
+    padding: 10px 20px;
+    font-size: 13px;
+    color: var(--gray-6);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.15s;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+  }
+
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--green); border-bottom-color: var(--green); }
+
+  /* CONTENT */
+  .content {
+    padding: 32px 40px;
+  }
+
+  /* OVERVIEW CARDS */
+  .metric-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+
+  .metric-card {
+    background: var(--gray-2);
+    border: 1px solid var(--gray-3);
+    border-radius: 10px;
+    padding: 18px 20px;
+    text-align: center;
+    transition: border-color 0.15s;
+  }
+
+  .metric-card:hover { border-color: var(--gray-4); }
+
+  .metric-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .metric-number.green { color: var(--green); }
+  .metric-number.yellow { color: var(--yellow); }
+  .metric-number.blue { color: var(--blue); }
+
+  .metric-label {
+    font-size: 11px;
+    color: var(--gray-6);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  /* PIE BREAKDOWN */
+  .overview-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+
+  .panel {
+    background: var(--gray-2);
+    border: 1px solid var(--gray-3);
+    border-radius: 10px;
+    padding: 22px 24px;
+  }
+
+  .panel-title {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray-5);
+    margin-bottom: 18px;
+    font-weight: 600;
+  }
+
+  .pie-row {
+    margin-bottom: 16px;
+  }
+
+  .pie-row-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+
+  .pie-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .pie-sub {
+    font-size: 11px;
+    color: var(--gray-6);
+    margin-top: 1px;
+  }
+
+  .pie-count {
+    font-size: 12px;
+    color: var(--gray-6);
+  }
+
+  .pie-bar {
+    height: 5px;
+    background: var(--gray-4);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+
+  .pie-fill {
+    height: 100%;
+    border-radius: 99px;
+    transition: width 0.6s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .pie-fill.p { background: var(--green); }
+  .pie-fill.i { background: var(--blue); }
+  .pie-fill.e { background: var(--purple); }
+
+  .coaching-note {
+    margin-top: 18px;
+    padding: 12px 14px;
+    background: rgba(87,223,127,0.08);
+    border-left: 3px solid var(--green);
+    border-radius: 0 6px 6px 0;
+    font-size: 12px;
+    color: var(--gray-7);
+    line-height: 1.6;
+  }
+
+  .coaching-note strong { color: var(--green); }
+
+  /* QUARTER TRACKER */
+  .quarter-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .quarter-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 14px;
+    background: var(--gray-3);
+    border-radius: 8px;
+  }
+
+  .quarter-name {
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--text);
+  }
+
+  .quarter-bar-wrap {
+    flex: 1;
+    margin: 0 14px;
+    height: 4px;
+    background: var(--gray-4);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+
+  .quarter-bar-fill {
+    height: 100%;
+    background: var(--green);
+    border-radius: 99px;
+  }
+
+  .quarter-frac {
+    font-size: 12px;
+    color: var(--gray-6);
+    white-space: nowrap;
+  }
+
+  /* FILTERS */
+  .filter-bar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .filter-label {
+    font-size: 12px;
+    color: var(--gray-6);
+    margin-right: 4px;
+  }
+
+  .filter-btn {
+    padding: 5px 13px;
+    border-radius: 5px;
+    border: 1px solid var(--gray-4);
+    background: var(--gray-2);
+    color: var(--gray-7);
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 500;
+  }
+
+  .filter-btn:hover { background: var(--gray-3); color: var(--text); }
+  .filter-btn.active { background: var(--green-dim); border-color: var(--green); color: var(--green); }
+
+  .filter-sep {
+    width: 1px;
+    height: 20px;
+    background: var(--gray-4);
+    margin: 0 4px;
+  }
+
+  /* TABLE */
+  .task-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .task-table thead th {
+    text-align: left;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gray-5);
+    padding: 10px 14px;
+    font-weight: 600;
+    border-bottom: 1px solid var(--gray-3);
+  }
+
+  .task-table tbody tr {
+    border-bottom: 1px solid var(--gray-3);
+    cursor: pointer;
+    transition: background 0.1s;
+  }
+
+  .task-table tbody tr:hover { background: var(--gray-2); }
+
+  .task-table tbody td {
+    padding: 14px 14px;
+    font-size: 13.5px;
+    color: var(--text);
+    vertical-align: top;
+  }
+
+  .task-name { font-weight: 500; }
+  .task-desc { font-size: 12px; color: var(--gray-6); margin-top: 3px; }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 9px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+
+  .badge-done { background: rgba(87,223,127,0.15); color: var(--green); }
+  .badge-progress { background: rgba(92,159,255,0.15); color: var(--blue); }
+  .badge-blocked { background: rgba(255,92,92,0.15); color: var(--red); }
+  .badge-notstarted { background: var(--gray-3); color: var(--gray-6); }
+
+  .badge-high { background: rgba(255,92,92,0.12); color: var(--red); }
+  .badge-medium { background: rgba(245,200,66,0.12); color: var(--yellow); }
+  .badge-low { background: var(--gray-3); color: var(--gray-6); }
+
+  .badge-p { background: rgba(87,223,127,0.12); color: var(--green); }
+  .badge-i { background: rgba(92,159,255,0.12); color: var(--blue); }
+  .badge-e { background: rgba(167,139,250,0.12); color: var(--purple); }
+
+  .vis-badge {
+    font-size: 11px;
+    color: var(--gray-6);
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--gray-5);
+    font-size: 14px;
+  }
+
+  /* BRAG DOC */
+  .brag-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .brag-card {
+    background: var(--gray-2);
+    border: 1px solid var(--gray-3);
+    border-radius: 10px;
+    padding: 22px 24px;
+    transition: border-color 0.15s;
+  }
+
+  .brag-card:hover { border-color: var(--gray-4); }
+
+  .brag-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    gap: 20px;
+  }
+
+  .brag-task-name {
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--white);
+  }
+
+  .brag-tags {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+  }
+
+  .brag-desc {
+    font-size: 12px;
+    color: var(--gray-6);
+    margin-bottom: 14px;
+  }
+
+  .brag-impact-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--green);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .brag-impact-text {
+    font-size: 13.5px;
+    color: var(--text);
+    line-height: 1.6;
+    margin-bottom: 14px;
+    padding: 12px 14px;
+    background: rgba(87,223,127,0.06);
+    border-radius: 6px;
+    border-left: 2px solid var(--green);
+  }
+
+  .brag-quote {
+    font-size: 13px;
+    color: var(--gray-7);
+    font-style: italic;
+    border-left: 3px solid var(--gray-4);
+    padding-left: 14px;
+    margin-bottom: 14px;
+    line-height: 1.6;
+  }
+
+  .brag-skills {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .skill-tag {
+    padding: 4px 10px;
+    background: var(--gray-3);
+    border-radius: 4px;
+    font-size: 11px;
+    color: var(--gray-7);
+  }
+
+  .no-brag {
+    text-align: center;
+    padding: 60px;
+    color: var(--gray-5);
+    font-size: 14px;
+  }
+
+  /* MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+  }
+
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: var(--gray-2);
+    border: 1px solid var(--gray-4);
+    border-radius: 12px;
+    width: 600px;
+    max-width: 94vw;
+    max-height: 88vh;
+    overflow-y: auto;
+    padding: 28px 30px;
+    position: relative;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 18px; right: 20px;
+    background: none;
+    border: none;
+    color: var(--gray-6);
+    font-size: 20px;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.1s;
+  }
+
+  .modal-close:hover { color: var(--text); }
+
+  .modal-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 2px;
+    color: var(--white);
+    margin-bottom: 22px;
+  }
+
+  .form-section {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--red);
+    font-weight: 700;
+    margin: 20px 0 12px;
+    padding-top: 16px;
+    border-top: 1px solid var(--gray-3);
+  }
+
+  .form-section:first-of-type { border-top: none; margin-top: 0; padding-top: 0; }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 14px;
+  }
+
+  .form-group.full { grid-column: 1 / -1; }
+
+  label {
+    font-size: 11px;
+    color: var(--gray-6);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  label .req { color: var(--red); margin-left: 2px; }
+
+  input, textarea, select {
+    background: var(--gray-3);
+    border: 1px solid var(--gray-4);
+    border-radius: 6px;
+    color: var(--text);
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 13px;
+    padding: 9px 12px;
+    width: 100%;
+    transition: border-color 0.15s;
+    outline: none;
+  }
+
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--green);
+  }
+
+  textarea { min-height: 72px; resize: vertical; }
+
+  select option { background: var(--gray-3); }
+
+  .skills-checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .skill-check {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    background: var(--gray-3);
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+    color: var(--gray-7);
+    border: 1px solid var(--gray-4);
+    transition: all 0.15s;
+    user-select: none;
+  }
+
+  .skill-check.selected {
+    background: var(--green-dim);
+    border-color: var(--green);
+    color: var(--green);
+  }
+
+  .modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--gray-3);
+  }
+
+  .btn-cancel {
+    background: none;
+    border: 1px solid var(--gray-4);
+    color: var(--gray-7);
+    border-radius: 6px;
+    padding: 9px 20px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .btn-cancel:hover { background: var(--gray-3); color: var(--text); }
+
+  .btn-save {
+    background: var(--green);
+    color: var(--black);
+    border: none;
+    border-radius: 6px;
+    padding: 9px 22px;
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+
+  .btn-save:hover { opacity: 0.85; }
+
+  /* DETAIL MODAL */
+  .detail-field {
+    margin-bottom: 16px;
+  }
+
+  .detail-field-label {
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--gray-5);
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+
+  .detail-field-value {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .detail-impact {
+    padding: 14px 16px;
+    background: rgba(87,223,127,0.06);
+    border-left: 3px solid var(--green);
+    border-radius: 0 6px 6px 0;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .modal-header-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+
+  .detail-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--gray-3);
+  }
+
+  .btn-delete {
+    background: none;
+    border: 1px solid rgba(255,92,92,0.4);
+    color: var(--red);
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-size: 12px;
+    cursor: pointer;
+    font-family: 'Source Sans 3', sans-serif;
+    transition: all 0.15s;
+  }
+
+  .btn-delete:hover { background: rgba(255,92,92,0.08); }
+
+  .btn-edit {
+    background: var(--green);
+    color: var(--black);
+    border: none;
+    border-radius: 6px;
+    padding: 8px 18px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Source Sans 3', sans-serif;
+    transition: opacity 0.15s;
+  }
+
+  .btn-edit:hover { opacity: 0.85; }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--gray-4); border-radius: 99px; }
+
+  /* PLAN PAGE */
+  .plan-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+
+  .plan-desc {
+    font-size: 13px;
+    color: var(--gray-6);
+  }
+
+  .plan-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+
+  .plan-col-title {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .plan-col-title .col-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .plan-col-title.want { color: var(--purple); }
+  .plan-col-title.want .col-dot { background: var(--purple); }
+  .plan-col-title.planning { color: var(--yellow); }
+  .plan-col-title.planning .col-dot { background: var(--yellow); }
+  .plan-col-title.wip { color: var(--blue); }
+  .plan-col-title.wip .col-dot { background: var(--blue); }
+
+  .plan-col {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 120px;
+  }
+
+  .plan-card {
+    background: var(--gray-2);
+    border: 1px solid var(--gray-3);
+    border-radius: 8px;
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: border-color 0.15s, transform 0.1s;
+  }
+
+  .plan-card:hover { border-color: var(--gray-4); transform: translateY(-1px); }
+
+  .plan-card-name {
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+
+  .plan-card-desc {
+    font-size: 12px;
+    color: var(--gray-6);
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+
+  .plan-card-footer {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .plan-col-empty {
+    padding: 20px;
+    border: 1px dashed var(--gray-4);
+    border-radius: 8px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--gray-5);
+  }
+
+  .btn-promote {
+    background: var(--green-dim);
+    border: 1px solid var(--green);
+    color: var(--green);
+    border-radius: 5px;
+    padding: 5px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Source Sans 3', sans-serif;
+    transition: all 0.15s;
+    margin-left: auto;
+  }
+
+  .btn-promote:hover { background: var(--green); color: var(--black); }
+
+  /* PAGE VISIBILITY */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  @media (max-width: 900px) {
+    .sidebar { width: 180px; }
+    .main { margin-left: 180px; }
+    .metric-row { grid-template-columns: repeat(3, 1fr); }
+    .overview-grid { grid-template-columns: 1fr; }
+  }
+
+</style>
+
 </body>
 </html>
