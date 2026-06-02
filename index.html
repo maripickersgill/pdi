@@ -3,406 +3,321 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PDI · Mariana · Marketing Manager</title>
+<title>PDI - Mariana - Marketing Manager</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#f5f4f2;--bg2:#edecea;--surface:#ffffff;--border:rgba(0,0,0,.07);--border2:rgba(0,0,0,.12);
-  --t1:#1a1918;--t2:#4a4846;--t3:#9a9896;--t4:#c8c6c4;
-  --green:#1a9e4a;--green-bg:rgba(26,158,74,.1);--green-bd:rgba(26,158,74,.2);
-  --amber:#d97706;--amber-bg:rgba(217,119,6,.1);
-  --coral:#e04a38;--coral-bg:rgba(224,74,56,.1);
-  --violet:#7c3aed;--violet-bg:rgba(124,58,237,.1);
-  --teal:#0d9488;--teal-bg:rgba(13,148,136,.1);
-  --blue:#2563eb;--blue-bg:rgba(37,99,235,.1);
-  --sidebar:#100f0f;
+  --bg:#f5f4f2;--bg2:#edecea;--surface:#fff;--bd:rgba(0,0,0,.07);--bd2:rgba(0,0,0,.13);
+  --t1:#1a1918;--t2:#4a4846;--t3:#9a9896;--t4:#c4c2c0;
+  --grn:#1a9e4a;--grn-bg:rgba(26,158,74,.1);--grn-bd:rgba(26,158,74,.22);
+  --amb:#d97706;--amb-bg:rgba(217,119,6,.1);
+  --cor:#e04a38;--cor-bg:rgba(224,74,56,.1);
+  --vio:#7c3aed;--vio-bg:rgba(124,58,237,.1);
+  --tel:#0d9488;--tel-bg:rgba(13,148,136,.1);
+  --blu:#2563eb;--blu-bg:rgba(37,99,235,.1);
+  --sb:#100f0f;
 }
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--t1);font-family:'DM Sans',sans-serif;display:flex;min-height:100vh}
-
-/* SIDEBAR */
-nav{width:220px;min-height:100vh;background:var(--sidebar);display:flex;flex-direction:column;padding:24px 0;position:sticky;top:0;height:100vh;overflow-y:auto;flex-shrink:0}
-.sb-brand{padding:0 18px 20px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:16px}
-.sb-logo{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:3px;color:#57df7f;line-height:1}
-.sb-sub{font-size:9px;color:rgba(255,255,255,.3);letter-spacing:1.5px;text-transform:uppercase;margin-top:3px}
-.sb-sect{padding:0 10px 18px}
-.sb-lbl{font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,.25);padding:0 8px;display:block;margin-bottom:6px}
-.nav-btn{display:flex;align-items:center;gap:9px;width:100%;background:none;border:none;color:rgba(255,255,255,.65);font-family:'DM Sans',sans-serif;font-size:13px;padding:7px 10px;border-radius:8px;cursor:pointer;text-align:left;transition:all .18s;margin-bottom:1px}
-.nav-btn:hover{background:rgba(255,255,255,.05);color:#fff}
-.nav-btn.active{background:rgba(87,223,127,.15);color:#57df7f;font-weight:500}
-.nav-dot{width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.7;flex-shrink:0}
-.sb-person{margin-top:auto;padding:16px 18px 0;border-top:1px solid rgba(255,255,255,.08)}
-.sb-av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#57df7f,#2ab85f);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:17px;color:#100f0f;flex-shrink:0}
-.sb-row{display:flex;align-items:center;gap:9px}
-.sb-pname{font-size:13px;font-weight:500;color:#fff}
-.sb-prole{font-size:10px;color:rgba(255,255,255,.35);margin-top:1px}
-.sb-badge{display:inline-block;background:rgba(87,223,127,.12);color:#57df7f;border:1px solid rgba(87,223,127,.22);font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;margin-top:7px}
-
-/* MAIN */
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--t1);font-family:"DM Sans",sans-serif;display:flex;min-height:100vh}
+/* sidebar */
+nav{width:218px;background:var(--sb);display:flex;flex-direction:column;padding:22px 0;position:sticky;top:0;height:100vh;overflow-y:auto;flex-shrink:0}
+.sb-top{padding:0 16px 18px;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:14px}
+.sb-logo{font-family:"Bebas Neue",sans-serif;font-size:26px;letter-spacing:3px;color:#57df7f}
+.sb-sub{font-size:9px;color:rgba(255,255,255,.28);letter-spacing:1.4px;text-transform:uppercase;margin-top:2px}
+.sb-nav{padding:0 8px}
+.sb-lbl{font-size:9px;text-transform:uppercase;letter-spacing:1.4px;color:rgba(255,255,255,.22);padding:0 8px;display:block;margin-bottom:5px}
+.nb{display:flex;align-items:center;gap:8px;width:100%;background:none;border:none;color:rgba(255,255,255,.6);font-family:"DM Sans",sans-serif;font-size:13px;padding:7px 10px;border-radius:8px;cursor:pointer;text-align:left;margin-bottom:2px}
+.nb:hover{background:rgba(255,255,255,.05);color:#fff}
+.nb.active{background:rgba(87,223,127,.14);color:#57df7f;font-weight:500}
+.nd{width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.65;flex-shrink:0}
+.sb-foot{margin-top:auto;padding:14px 16px 0;border-top:1px solid rgba(255,255,255,.08)}
+.sb-av{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#57df7f,#2ab85f);display:flex;align-items:center;justify-content:center;font-family:"Bebas Neue",sans-serif;font-size:16px;color:#100f0f;flex-shrink:0}
+.sb-fr{display:flex;align-items:center;gap:8px}
+.sb-nm{font-size:13px;font-weight:500;color:#fff}
+.sb-rl{font-size:10px;color:rgba(255,255,255,.32)}
+.sb-bdg{display:inline-block;background:rgba(87,223,127,.1);color:#57df7f;border:1px solid rgba(87,223,127,.2);font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;margin-top:6px}
+/* main */
 main{flex:1;min-width:0}
-.view{display:none;padding:36px 40px 64px;max-width:1040px}
+.view{display:none;padding:34px 38px 60px;max-width:1020px}
 .view.active{display:block}
-.topbar{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:32px}
-.pg-title{font-family:'Bebas Neue',sans-serif;font-size:40px;letter-spacing:1.5px;color:var(--t1);line-height:1}
-.pg-sub{font-size:13px;color:var(--t3);margin-top:5px}
-
-/* HERO */
-.hero{background:var(--sidebar);border-radius:20px;padding:28px 32px;display:flex;align-items:center;gap:24px;margin-bottom:28px}
-.hero-av{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#57df7f,#2ab85f);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:34px;color:#100f0f;flex-shrink:0}
-.hero-info{flex:1}
-.hero-name{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:.5px;color:#fff;line-height:1}
-.hero-role{font-size:13px;color:rgba(255,255,255,.45);margin-top:4px}
-.hero-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
-.hero-tag{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);font-size:11px;color:rgba(255,255,255,.6);padding:3px 10px;border-radius:20px}
-.hero-stats{display:flex;gap:32px;flex-shrink:0;text-align:center}
-.h-num{font-family:'Bebas Neue',sans-serif;font-size:36px;color:#57df7f;line-height:1}
-.h-lbl{font-size:10px;color:rgba(255,255,255,.35);margin-top:3px;text-transform:uppercase;letter-spacing:.8px}
-
-/* SECTION */
-.section{margin-bottom:32px}
-.sec-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-.sec-title{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:1.5px;color:var(--t3);text-transform:uppercase}
-.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.g2{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-
-/* CARDS */
-.card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px}
-.kpi-lbl{font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
-.kpi-val{font-family:'Bebas Neue',sans-serif;font-size:52px;line-height:1;letter-spacing:-.5px}
-.kpi-delta{font-size:12px;color:var(--t3);margin-top:5px}
-.kpi-meta{font-size:11px;color:var(--t3);margin-top:12px}
-.bar-wrap{height:5px;background:var(--bg2);border-radius:3px;margin-top:14px;overflow:hidden}
-.bar-fill{height:100%;border-radius:3px;transition:width .9s cubic-bezier(.4,0,.2,1)}
-.chart-title{font-size:14px;font-weight:600;color:var(--t1)}
-.chart-sub{font-size:12px;color:var(--t3);margin-bottom:16px;margin-top:3px}
-
-/* READINESS */
-.rb{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;padding:6px 14px;border-radius:20px}
-.rb-dot{width:7px;height:7px;border-radius:50%;background:currentColor}
-.rb-ready{background:var(--teal-bg);color:var(--teal);border:1px solid rgba(13,148,136,.25)}
-.rb-transition{background:var(--amber-bg);color:var(--amber);border:1px solid rgba(217,119,6,.25)}
-.rb-developing{background:var(--violet-bg);color:var(--violet);border:1px solid rgba(124,58,237,.25)}
-
-/* AUTO SCALE */
-.auto-scale{display:flex;gap:5px;margin-top:10px}
-.auto-step{flex:1;height:6px;border-radius:3px;background:var(--bg2)}
-.auto-step.filled{background:var(--violet)}
-
-/* SCORE */
-.score-circle-wrap{display:flex;flex-direction:column;align-items:center;padding:32px 0}
-.score-circle{--pct:0;width:160px;height:160px;border-radius:50%;background:conic-gradient(var(--green) 0% calc(var(--pct)*1%),var(--bg2) calc(var(--pct)*1%) 100%);display:flex;align-items:center;justify-content:center;position:relative}
-.score-circle::before{content:'';position:absolute;width:122px;height:122px;border-radius:50%;background:var(--surface)}
-.score-inner{position:relative;z-index:1;text-align:center}
-.score-num{font-family:'Bebas Neue',sans-serif;font-size:54px;color:var(--green);line-height:1}
-.score-max{font-size:12px;color:var(--t3)}
-.score-label{font-size:13px;color:var(--t2);margin-top:12px;text-align:center;font-weight:500}
-.score-desc{font-size:12px;color:var(--t3);text-align:center;margin-top:3px}
-.score-dim{display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid var(--border)}
-.score-dim:last-child{border-bottom:none}
-.sd-label{font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:.8px;width:110px;flex-shrink:0}
-.sd-bar{flex:1;height:8px;background:var(--bg2);border-radius:4px;overflow:hidden}
-.sd-fill{height:100%;border-radius:4px;transition:width .9s}
-.sd-val{font-size:12px;font-weight:500;color:var(--t2);width:40px;text-align:right;flex-shrink:0}
-
-/* SKILLS */
-.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px}
-.tab{background:var(--bg2);border:1px solid var(--border);color:var(--t3);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;padding:6px 14px;border-radius:20px;cursor:pointer;transition:all .18s}
+/* topbar */
+.tbar{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:30px}
+.pt{font-family:"Bebas Neue",sans-serif;font-size:40px;letter-spacing:1.5px;line-height:1}
+.ps{font-size:13px;color:var(--t3);margin-top:4px}
+/* hero */
+.hero{background:var(--sb);border-radius:18px;padding:26px 30px;display:flex;align-items:center;gap:22px;margin-bottom:26px}
+.hav{width:68px;height:68px;border-radius:50%;background:linear-gradient(135deg,#57df7f,#2ab85f);display:flex;align-items:center;justify-content:center;font-family:"Bebas Neue",sans-serif;font-size:32px;color:#100f0f;flex-shrink:0}
+.hi{flex:1}
+.hn{font-family:"Bebas Neue",sans-serif;font-size:24px;letter-spacing:.4px;color:#fff;line-height:1}
+.hr{font-size:13px;color:rgba(255,255,255,.42);margin-top:3px}
+.htags{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
+.htag{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.09);font-size:11px;color:rgba(255,255,255,.55);padding:2px 9px;border-radius:20px}
+.hst{display:flex;gap:28px;flex-shrink:0;text-align:center}
+.hsn{font-family:"Bebas Neue",sans-serif;font-size:34px;color:#57df7f;line-height:1}
+.hsl{font-size:10px;color:rgba(255,255,255,.32);margin-top:2px;text-transform:uppercase;letter-spacing:.7px}
+/* section */
+.sec{margin-bottom:28px}
+.sech{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.sect{font-family:"Bebas Neue",sans-serif;font-size:13px;letter-spacing:1.5px;color:var(--t3);text-transform:uppercase}
+/* grid */
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.g2{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+/* card */
+.card{background:var(--surface);border:1px solid var(--bd);border-radius:14px;padding:22px}
+.kl{font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:.9px;margin-bottom:10px}
+.kv{font-family:"Bebas Neue",sans-serif;font-size:52px;line-height:1;letter-spacing:-.5px}
+.kd{font-size:12px;color:var(--t3);margin-top:4px}
+.km{font-size:11px;color:var(--t3);margin-top:10px}
+.bw{height:5px;background:var(--bg2);border-radius:3px;margin-top:12px;overflow:hidden}
+.bf{height:100%;border-radius:3px;transition:width .9s cubic-bezier(.4,0,.2,1)}
+/* readiness */
+.rb{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;letter-spacing:.7px;text-transform:uppercase;padding:5px 12px;border-radius:20px}
+.rb-dot{width:6px;height:6px;border-radius:50%;background:currentColor}
+.rb-ready{background:var(--tel-bg);color:var(--tel);border:1px solid rgba(13,148,136,.25)}
+.rb-trans{background:var(--amb-bg);color:var(--amb);border:1px solid rgba(217,119,6,.25)}
+.rb-dev{background:var(--vio-bg);color:var(--vio);border:1px solid rgba(124,58,237,.25)}
+/* auto scale */
+.asc{display:flex;gap:4px;margin-top:9px}
+.ast{flex:1;height:6px;border-radius:3px;background:var(--bg2)}
+.ast.on{background:var(--vio)}
+/* score circle */
+.sc-wrap{display:flex;flex-direction:column;align-items:center;padding:28px 0}
+.sc-ring{--p:0;width:156px;height:156px;border-radius:50%;background:conic-gradient(var(--grn) 0% calc(var(--p)*1%),var(--bg2) calc(var(--p)*1%) 100%);display:flex;align-items:center;justify-content:center;position:relative}
+.sc-ring::before{content:"";position:absolute;width:118px;height:118px;border-radius:50%;background:var(--surface)}
+.sc-in{position:relative;z-index:1;text-align:center}
+.sc-n{font-family:"Bebas Neue",sans-serif;font-size:52px;color:var(--grn);line-height:1}
+.sc-mx{font-size:11px;color:var(--t3)}
+.sc-lb{font-size:13px;color:var(--t2);margin-top:10px;font-weight:500;text-align:center}
+.sc-ds{font-size:11px;color:var(--t3);text-align:center;margin-top:2px}
+.sdim{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--bd)}
+.sdim:last-child{border-bottom:none}
+.sdl{font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:.7px;width:100px;flex-shrink:0}
+.sdb{flex:1;height:7px;background:var(--bg2);border-radius:4px;overflow:hidden}
+.sdf{height:100%;border-radius:4px;transition:width .9s}
+.sdv{font-size:11px;font-weight:500;color:var(--t2);width:36px;text-align:right;flex-shrink:0}
+/* skills */
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.tab{background:var(--bg2);border:1px solid var(--bd);color:var(--t3);font-family:"DM Sans",sans-serif;font-size:12px;font-weight:500;padding:5px 13px;border-radius:20px;cursor:pointer}
 .tab:hover{color:var(--t1)}
 .tab.active{background:var(--t1);color:#fff;border-color:var(--t1)}
-.skill-row{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;padding:16px 0;border-bottom:1px solid var(--border)}
-.skill-row:last-child{border-bottom:none}
-.skill-name{font-size:14px;font-weight:500;color:var(--t1)}
-.skill-desc{font-size:12px;color:var(--t3);margin-top:2px}
-.skill-obs{font-size:11px;color:var(--t4);margin-top:4px;font-style:italic}
-.cat-row{font-family:'Bebas Neue',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--t4);padding:14px 0 8px;border-bottom:1px solid var(--bg2)}
-.pill{font-size:11px;font-weight:600;padding:4px 11px;border-radius:20px;white-space:nowrap;flex-shrink:0}
-.p-nao{background:var(--coral-bg);color:var(--coral)}
-.p-dev{background:var(--amber-bg);color:var(--amber)}
-.p-ok{background:var(--green-bg);color:var(--green)}
-.p-sup{background:var(--teal-bg);color:var(--teal)}
-
-/* PDI CARDS */
-.pdi-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:26px;margin-bottom:18px;position:relative;overflow:hidden}
-.pdi-bar{position:absolute;top:0;left:0;right:0;height:4px}
-.pdi-header{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:16px}
-.pdi-icon{font-size:26px;flex-shrink:0;margin-top:2px}
-.pdi-title{font-size:17px;font-weight:600;color:var(--t1);flex:1;line-height:1.3}
-.pdi-sub{font-size:12px;color:var(--t3);margin-top:4px}
-.pdi-st-pill{font-size:10px;font-weight:600;padding:4px 10px;border-radius:20px;white-space:nowrap;flex-shrink:0}
-.pdi-prog-row{display:flex;align-items:center;gap:12px;margin:14px 0}
-.pdi-prog-lbl{font-size:11px;color:var(--t3);width:72px;flex-shrink:0}
-.pdi-prog-bar{flex:1;height:8px;background:var(--bg2);border-radius:4px;overflow:hidden}
-.pdi-prog-fill{height:100%;border-radius:4px;transition:width .9s}
-.pdi-prog-pct{font-size:12px;font-weight:600;color:var(--t2);width:34px;text-align:right}
-.pdi-lbl{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--t3);margin:14px 0 5px}
-.pdi-txt{font-size:13px;color:var(--t2);line-height:1.65}
-.pie-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:8px}
-.pie-block{border-radius:12px;padding:16px}
-.pie-pct{font-family:'Bebas Neue',sans-serif;font-size:32px;line-height:1;margin-bottom:8px}
-.pie-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px}
-.pie-items{font-size:12px;line-height:1.75;color:var(--t2)}
-.pie-item{padding:4px 0;border-bottom:1px solid rgba(0,0,0,.05)}
-.pie-item:last-child{border-bottom:none}
-.pie-70{background:rgba(26,158,74,.06);border:1px solid rgba(26,158,74,.18)}
-.pie-70 .pie-pct,.pie-70 .pie-label{color:var(--green)}
-.pie-20{background:var(--blue-bg);border:1px solid rgba(37,99,235,.18)}
-.pie-20 .pie-pct,.pie-20 .pie-label{color:var(--blue)}
-.pie-10{background:var(--violet-bg);border:1px solid rgba(124,58,237,.18)}
-.pie-10 .pie-pct,.pie-10 .pie-label{color:var(--violet)}
-.ev-tag{display:inline-block;background:var(--bg2);border:1px solid var(--border2);font-size:11px;color:var(--t3);padding:3px 9px;border-radius:6px;margin-right:5px;margin-top:10px}
-.ev-item{display:flex;align-items:flex-start;gap:7px;font-size:12px;color:var(--t3);padding:3px 0}
-.ev-dot{color:var(--green);flex-shrink:0}
-.update-row{display:flex;align-items:center;gap:8px;margin-top:14px;padding-top:14px;border-top:1px solid var(--border);flex-wrap:wrap}
-.update-row label{font-size:11px;color:var(--t3)}
-input[type=range]{accent-color:var(--green);width:90px}
-
-/* CRITERIA */
-.crit-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border)}
-.crit-row:last-child{border-bottom:none}
-.crit-name{font-size:13px;color:var(--t1);font-weight:500}
-.crit-val{font-size:12px;color:var(--t3);margin-top:2px}
-.ps-done{background:var(--teal-bg);color:var(--teal);font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px}
-.ps-prog{background:var(--amber-bg);color:var(--amber);font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px}
-
-/* CONTRATO */
-.mes-btns{display:flex;gap:7px;margin-bottom:20px;flex-wrap:wrap}
-.mes-btn{background:var(--bg2);border:1px solid var(--border);color:var(--t3);font-family:'DM Sans',sans-serif;font-size:12px;padding:6px 14px;border-radius:8px;cursor:pointer;transition:all .18s}
-.mes-btn.active{background:var(--t1);color:#fff;border-color:var(--t1)}
-.exp-card{display:grid;grid-template-columns:30px 1fr auto;gap:12px;align-items:start;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:12px;margin-bottom:10px}
-.exp-tipo{font-size:16px}
-.exp-ponto{font-size:13px;font-weight:500;color:var(--t1);margin-bottom:3px}
-.exp-acao{font-size:12px;color:var(--t3)}
-.exp-recurso{font-size:11px;color:var(--t4);margin-top:4px}
-.exp-result{font-size:11px;color:var(--green);margin-top:4px;font-weight:500}
-.exp-sel{background:var(--bg2);border:1px solid var(--border);color:var(--t2);font-size:11px;padding:4px 8px;border-radius:6px;cursor:pointer;font-family:'DM Sans',sans-serif}
-
-/* CURADORIA */
-.cur-card{display:flex;align-items:flex-start;gap:14px;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:12px;margin-bottom:10px;text-decoration:none;transition:border-color .2s}
-.cur-card:hover{border-color:rgba(26,158,74,.3)}
-.cur-emoji{font-size:22px;flex-shrink:0;margin-top:1px}
-.cur-title{font-size:13px;font-weight:600;color:var(--t1)}
-.cur-desc{font-size:12px;color:var(--t3);margin-top:2px}
-.cur-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
-.cur-tag{font-size:10px;color:var(--t3);background:var(--bg2);border:1px solid var(--border);padding:2px 8px;border-radius:20px}
-
-/* BUTTONS */
-.add-btn{display:inline-flex;align-items:center;gap:6px;background:var(--t1);color:#fff;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;padding:8px 16px;border-radius:9px;border:none;cursor:pointer;transition:opacity .18s}
-.add-btn:hover{opacity:.85}
-
-/* MODAL */
-.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);z-index:100;align-items:center;justify-content:center;padding:24px}
+.skrow{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid var(--bd)}
+.skrow:last-child{border-bottom:none}
+.skn{font-size:14px;font-weight:500;color:var(--t1)}
+.skd{font-size:12px;color:var(--t3);margin-top:2px}
+.sko{font-size:11px;color:var(--t4);margin-top:3px;font-style:italic}
+.catr{font-family:"Bebas Neue",sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--t4);padding:12px 0 6px;border-bottom:1px solid var(--bg2)}
+.pill{font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;white-space:nowrap;flex-shrink:0}
+.p-nao{background:var(--cor-bg);color:var(--cor)}
+.p-dev{background:var(--amb-bg);color:var(--amb)}
+.p-ok{background:var(--grn-bg);color:var(--grn)}
+.p-sup{background:var(--tel-bg);color:var(--tel)}
+/* pdi cards */
+.pc{background:var(--surface);border:1px solid var(--bd);border-radius:14px;padding:24px;margin-bottom:16px;position:relative;overflow:hidden}
+.pcbar{position:absolute;top:0;left:0;right:0;height:4px}
+.pch{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px}
+.pci{font-size:24px;flex-shrink:0;margin-top:2px;line-height:1}
+.pct{font-size:16px;font-weight:600;color:var(--t1);flex:1;line-height:1.3}
+.pcs{font-size:12px;color:var(--t3);margin-top:3px}
+.pcpill{font-size:10px;font-weight:600;padding:3px 9px;border-radius:20px;white-space:nowrap;flex-shrink:0}
+.ppr{display:flex;align-items:center;gap:10px;margin:12px 0}
+.ppl{font-size:11px;color:var(--t3);width:68px;flex-shrink:0}
+.ppb{flex:1;height:7px;background:var(--bg2);border-radius:4px;overflow:hidden}
+.ppf{height:100%;border-radius:4px;transition:width .9s}
+.ppv{font-size:12px;font-weight:600;color:var(--t2);width:32px;text-align:right}
+.plbl{font-size:10px;text-transform:uppercase;letter-spacing:.9px;color:var(--t3);margin:12px 0 4px}
+.ptxt{font-size:13px;color:var(--t2);line-height:1.65}
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:8px}
+.pblk{border-radius:10px;padding:14px}
+.pbpct{font-family:"Bebas Neue",sans-serif;font-size:30px;line-height:1;margin-bottom:6px}
+.pblab{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.7px;margin-bottom:6px}
+.pbitm{font-size:12px;color:var(--t2);padding:4px 0;border-bottom:1px solid rgba(0,0,0,.05);line-height:1.6}
+.pbitm:last-child{border-bottom:none}
+.pb70{background:rgba(26,158,74,.06);border:1px solid rgba(26,158,74,.16)}
+.pb70 .pbpct,.pb70 .pblab{color:var(--grn)}
+.pb20{background:var(--blu-bg);border:1px solid rgba(37,99,235,.16)}
+.pb20 .pbpct,.pb20 .pblab{color:var(--blu)}
+.pb10{background:var(--vio-bg);border:1px solid rgba(124,58,237,.16)}
+.pb10 .pbpct,.pb10 .pblab{color:var(--vio)}
+.etag{display:inline-block;background:var(--bg2);border:1px solid var(--bd2);font-size:11px;color:var(--t3);padding:3px 8px;border-radius:5px;margin:8px 4px 0 0}
+.evit{display:flex;align-items:flex-start;gap:6px;font-size:12px;color:var(--t3);padding:3px 0}
+.evdot{color:var(--grn);flex-shrink:0}
+.updr{display:flex;align-items:center;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid var(--bd);flex-wrap:wrap}
+.updr label{font-size:11px;color:var(--t3)}
+input[type=range]{accent-color:var(--grn);width:88px}
+.updr select{background:var(--bg2);border:1px solid var(--bd);color:var(--t2);font-size:11px;padding:3px 7px;border-radius:6px;cursor:pointer;font-family:"DM Sans",sans-serif}
+/* crit */
+.cr{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--bd)}
+.cr:last-child{border-bottom:none}
+.crn{font-size:13px;color:var(--t1);font-weight:500}
+.crv{font-size:11px;color:var(--t3);margin-top:1px}
+.ps-done{background:var(--tel-bg);color:var(--tel);font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px}
+.ps-prog{background:var(--amb-bg);color:var(--amb);font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px}
+/* contrato */
+.mbtns{display:flex;gap:6px;margin-bottom:18px;flex-wrap:wrap}
+.mbtn{background:var(--bg2);border:1px solid var(--bd);color:var(--t3);font-family:"DM Sans",sans-serif;font-size:12px;padding:5px 13px;border-radius:8px;cursor:pointer}
+.mbtn.active{background:var(--t1);color:#fff;border-color:var(--t1)}
+.ec{display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:start;padding:14px;background:var(--surface);border:1px solid var(--bd);border-radius:11px;margin-bottom:8px}
+.etp{font-size:15px}
+.epn{font-size:13px;font-weight:500;color:var(--t1);margin-bottom:2px}
+.eac{font-size:12px;color:var(--t3)}
+.ere{font-size:11px;color:var(--t4);margin-top:3px}
+.erg{font-size:11px;color:var(--grn);margin-top:3px;font-weight:500}
+.esel{background:var(--bg2);border:1px solid var(--bd);color:var(--t2);font-size:11px;padding:3px 7px;border-radius:6px;cursor:pointer;font-family:"DM Sans",sans-serif}
+/* curadoria */
+.cu{display:flex;align-items:flex-start;gap:12px;padding:14px;background:var(--surface);border:1px solid var(--bd);border-radius:11px;margin-bottom:8px;text-decoration:none;transition:border-color .18s;color:inherit}
+.cu:hover{border-color:var(--grn-bd)}
+.cue{font-size:20px;flex-shrink:0;margin-top:1px}
+.cut{font-size:13px;font-weight:600;color:var(--t1)}
+.cud{font-size:12px;color:var(--t3);margin-top:2px}
+.cutg{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px}
+.ctg{font-size:10px;color:var(--t3);background:var(--bg2);border:1px solid var(--bd);padding:2px 7px;border-radius:20px}
+/* btn */
+.abtn{display:inline-flex;align-items:center;gap:5px;background:var(--t1);color:#fff;font-family:"DM Sans",sans-serif;font-size:12px;font-weight:500;padding:7px 14px;border-radius:8px;border:none;cursor:pointer;opacity:1;transition:opacity .15s}
+.abtn:hover{opacity:.82}
+/* modal */
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.48);backdrop-filter:blur(3px);z-index:200;align-items:center;justify-content:center;padding:20px}
 .modal.open{display:flex}
-.modal-box{background:#fff;border-radius:16px;padding:28px;max-width:520px;width:100%;max-height:82vh;overflow-y:auto}
-.modal-title{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--t1);margin-bottom:18px}
-.mf{margin-bottom:13px}
-.ml{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--t3);margin-bottom:5px;display:block}
-.mi,.ms,.mt{width:100%;background:var(--bg);border:1px solid var(--border2);border-radius:8px;color:var(--t1);font-family:'DM Sans',sans-serif;font-size:13px;padding:9px 12px}
-.mt{resize:vertical;min-height:80px}
-.mi:focus,.ms:focus,.mt:focus{outline:none;border-color:var(--green)}
-.ma{display:flex;gap:8px;margin-top:20px;justify-content:flex-end}
-.m-cancel{background:var(--bg2);border:1px solid var(--border);color:var(--t2);font-family:'DM Sans',sans-serif;font-size:13px;padding:8px 16px;border-radius:8px;cursor:pointer}
-.m-save{background:var(--t1);border:none;color:#fff;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;padding:8px 16px;border-radius:8px;cursor:pointer}
-
-/* TOAST */
-.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--t1);color:#fff;font-size:13px;padding:10px 20px;border-radius:9px;opacity:0;transition:all .3s;pointer-events:none;z-index:999;white-space:nowrap}
+.mbox{background:#fff;border-radius:14px;padding:26px;max-width:500px;width:100%;max-height:85vh;overflow-y:auto}
+.mtit{font-family:"Bebas Neue",sans-serif;font-size:21px;color:var(--t1);margin-bottom:16px}
+.mf{margin-bottom:12px}
+.mlb{font-size:10px;text-transform:uppercase;letter-spacing:.9px;color:var(--t3);margin-bottom:4px;display:block}
+.mi,.ms,.mt{width:100%;background:var(--bg);border:1px solid var(--bd2);border-radius:7px;color:var(--t1);font-family:"DM Sans",sans-serif;font-size:13px;padding:8px 11px}
+.mt{resize:vertical;min-height:76px}
+.mi:focus,.ms:focus,.mt:focus{outline:none;border-color:var(--grn)}
+.ma{display:flex;gap:7px;margin-top:18px;justify-content:flex-end}
+.mc{background:var(--bg2);border:1px solid var(--bd);color:var(--t2);font-family:"DM Sans",sans-serif;font-size:13px;padding:7px 14px;border-radius:7px;cursor:pointer}
+.msv{background:var(--t1);border:none;color:#fff;font-family:"DM Sans",sans-serif;font-size:13px;font-weight:500;padding:7px 14px;border-radius:7px;cursor:pointer}
+/* toast */
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(16px);background:var(--t1);color:#fff;font-size:13px;padding:9px 18px;border-radius:8px;opacity:0;transition:all .28s;pointer-events:none;z-index:999}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
 </head>
 <body>
 
 <nav>
-  <div class="sb-brand">
+  <div class="sb-top">
     <div class="sb-logo">SPUN</div>
     <div class="sb-sub">Marketing Manager &middot; PDI</div>
   </div>
-  <div class="sb-sect">
-    <span class="sb-lbl">Navegação</span>
-    <button class="nav-btn active" onclick="go('overview',this)"><span class="nav-dot"></span>Visão Geral</button>
-    <button class="nav-btn" onclick="go('score',this)"><span class="nav-dot"></span>Score Mensal</button>
-    <button class="nav-btn" onclick="go('skills',this)"><span class="nav-dot"></span>Matriz de Skills</button>
-    <button class="nav-btn" onclick="go('pdi',this)"><span class="nav-dot"></span>PDI</button>
-    <button class="nav-btn" onclick="go('contrato',this)"><span class="nav-dot"></span>Contrato de Evolução</button>
-    <button class="nav-btn" onclick="go('curadoria',this)"><span class="nav-dot"></span>Curadoria</button>
+  <div class="sb-nav">
+    <span class="sb-lbl">Navegacao</span>
+    <button class="nb active" id="nb-overview" onclick="goView('overview')"><span class="nd"></span>Visao Geral</button>
+    <button class="nb" id="nb-score"    onclick="goView('score')"><span class="nd"></span>Score Mensal</button>
+    <button class="nb" id="nb-skills"   onclick="goView('skills')"><span class="nd"></span>Matriz de Skills</button>
+    <button class="nb" id="nb-pdi"      onclick="goView('pdi')"><span class="nd"></span>PDI</button>
+    <button class="nb" id="nb-contrato" onclick="goView('contrato')"><span class="nd"></span>Contrato de Evolucao</button>
+    <button class="nb" id="nb-curadoria"onclick="goView('curadoria')"><span class="nd"></span>Curadoria</button>
   </div>
-  <div class="sb-person">
-    <div class="sb-row">
+  <div class="sb-foot">
+    <div class="sb-fr">
       <div class="sb-av">M</div>
-      <div><div class="sb-pname">Mariana B.</div><div class="sb-prole">Marketing Manager</div></div>
+      <div><div class="sb-nm">Mariana B.</div><div class="sb-rl">Marketing Manager</div></div>
     </div>
-    <div class="sb-badge">Sênior &rarr; Head</div>
+    <div class="sb-bdg">Senior &rarr; Head</div>
   </div>
 </nav>
 
 <main>
 
 <div class="view active" id="view-overview">
-  <div class="topbar">
-    <div><div class="pg-title">Visão Geral</div><div class="pg-sub">Jun/26 &middot; Ciclo 2026.1 &middot; Dados de Mai/26</div></div>
-    <div id="ov-badge"></div>
+  <div class="tbar">
+    <div><div class="pt">Visao Geral</div><div class="ps">Jun/26 &middot; Ciclo 2026.1 &middot; Dados de Mai/26</div></div>
+    <div id="ov-rb"></div>
   </div>
   <div class="hero">
-    <div class="hero-av">M</div>
-    <div class="hero-info">
-      <div class="hero-name">Mariana Burlamaqui</div>
-      <div class="hero-role">marketing manager &middot; spun mídia</div>
-      <div class="hero-tags">
-        <span class="hero-tag">Estratégia</span>
-        <span class="hero-tag">Performance</span>
-        <span class="hero-tag">Liderança</span>
-        <span class="hero-tag">Infoproduto</span>
-        <span class="hero-tag">Sênior &rarr; Head</span>
+    <div class="hav">M</div>
+    <div class="hi">
+      <div class="hn">Mariana Burlamaqui</div>
+      <div class="hr">marketing manager &middot; spun midia</div>
+      <div class="htags">
+        <span class="htag">Estrategia</span><span class="htag">Performance</span>
+        <span class="htag">Lideranca</span><span class="htag">Infoproduto</span>
+        <span class="htag">Senior &rarr; Head</span>
       </div>
     </div>
-    <div class="hero-stats">
-      <div><div class="h-num" id="hs-prazo">—</div><div class="h-lbl">Prazo</div></div>
-      <div><div class="h-num">8</div><div class="h-lbl">Pessoas</div></div>
-      <div><div class="h-num">4</div><div class="h-lbl">PDIs</div></div>
+    <div class="hst">
+      <div><div class="hsn" id="hs-prazo">-</div><div class="hsl">Prazo</div></div>
+      <div><div class="hsn">8</div><div class="hsl">Pessoas</div></div>
+      <div><div class="hsn">4</div><div class="hsl">PDIs</div></div>
     </div>
   </div>
   <div id="ov-baseline" style="margin-bottom:20px"></div>
-  <div class="section">
-    <div class="sec-hd"><span class="sec-title">KPIs do Mês</span></div>
+  <div class="sec">
+    <div class="sech"><span class="sect">KPIs do Mes</span></div>
+    <div class="g3">
+      <div class="card"><div class="kl">Campanhas no Prazo</div><div class="kv" id="kv-prazo" style="color:var(--grn)">-</div><div class="kd" id="kd-prazo"></div><div class="bw"><div class="bf" id="kb-prazo" style="background:var(--grn)"></div></div><div class="km">meta &middot; 100%</div></div>
+      <div class="card"><div class="kl">OKRs em Tracking</div><div class="kv" id="kv-okrs" style="color:var(--amb)">-</div><div class="kd" id="kd-okrs"></div><div class="bw"><div class="bf" id="kb-okrs" style="background:var(--amb)"></div></div><div class="km">meta &middot; 80%</div></div>
+      <div class="card"><div class="kl">Influencia Estrategica</div><div class="kv" id="kv-inf" style="color:var(--vio)">-</div><div class="kd" id="kd-inf"></div><div class="bw"><div class="bf" id="kb-inf" style="background:var(--vio)"></div></div><div class="km">pautas/mes &middot; meta &ge;7</div></div>
+    </div>
+  </div>
+  <div class="sec">
     <div class="g3">
       <div class="card">
-        <div class="kpi-lbl">Campanhas no Prazo</div>
-        <div class="kpi-val" id="ov-prazo" style="color:var(--green)">—</div>
-        <div class="kpi-delta" id="ov-prazo-d"></div>
-        <div class="bar-wrap"><div class="bar-fill" id="ov-prazo-bar" style="background:var(--green)"></div></div>
-        <div class="kpi-meta">meta · 100%</div>
-      </div>
-      <div class="card">
-        <div class="kpi-lbl">OKRs em Tracking</div>
-        <div class="kpi-val" id="ov-okrs" style="color:var(--amber)">—</div>
-        <div class="kpi-delta" id="ov-okrs-d"></div>
-        <div class="bar-wrap"><div class="bar-fill" id="ov-okrs-bar" style="background:var(--amber)"></div></div>
-        <div class="kpi-meta">meta · 80%</div>
-      </div>
-      <div class="card">
-        <div class="kpi-lbl">Influência Estratégica</div>
-        <div class="kpi-val" id="ov-inf" style="color:var(--violet)">—</div>
-        <div class="kpi-delta" id="ov-inf-d"></div>
-        <div class="bar-wrap"><div class="bar-fill" id="ov-inf-bar" style="background:var(--violet)"></div></div>
-        <div class="kpi-meta">pautas lideradas/mês · meta ≥ 7</div>
+        <div class="kl">Autonomia Decisoria</div>
+        <div class="kv" id="av-val" style="font-size:40px;color:var(--tel)">-</div>
+        <div id="av-lbl" style="font-size:12px;color:var(--t3);margin-top:4px">-</div>
+        <div class="asc" id="av-bar"></div>
+        <div style="display:flex;justify-content:space-between;margin-top:4px"><span style="font-size:9px;color:var(--t4)">operacional</span><span style="font-size:9px;color:var(--t4)">estrategica</span></div>
       </div>
     </div>
   </div>
-  <div class="section">
-    <div class="g3">
-      <div class="card">
-        <div class="kpi-lbl">Autonomia Decisória</div>
-        <div class="kpi-val" id="i-auto-val" style="font-size:40px;color:var(--teal)">—</div>
-        <div style="font-size:12px;color:var(--t3);margin-top:5px" id="i-auto-lbl">—</div>
-        <div class="auto-scale" id="i-auto-bar"></div>
-        <div style="display:flex;justify-content:space-between;margin-top:5px">
-          <span style="font-size:9px;color:var(--t4)">operacional</span>
-          <span style="font-size:9px;color:var(--t4)">estratégica</span>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="section">
+  <div class="sec">
     <div class="g2">
-      <div class="card">
-        <div class="chart-title">Prazo de Campanhas vs Baseline Q1</div>
-        <div class="chart-sub">mês atual · média jan–mar · meta</div>
-        <canvas id="prazoChart" height="130"></canvas>
-      </div>
-      <div class="card">
-        <div class="chart-title">OKRs em Tracking</div>
-        <div class="chart-sub">% de objetivos monitorados ativamente</div>
-        <canvas id="okrsChart" height="130"></canvas>
-      </div>
+      <div class="card"><div class="kl" style="font-size:13px;font-weight:600;color:var(--t1);text-transform:none;letter-spacing:0;margin-bottom:3px">Prazo de Campanhas vs Baseline Q1</div><div style="font-size:12px;color:var(--t3);margin-bottom:14px">mes atual &middot; media jan-mar &middot; meta</div><canvas id="ch-prazo" height="130"></canvas></div>
+      <div class="card"><div class="kl" style="font-size:13px;font-weight:600;color:var(--t1);text-transform:none;letter-spacing:0;margin-bottom:3px">OKRs em Tracking</div><div style="font-size:12px;color:var(--t3);margin-bottom:14px">% de objetivos monitorados ativamente</div><canvas id="ch-okrs" height="130"></canvas></div>
     </div>
   </div>
-  <div class="section">
-    <div class="sec-hd"><span class="sec-title">Tendência de KPIs</span></div>
-    <div class="card">
-      <div class="chart-title">Prazo · OKRs · Influência · Baseline Q1</div>
-      <div class="chart-sub">evolução mensal Jan/26 – Mai/26</div>
-      <canvas id="tendChart" height="130"></canvas>
-    </div>
+  <div class="sec">
+    <div class="sech"><span class="sect">Tendencia de KPIs</span></div>
+    <div class="card"><div class="kl" style="font-size:13px;font-weight:600;color:var(--t1);text-transform:none;letter-spacing:0;margin-bottom:3px">Prazo &middot; OKRs &middot; Influencia &middot; Baseline Q1</div><div style="font-size:12px;color:var(--t3);margin-bottom:14px">evolucao mensal Jan/26 - Mai/26</div><canvas id="ch-tend" height="130"></canvas></div>
   </div>
 </div>
 
 <div class="view" id="view-score">
-  <div class="topbar">
-    <div><div class="pg-title">Score Mensal</div><div class="pg-sub">Desenvolvimento · Jun/26</div></div>
-    <div id="score-rb"></div>
-  </div>
-  <div class="g2" style="margin-bottom:28px">
-    <div class="card score-circle-wrap">
-      <div class="score-circle" id="score-circle">
-        <div class="score-inner">
-          <div class="score-num" id="score-num">—</div>
-          <div class="score-max">/100</div>
-        </div>
-      </div>
-      <div class="score-label" id="score-lbl">—</div>
-      <div class="score-desc" id="score-desc">—</div>
+  <div class="tbar"><div><div class="pt">Score Mensal</div><div class="ps">Desenvolvimento &middot; Jun/26</div></div><div id="sc-rb"></div></div>
+  <div class="g2" style="margin-bottom:26px">
+    <div class="card sc-wrap">
+      <div class="sc-ring" id="sc-ring"><div class="sc-in"><div class="sc-n" id="sc-num">-</div><div class="sc-mx">/100</div></div></div>
+      <div class="sc-lb" id="sc-lbl">-</div>
+      <div class="sc-ds" id="sc-ds">-</div>
     </div>
-    <div class="card">
-      <div class="chart-title">Radar de Competências</div>
-      <div class="chart-sub">atual vs meta Head</div>
-      <canvas id="radarChart" height="200"></canvas>
-    </div>
+    <div class="card"><div style="font-size:14px;font-weight:600;color:var(--t1);margin-bottom:3px">Radar de Competencias</div><div style="font-size:12px;color:var(--t3);margin-bottom:14px">atual vs meta Head</div><canvas id="ch-radar" height="200"></canvas></div>
   </div>
-  <div class="section">
-    <div class="sec-hd"><span class="sec-title">Dimensões do Score</span></div>
-    <div class="card" id="score-dims"></div>
+  <div class="sec"><div class="sech"><span class="sect">Dimensoes do Score</span></div><div class="card" id="sc-dims"></div></div>
+  <div class="sec"><div class="sech"><span class="sect">Evolucao Historica</span></div>
+    <div class="card"><div style="font-size:14px;font-weight:600;color:var(--t1);margin-bottom:3px">Score Total por Mes</div><div style="font-size:12px;color:var(--t3);margin-bottom:14px">meta para Head: 85+</div><canvas id="ch-hist" height="130"></canvas></div>
   </div>
-  <div class="section">
-    <div class="sec-hd"><span class="sec-title">Evolução Histórica</span></div>
-    <div class="card">
-      <div class="chart-title">Score Total por Mês</div>
-      <div class="chart-sub">meta para Head: 85+</div>
-      <canvas id="histChart" height="130"></canvas>
-    </div>
-  </div>
-  <div class="section">
-    <div class="sec-hd"><span class="sec-title">Critérios de Progressão &rarr; Head de Marketing</span></div>
-    <div class="card" id="crit-list"></div>
-  </div>
+  <div class="sec"><div class="sech"><span class="sect">Criterios de Progressao para Head de Marketing</span></div><div class="card" id="sc-crit"></div></div>
 </div>
 
 <div class="view" id="view-skills">
-  <div class="topbar">
-    <div><div class="pg-title">Matriz de Skills</div><div class="pg-sub">Competências da função</div></div>
-  </div>
+  <div class="tbar"><div><div class="pt">Matriz de Skills</div><div class="ps">Competencias da funcao</div></div></div>
   <div class="tabs">
-    <button class="tab active" onclick="filterCat('all',this)">Todas</button>
-    <button class="tab" onclick="filterCat('estrategia',this)">Estratégia</button>
-    <button class="tab" onclick="filterCat('lideranca',this)">Liderança</button>
-    <button class="tab" onclick="filterCat('performance',this)">Performance</button>
-    <button class="tab" onclick="filterCat('comunicacao',this)">Comunicação</button>
-    <button class="tab" onclick="filterCat('gestao',this)">Gestão</button>
+    <button class="tab active" id="tab-all"          onclick="filterCat('all',this)">Todas</button>
+    <button class="tab" id="tab-estrategia"  onclick="filterCat('estrategia',this)">Estrategia</button>
+    <button class="tab" id="tab-lideranca"   onclick="filterCat('lideranca',this)">Lideranca</button>
+    <button class="tab" id="tab-performance" onclick="filterCat('performance',this)">Performance</button>
+    <button class="tab" id="tab-comunicacao" onclick="filterCat('comunicacao',this)">Comunicacao</button>
+    <button class="tab" id="tab-gestao"      onclick="filterCat('gestao',this)">Gestao</button>
   </div>
-  <div class="card" id="skills-body"></div>
+  <div class="card" id="sk-body"></div>
 </div>
 
 <div class="view" id="view-pdi">
-  <div class="topbar">
-    <div><div class="pg-title">PDI</div><div class="pg-sub">Plano de Desenvolvimento Individual · 2026 · Modelo 70–20–10</div></div>
-    <button class="add-btn" onclick="openPDIModal()">+ Novo PDI</button>
-  </div>
+  <div class="tbar"><div><div class="pt">PDI</div><div class="ps">Plano de Desenvolvimento Individual &middot; 2026 &middot; Modelo 70-20-10</div></div><button class="abtn" onclick="openModal('modal-pdi')">+ Novo PDI</button></div>
   <div id="pdi-body"></div>
 </div>
 
 <div class="view" id="view-contrato">
-  <div class="topbar">
-    <div><div class="pg-title">Contrato de Evolução</div><div class="pg-sub">Experimentos mensais · Start · Stop · Continue</div></div>
-    <button class="add-btn" onclick="openExpModal()">+ Experimento</button>
-  </div>
-  <div class="mes-btns" id="mes-btns"></div>
-  <div id="contrato-body"></div>
+  <div class="tbar"><div><div class="pt">Contrato de Evolucao</div><div class="ps">Experimentos mensais &middot; Start &middot; Stop &middot; Continue</div></div><button class="abtn" onclick="openModal('modal-exp')">+ Experimento</button></div>
+  <div class="mbtns" id="mes-btns"></div>
+  <div id="ct-body"></div>
 </div>
 
 <div class="view" id="view-curadoria">
-  <div class="topbar">
-    <div><div class="pg-title">Curadoria</div><div class="pg-sub">Recursos de desenvolvimento</div></div>
-    <button class="add-btn" onclick="openCurModal()">+ Recurso</button>
-  </div>
-  <div id="curadoria-body"></div>
+  <div class="tbar"><div><div class="pt">Curadoria</div><div class="ps">Recursos de desenvolvimento</div></div><button class="abtn" onclick="openModal('modal-cur')">+ Recurso</button></div>
+  <div id="cur-body"></div>
 </div>
 
 </main>
@@ -410,352 +325,317 @@ input[type=range]{accent-color:var(--green);width:90px}
 <div class="toast" id="toast"></div>
 
 <div class="modal" id="modal-pdi">
-  <div class="modal-box">
-    <div class="modal-title">Novo PDI</div>
-    <div class="mf"><label class="ml">Competência</label><input class="mi" id="m-comp"></div>
-    <div class="mf"><label class="ml">Objetivo</label><textarea class="mt" id="m-obj"></textarea></div>
-    <div class="mf"><label class="ml">Por que importa</label><textarea class="mt" id="m-por"></textarea></div>
-    <div class="mf"><label class="ml">Critério de Sucesso</label><input class="mi" id="m-crit"></div>
-    <div class="mf"><label class="ml">Ciclo</label><input class="mi" id="m-ciclo"></div>
-    <div class="mf"><label class="ml">Ícone</label><input class="mi" id="m-icon" style="width:80px"></div>
-    <div class="ma"><button class="m-cancel" onclick="closeModal('modal-pdi')">Cancelar</button><button class="m-save" onclick="savePDI()">Salvar</button></div>
+  <div class="mbox"><div class="mtit">Novo PDI</div>
+    <div class="mf"><label class="mlb">Competencia</label><input class="mi" id="mp-comp"></div>
+    <div class="mf"><label class="mlb">Objetivo</label><textarea class="mt" id="mp-obj"></textarea></div>
+    <div class="mf"><label class="mlb">Por que importa</label><textarea class="mt" id="mp-por"></textarea></div>
+    <div class="mf"><label class="mlb">Criterio de Sucesso</label><input class="mi" id="mp-crit"></div>
+    <div class="mf"><label class="mlb">Ciclo</label><input class="mi" id="mp-ciclo"></div>
+    <div class="ma"><button class="mc" onclick="closeModal('modal-pdi')">Cancelar</button><button class="msv" onclick="savePDI()">Salvar</button></div>
   </div>
 </div>
 
 <div class="modal" id="modal-exp">
-  <div class="modal-box">
-    <div class="modal-title">Novo Experimento</div>
-    <div class="mf"><label class="ml">Tipo</label>
-      <select class="ms" id="e-tipo">
-        <option value="start">Start</option>
-        <option value="stop">Stop</option>
-        <option value="continue">Continue</option>
-      </select>
-    </div>
-    <div class="mf"><label class="ml">Ponto observado</label><input class="mi" id="e-ponto"></div>
-    <div class="mf"><label class="ml">Ação</label><textarea class="mt" id="e-acao"></textarea></div>
-    <div class="mf"><label class="ml">Recurso</label><input class="mi" id="e-recurso"></div>
-    <div class="ma"><button class="m-cancel" onclick="closeModal('modal-exp')">Cancelar</button><button class="m-save" onclick="saveExp()">Salvar</button></div>
+  <div class="mbox"><div class="mtit">Novo Experimento</div>
+    <div class="mf"><label class="mlb">Tipo</label><select class="ms" id="ep-tipo"><option value="start">Start</option><option value="stop">Stop</option><option value="continue">Continue</option></select></div>
+    <div class="mf"><label class="mlb">Ponto observado</label><input class="mi" id="ep-ponto"></div>
+    <div class="mf"><label class="mlb">Acao</label><textarea class="mt" id="ep-acao"></textarea></div>
+    <div class="mf"><label class="mlb">Recurso</label><input class="mi" id="ep-recurso"></div>
+    <div class="ma"><button class="mc" onclick="closeModal('modal-exp')">Cancelar</button><button class="msv" onclick="saveExp()">Salvar</button></div>
   </div>
 </div>
 
 <div class="modal" id="modal-cur">
-  <div class="modal-box">
-    <div class="modal-title">Novo Recurso</div>
-    <div class="mf"><label class="ml">Título</label><input class="mi" id="c-title"></div>
-    <div class="mf"><label class="ml">Descrição</label><input class="mi" id="c-desc"></div>
-    <div class="mf"><label class="ml">URL</label><input class="mi" id="c-url"></div>
-    <div class="mf"><label class="ml">Tags (vírgula)</label><input class="mi" id="c-tags"></div>
-    <div class="mf"><label class="ml">Ícone</label><input class="mi" id="c-icon" style="width:80px"></div>
-    <div class="ma"><button class="m-cancel" onclick="closeModal('modal-cur')">Cancelar</button><button class="m-save" onclick="saveCur()">Salvar</button></div>
+  <div class="mbox"><div class="mtit">Novo Recurso</div>
+    <div class="mf"><label class="mlb">Titulo</label><input class="mi" id="cp-title"></div>
+    <div class="mf"><label class="mlb">Descricao</label><input class="mi" id="cp-desc"></div>
+    <div class="mf"><label class="mlb">URL</label><input class="mi" id="cp-url"></div>
+    <div class="mf"><label class="mlb">Tags (virgula)</label><input class="mi" id="cp-tags"></div>
+    <div class="ma"><button class="mc" onclick="closeModal('modal-cur')">Cancelar</button><button class="msv" onclick="saveCur()">Salvar</button></div>
   </div>
 </div>
 
 <script>
-const INIT_DATA = {"kpis": [{"mes": "2026-01", "prazo": 90, "okrs": 70, "inf": 4, "auto": 3}, {"mes": "2026-02", "prazo": 95, "okrs": 75, "inf": 5, "auto": 3}, {"mes": "2026-03", "prazo": 100, "okrs": 72, "inf": 6, "auto": 4}, {"mes": "2026-04", "prazo": 95, "okrs": 78, "inf": 7, "auto": 4}, {"mes": "2026-05", "prazo": 100, "okrs": 80, "inf": 8, "auto": 4}], "skills": [{"id": "pos", "cat": "estrategia", "name": "Posicionamento de Marca", "desc": "Definição e execução do posicionamento B2B e institucional", "status": "supera", "obs": "Liderou rebranding Spun e manifesto South Summit"}, {"id": "okrp", "cat": "estrategia", "name": "Planejamento Tático (OKRs)", "desc": "Traduzir visão do CEO em plano trimestral/anual mensurável", "status": "atende", "obs": "OKRs em 80% de tracking — meta: 100%"}, {"id": "fun", "cat": "estrategia", "name": "Estratégia de Funil", "desc": "Construção de jornada de conteúdo e conversão end-to-end", "status": "supera", "obs": "Funis documentados para WIBR, MIBR, Spun"}, {"id": "camp", "cat": "estrategia", "name": "Arquitetura de Campanhas", "desc": "Coordenação de campanhas multicanal com calendário e dono", "status": "atende", "obs": "Oportunidade de criar Calendário Mestre anual com ownership por supervisor"}, {"id": "11", "cat": "lideranca", "name": "1:1s e Desenvolvimento de Time", "desc": "Qualidade de feedbacks e acompanhamento individual", "status": "atende", "obs": "1:1s mensais — evoluir para feedbacks com evidência e PDI por pessoa"}, {"id": "del", "cat": "lideranca", "name": "Delegação Eficaz", "desc": "Transferência de responsabilidade com clareza e confiança", "status": "desenvolvendo", "obs": "Principal gargalo para o Head — documentar 3 processos com SOP"}, {"id": "cult", "cat": "lideranca", "name": "Cultura e Clima de Equipe", "desc": "Engajamento e ambiente de crescimento", "status": "supera", "obs": "Spun Voices, SPUNmers, rituais de time — referência comportamental"}, {"id": "rec", "cat": "lideranca", "name": "Recrutamento e Onboarding", "desc": "Atração, seleção e integração de membros", "status": "atende", "obs": "Trilha de onboarding de 90 dias criada"}, {"id": "perf", "cat": "performance", "name": "Marketing de Performance", "desc": "Campanhas paid com ROAS e CAC como critérios", "status": "atende", "obs": "Afiliados Smiles, PicPay, SuperSIM, Itaú"}, {"id": "prog", "cat": "performance", "name": "Mídia Programática", "desc": "Entendimento de inventário, CPM, viewability, DSP", "status": "desenvolvendo", "obs": "MCM ativa — aprofundar visão técnica de programática"}, {"id": "dados", "cat": "performance", "name": "Sistema de Performance e Decisão", "desc": "Dashboard executivo + relatório mensal de decisão proposta", "status": "desenvolvendo", "obs": "Criar dashboard macro com 10-15 KPIs e relatório mensal de decisão ao CEO"}, {"id": "copy", "cat": "comunicacao", "name": "Copywriting Estratégico", "desc": "Copy institucional, editorial e de vendas com voz consistente", "status": "supera", "obs": "Sistema de voz documentado para múltiplas marcas"}, {"id": "brand", "cat": "comunicacao", "name": "Identidade Verbal de Marca", "desc": "Construção e manutenção de tom de voz para portfólio", "status": "supera", "obs": "MIBR, WIBR, Spun, João Manetti — skills documentadas"}, {"id": "stk", "cat": "comunicacao", "name": "Narrativa Executiva (C-level)", "desc": "Apresentações e narrativas estratégicas para board e CEO", "status": "atende", "obs": "Evoluir de quem reporta dado para quem recomenda decisão — business cases"}, {"id": "ops", "cat": "gestao", "name": "Marketing Ops / Processos", "desc": "Fluxos, SOPs e ferramentas de operação de marketing", "status": "supera", "obs": "ClickUp arch, Make automations, dashboard HTML, mLabs workflow"}, {"id": "proj", "cat": "gestao", "name": "Gestão de Projetos", "desc": "Planejamento e acompanhamento de múltiplos projetos", "status": "atende", "obs": "Alta volumetria — documentar processos críticos como SOP"}, {"id": "bud", "cat": "gestao", "name": "Gestão de Budget e ROI", "desc": "Controle de verba + visão de ROI por canal para o board", "status": "desenvolvendo", "obs": "Criar dashboard budget + ROI apresentável trimestralmente"}], "pdis": [{"id": "p1", "status": "desenvolvimento", "progress": 40, "cargoAtual": "Marketing Manager Sênior", "cargoAlvo": "Head de Marketing", "cicloLabel": "PDI 2026.1 · Mar–Set/26", "comp": "Competência A — Direção e Plano Tático", "obj": "Traduzir a visão do CEO em planos táticos claros (trimestre/ano) que organizem trabalho, metas e prioridades para supervisores e times, com cara de documento que diretor assina.", "porqueImporta": "Sair do perfil de super analista sênior e consolidar o papel de quem cria direção, sistema e narrativa para a área. Entregáveis de alto valor para o CEO são o critério de progressão para Head.", "criterioSucesso": "Plano Tático Trimestral entregue (máx. 15 slides) + modelo padrão de plano validado com o CEO + revisão trimestral documentada", "pie70": ["Plano Tático Trimestral da área de marketing (máx. 15 slides): contexto, objetivos ligados ao negócio, grandes apostas, metas por frente, roadmap macro e principais riscos", "A cada trimestre, revisar o plano com base nos resultados — documentando o que muda, por quê e o que será despriorizado"], "pie20": ["1 sessão de alinhamento com o CEO: levar rascunho do modelo de plano tático, discutir o que ele espera e ajustar a estrutura com base no feedback (até mês 2)", "Fazer shadowing de 1 planejamento de outra área (vendas/produto) ou conversar com 1 gerente/head para entender como estruturam planos e metas (até mês 3)"], "pie10": ["Estudar 1 referência forte de planejamento de marketing (curso ou guideline de plano anual/trimestral) e criar modelo padrão adaptado (até mês 2)", "Ler 1 conteúdo sobre crescimento de carreira em liderança de marketing e anotar critérios de sucesso para gerentes e heads"], "ciclo": "Mar/26 – Set/26", "ev": "Plano aprovado pelo CEO", "icon": "🎯", "evidencias": ["Spun Voices proposta e aprovada pelo CEO", "Estrutura WIBR (2 fases) aprovada pela Roberta", "South Summit manifesto liderado"]}, {"id": "p2", "status": "desenvolvimento", "progress": 35, "cargoAtual": "Marketing Manager Sênior", "cargoAlvo": "Head de Marketing", "cicloLabel": "PDI 2026.1 · Abr–Out/26", "comp": "Competência B — Sistema de Performance e Tomada de Decisão", "obj": "Sair do papel de quem reporta dado para ser quem recomenda decisão, construindo um sistema de performance que permita ao CEO decidir rápido e confiar.", "porqueImporta": "Head de Marketing precisa falar a língua do board: receita, CAC, ROAS, margem. Construir visibilidade de budget por projeto e canal é o que diferencia a postura gerencial da postura estratégica.", "criterioSucesso": "Dashboard Macro ativo (10-15 KPIs) + Relatório Mensal de Decisão rodando + 1 business case apresentado ao CEO trimestralmente", "pie70": ["Criar Dashboard Macro de Marketing focado em visão executiva (10-15 KPIs principais, visão por frente, leitura mensal em reunião fixa com CEO) — até mês 4", "Criar Relatório Mensal de Decisão (máx. 5 páginas): o que aconteceu · por que aconteceu · o que vamos fazer (decisões propostas) · impacto esperado", "A cada trimestre, levar ao CEO 1 mini business case para 1 decisão relevante (mudar canal, aumentar investimento, trocar fornecedor) — com 2-3 cenários, recomendação e riscos"], "pie20": ["Rodar 1 conversa estruturada com CEO + finanças/dados: quais números importam mais, em qual cadência e em qual formato (até mês 3)", "Trocar com 1 gerente/head de vendas sobre como usam dados para propor decisões — não só para reportar — anotando estruturas de raciocínio replicáveis"], "pie10": ["Fazer 1 curso ou trilha sobre métricas de marketing e funil orientado a negócio (CAC, LTV, pipeline, contribuição de receita) e revisar os KPIs atuais", "Estudar 2 exemplos de dashboards executivos de marketing/vendas e mapear quais 10-15 KPIs são críticos para o CEO"], "ciclo": "Abr/26 – Out/26", "ev": "Dashboard + relatório mensal + print de decisões tomadas", "icon": "📊", "evidencias": ["Dashboard HTML/CSS com dados ClickUp CSV construído", "Relatórios mensais LOS Grandes como base", "Campanhas afiliadas Smiles, PicPay, Itaú gerenciadas"]}, {"id": "p3", "status": "desenvolvimento", "progress": 25, "cargoAtual": "Marketing Manager Sênior", "cargoAlvo": "Head de Marketing", "cicloLabel": "PDI 2026.1 · Mai–Nov/26", "comp": "Competência C — Arquitetura de Campanhas, Canais e Operação", "obj": "Deixar de operar campanha a campanha e passar a operar com uma arquitetura clara: quem faz o quê, como as frentes se conectam, qual o papel de cada canal.", "porqueImporta": "A progressão para Head exige entregáveis de gerente que organiza o sistema, não só projetos. Um Calendário Mestre e Guidelines Táticos por Canal mostram que você pensa como diretora.", "criterioSucesso": "Calendário Mestre de Campanhas anual criado + Guidelines Táticos por canal (1 por frente) + Ritual de Gestão documentado e rodando", "pie70": ["Criar Calendário Mestre de Campanhas (anual/trimestral): campanhas e temas, objetivos, janelas de tempo, owner (supervisor) e prioridade — ligado ao plano tático", "Definir Guidelines Táticos por Canal (1-2 páginas cada): papel no funil, KPIs principais, regras de ouro (do/dont), faixas de budget", "Documentar 1 Ritual de Gestão da Área: cadência de reuniões (semanais com supervisores, mensal com CEO), pauta padrão, quem traz dado / quem leva problema / quem propõe solução"], "pie20": ["Conversar com 1 gerente/head de outra empresa com sistema de campanhas/canais bem definido — entender como organizam calendário e responsabilidade por nível", "Fazer 1 workshop interno com os supervisores para mapear: dores do fluxo atual, gargalos, sobreposição de canais, gaps de dono e coletar ideias para o novo modelo"], "pie10": ["Estudar 1 conteúdo sobre gestão de portfólio de campanhas/canais e organização de marketing por funil ou jobs-to-be-done", "Ler sobre modelos simples de RACI e rituais de gestão leve — desenhar esqueleto para a área"], "ciclo": "Mai/26 – Nov/26", "ev": "Documentos usados pelos supervisores + ritual rodando", "icon": "🗺️", "evidencias": ["ClickUp workspace architecture redesign concluída", "mLabs automation para social media criada", "Spun Voices modelo operacional documentado"]}, {"id": "p4", "status": "acompanhamento", "progress": 20, "cargoAtual": "Marketing Manager Sênior", "cargoAlvo": "Head de Marketing", "cicloLabel": "PDI 2026.1 · Jun–Dez/26", "comp": "Competência D — Narrativa Executiva e Relacionamento com C-level", "obj": "Falar a língua de C-level, construindo narrativas claras, seguras e estratégicas sobre o que marketing está fazendo, por quê e o que vem depois — como as narrativas que VP leva para board.", "porqueImporta": "Head não é título, é postura. A percepção do CEO e do board precisa evoluir de executa muito bem para pensa como a empresa. Isso se constrói com comunicação proativa, antecipação e presença em pautas de negócio.", "criterioSucesso": "1 case de marketing apresentado por trimestre em fórum relevante + template padrão de deck executivo criado e usado + feedback positivo do CEO sobre evolução de postura", "pie70": ["A cada trimestre, apresentar 1 case de marketing em fórum relevante (reunião de diretoria, comitê de crescimento, all-hands): problema, tese, plano, resultado, aprendizados, próximos passos", "Criar um template padrão de deck executivo de marketing (para plano, resultados, business case) e usar esse formato em todas as conversas com C-level — você vira quem sempre organiza a conversa"], "pie20": ["Combinar com o CEO 1 espaço fixo bimestral de 30-45 min para apresentar um case ou atualização executiva (não status de tarefa) — pedir feedback sobre clareza, foco e confiança", "Pedir para 1 liderança revisar 1 deck importante antes de ir para fórum maior, pedindo sugestões diretas de como subir o nível da apresentação"], "pie10": ["Fazer 1 curso de comunicação/apresentações estratégicas com foco em business storytelling (até mês 4)", "Estudar 2-3 decks públicos de CMOs/diretores prestando atenção em como estruturam: contexto → tese → dados → recomendação"], "ciclo": "Jun/26 – Dez/26", "ev": "Decks salvos + feedbacks positivos registrados", "icon": "🎤", "evidencias": ["Sistema de voz documentado para MIBR, Spun, João Manetti", "Apresentações para João e board rodando", "Infoproduto Centelha como laboratório de narrativa"]}], "contratos": {"2026-06": {"mes": "2026-06", "experimentos": [{"id": "c1", "tipo": "start", "ponto": "Operacional acumulando na agenda", "acao": "Bloquear 2h às terças para estratégia — sem reuniões, sem Slack", "recurso": "Google Calendar — bloco fixo protegido", "status": "em_teste", "resultado": ""}, {"id": "c2", "tipo": "stop", "ponto": "Responder mensagens fora do horário", "acao": "Definir janela de resposta 9h-18h NL e comunicar pro time", "recurso": "", "status": "aguardando", "resultado": ""}, {"id": "c3", "tipo": "start", "ponto": "Falta de documentação de processos críticos", "acao": "Criar 1 SOP por semana — começar pelo relatório LOS Grandes", "recurso": "ClickUp — seção SOPs", "status": "em_teste", "resultado": ""}, {"id": "c4", "tipo": "continue", "ponto": "Qualidade de copy e consistência de voz — ponto forte", "acao": "Manter o nível + documentar sistema de voz do Absol e WIBR", "recurso": "Claude skills de voz", "status": "funcionou", "resultado": "Sistema de voz documentado para MIBR, Spun, João Manetti."}, {"id": "c5", "tipo": "start", "ponto": "Pouca visibilidade pública de autoridade", "acao": "1 post por semana no LinkedIn com lente estratégica", "recurso": "Conteúdo da Centelha como base", "status": "aguardando", "resultado": ""}]}, "2026-05": {"mes": "2026-05", "experimentos": [{"id": "m1", "tipo": "start", "ponto": "Entregas do time sem critério de qualidade formalizado", "acao": "Criar checklist de aprovação para cada entregável antes de subir pro cliente", "recurso": "ClickUp — campo de checklist", "status": "funcionou", "resultado": "Checklist criado e adotado pelo time de design."}, {"id": "m2", "tipo": "stop", "ponto": "Assumir tarefas do time quando estão atrasadas", "acao": "Escalar bloqueio antes de resolver sozinha — comunicar risco pro CEO", "recurso": "", "status": "em_teste", "resultado": ""}, {"id": "m3", "tipo": "continue", "ponto": "Rituais de cultura e comunicação interna", "acao": "Manter Spun Voices, SPUNmers e 1:1s mensais com estrutura", "recurso": "Discord, Notion, ClickUp", "status": "funcionou", "resultado": "SPUNmers com pauta de cultura interna estruturada."}]}}, "curadoria": [{"id": "r1", "title": "Obviously Awesome — April Dunford", "desc": "Framework de posicionamento de produto. Referência direta para o posicionamento B2B da Spun.", "url": "https://www.aprildunford.com/obviously-awesome", "tags": ["posicionamento", "estratégia", "B2B"], "icon": "📖"}, {"id": "r2", "title": "Marketing Strategy — Mark Ritson", "desc": "Curso intensivo sobre estratégia com base empírica. Base para trabalhar OKRs de marketing com rigor.", "url": "https://minicoursesbymarkritson.com", "tags": ["estratégia", "métricas", "marca"], "icon": "🎓"}, {"id": "r3", "title": "Docência Digital — Clara Marques", "desc": "Metodologia de infoprodutos aplicada ao MAPA DIGITAL e Centelha.", "url": "#", "tags": ["infoproduto", "lançamento", "método"], "icon": "💡"}, {"id": "r4", "title": "Radical Candor — Kim Scott", "desc": "Framework de liderança e feedback direto. Aplicar nos 1:1s para evoluir para postura de Head.", "url": "https://www.radicalcandor.com", "tags": ["liderança", "feedback", "gestão"], "icon": "🧠"}, {"id": "r5", "title": "Esports Business and Media", "desc": "Visão de negócio, monetização e patrocínio em esports. Relevante para MIBR e LOS Grandes.", "url": "https://www.coursera.org", "tags": ["esports", "monetização", "mídia"], "icon": "🎮"}, {"id": "r6", "title": "Maia Santos — Conteúdo de Autoridade", "desc": "Pilares de conteúdo aspiracional e narrativa para marca pessoal.", "url": "#", "tags": ["marca pessoal", "conteúdo", "autoridade"], "icon": "✨"}, {"id": "r7", "title": "Business Storytelling (curso)", "desc": "Comunicação e apresentações estratégicas com foco em C-level storytelling — Competência D do PDI.", "url": "#", "tags": ["narrativa", "apresentação", "C-level"], "icon": "🎤"}]};
+var IDATA = {"kpis":[{"mes":"2026-01","prazo":90,"okrs":70,"inf":4,"auto":3},{"mes":"2026-02","prazo":95,"okrs":75,"inf":5,"auto":3},{"mes":"2026-03","prazo":100,"okrs":72,"inf":6,"auto":4},{"mes":"2026-04","prazo":95,"okrs":78,"inf":7,"auto":4},{"mes":"2026-05","prazo":100,"okrs":80,"inf":8,"auto":4}],"skills":[{"id":"pos","cat":"estrategia","name":"Posicionamento de Marca","desc":"Definicao e execucao do posicionamento B2B e institucional","status":"supera","obs":"Liderou rebranding Spun e manifesto South Summit"},{"id":"okrp","cat":"estrategia","name":"Planejamento Tatico (OKRs)","desc":"Traduzir visao do CEO em plano trimestral/anual mensuravel","status":"atende","obs":"OKRs em 80% de tracking - meta: 100%"},{"id":"fun","cat":"estrategia","name":"Estrategia de Funil","desc":"Construcao de jornada de conteudo e conversao end-to-end","status":"supera","obs":"Funis documentados para WIBR, MIBR, Spun"},{"id":"camp","cat":"estrategia","name":"Arquitetura de Campanhas","desc":"Coordenacao de campanhas multicanal com calendario e dono","status":"atende","obs":"Oportunidade de criar Calendario Mestre anual com ownership por supervisor"},{"id":"u11","cat":"lideranca","name":"1:1s e Desenvolvimento de Time","desc":"Qualidade de feedbacks e acompanhamento individual","status":"atende","obs":"1:1s mensais - evoluir para feedbacks com evidencia e PDI por pessoa"},{"id":"del","cat":"lideranca","name":"Delegacao Eficaz","desc":"Transferencia de responsabilidade com clareza e confianca","status":"desenvolvendo","obs":"Principal gargalo para o Head - documentar 3 processos com SOP"},{"id":"cult","cat":"lideranca","name":"Cultura e Clima de Equipe","desc":"Engajamento e ambiente de crescimento","status":"supera","obs":"Spun Voices, SPUNmers, rituais de time - referencia comportamental"},{"id":"rec","cat":"lideranca","name":"Recrutamento e Onboarding","desc":"Atracao, selecao e integracao de membros","status":"atende","obs":"Trilha de onboarding de 90 dias criada"},{"id":"perf","cat":"performance","name":"Marketing de Performance","desc":"Campanhas paid com ROAS e CAC como criterios","status":"atende","obs":"Afiliados Smiles, PicPay, SuperSIM, Itau"},{"id":"prog","cat":"performance","name":"Midia Programatica","desc":"Entendimento de inventario, CPM, viewability, DSP","status":"desenvolvendo","obs":"MCM ativa - aprofundar visao tecnica de programatica"},{"id":"dados","cat":"performance","name":"Sistema de Performance e Decisao","desc":"Dashboard executivo + relatorio mensal de decisao","status":"desenvolvendo","obs":"Criar dashboard macro com 10-15 KPIs e relatorio mensal ao CEO"},{"id":"copy","cat":"comunicacao","name":"Copywriting Estrategico","desc":"Copy institucional, editorial e de vendas com voz consistente","status":"supera","obs":"Sistema de voz documentado para multiplas marcas"},{"id":"brand","cat":"comunicacao","name":"Identidade Verbal de Marca","desc":"Construcao e manutencao de tom de voz para portfolio","status":"supera","obs":"MIBR, WIBR, Spun, Joao Manetti - skills documentadas"},{"id":"stk","cat":"comunicacao","name":"Narrativa Executiva (C-level)","desc":"Apresentacoes e narrativas estrategicas para board e CEO","status":"atende","obs":"Evoluir de quem reporta dado para quem recomenda decisao"},{"id":"ops","cat":"gestao","name":"Marketing Ops e Processos","desc":"Fluxos, SOPs e ferramentas de operacao de marketing","status":"supera","obs":"ClickUp arch, Make automations, dashboard HTML, mLabs workflow"},{"id":"proj","cat":"gestao","name":"Gestao de Projetos","desc":"Planejamento e acompanhamento de multiplos projetos","status":"atende","obs":"Alta volumetria - documentar processos criticos como SOP"},{"id":"bud","cat":"gestao","name":"Gestao de Budget e ROI","desc":"Controle de verba + visao de ROI por canal para o board","status":"desenvolvendo","obs":"Criar dashboard budget + ROI apresentavel trimestralmente"}],"pdis":[{"id":"p1","status":"desenvolvimento","progress":40,"cargoAtual":"Marketing Manager Senior","cargoAlvo":"Head de Marketing","cicloLabel":"PDI 2026.1 Mar-Set/26","comp":"Competencia A - Direcao e Plano Tatico","obj":"Traduzir a visao do CEO em planos taticos claros (trimestre/ano) que organizem trabalho, metas e prioridades para supervisores e times.","porqueImporta":"Sair do perfil de super analista senior e consolidar o papel de quem cria direcao, sistema e narrativa para a area. Entregar planos de alto valor para o CEO e o criterio de progressao para Head.","criterioSucesso":"Plano Tatico Trimestral entregue (max 15 slides) + modelo padrao validado com o CEO + revisao trimestral documentada","pie70":["Plano Tatico Trimestral da area de marketing (max 15 slides): contexto, objetivos ligados ao negocio, grandes apostas, metas por frente, roadmap macro e principais riscos","A cada trimestre, revisar o plano com base nos resultados, documentando o que muda, por que e o que sera despriorizado"],"pie20":["1 sessao de alinhamento com o CEO: levar rascunho do modelo de plano tatico, discutir o que ele espera e ajustar a estrutura com base no feedback (ate mes 2)","Fazer shadowing de 1 planejamento de outra area (vendas/produto) ou conversar com 1 gerente/head para entender como estruturam planos e metas (ate mes 3)"],"pie10":["Estudar 1 referencia forte de planejamento de marketing (curso ou guideline de plano anual/trimestral) e criar modelo padrao adaptado (ate mes 2)","Ler 1 conteudo sobre crescimento de carreira em lideranca de marketing e anotar criterios de sucesso para gerentes e heads"],"ciclo":"Mar/26 - Set/26","ev":"Plano aprovado pelo CEO","icon":"ALVO","evidencias":["Spun Voices proposta e aprovada pelo CEO","Estrutura WIBR (2 fases) aprovada pela Roberta","South Summit manifesto liderado"]},{"id":"p2","status":"desenvolvimento","progress":35,"cargoAtual":"Marketing Manager Senior","cargoAlvo":"Head de Marketing","cicloLabel":"PDI 2026.1 Abr-Out/26","comp":"Competencia B - Sistema de Performance e Tomada de Decisao","obj":"Sair do papel de quem reporta dado para ser quem recomenda decisao, construindo um sistema de performance que permita ao CEO decidir rapido e confiar.","porqueImporta":"Head de Marketing precisa falar a lingua do board: receita, CAC, ROAS, margem. Construir visibilidade de budget por projeto e canal e o que diferencia a postura gerencial da postura estrategica.","criterioSucesso":"Dashboard Macro ativo (10-15 KPIs) + Relatorio Mensal de Decisao rodando + 1 business case apresentado ao CEO trimestralmente","pie70":["Criar Dashboard Macro de Marketing focado em visao executiva (10-15 KPIs principais, visao por frente, leitura mensal em reuniao fixa com CEO) - ate mes 4","Criar Relatorio Mensal de Decisao (max 5 paginas): o que aconteceu, por que aconteceu, o que vamos fazer (decisoes propostas), impacto esperado","A cada trimestre, levar ao CEO 1 mini business case para 1 decisao relevante (mudar canal, aumentar investimento, trocar fornecedor) com 2-3 cenarios, recomendacao e riscos"],"pie20":["Rodar 1 conversa estruturada com CEO + financas/dados: quais numeros importam mais, em qual cadencia e em qual formato (ate mes 3)","Trocar com 1 gerente/head de vendas sobre como usam dados para propor decisoes (nao so para reportar), anotando estruturas de raciocinio replicaveis"],"pie10":["Fazer 1 curso ou trilha sobre metricas de marketing e funil orientado a negocio (CAC, LTV, pipeline, contribuicao de receita) e revisar os KPIs atuais","Estudar 2 exemplos de dashboards executivos de marketing/vendas e mapear quais 10-15 KPIs sao criticos para o CEO"],"ciclo":"Abr/26 - Out/26","ev":"Dashboard + relatorio mensal + print de decisoes tomadas","icon":"GRAFICO","evidencias":["Dashboard HTML/CSS com dados ClickUp CSV construido","Relatorios mensais LOS Grandes como base","Campanhas afiliadas Smiles, PicPay, Itau gerenciadas"]},{"id":"p3","status":"desenvolvimento","progress":25,"cargoAtual":"Marketing Manager Senior","cargoAlvo":"Head de Marketing","cicloLabel":"PDI 2026.1 Mai-Nov/26","comp":"Competencia C - Arquitetura de Campanhas, Canais e Operacao","obj":"Deixar de operar campanha a campanha e passar a operar com uma arquitetura clara: quem faz o que, como as frentes se conectam, qual o papel de cada canal.","porqueImporta":"A progressao para Head exige entregaveis de gerente que organiza o sistema, nao so projetos. Um Calendario Mestre e Guidelines Taticos por Canal mostram que voce pensa como diretora.","criterioSucesso":"Calendario Mestre de Campanhas anual criado + Guidelines Taticos por canal (1 por frente) + Ritual de Gestao documentado e rodando","pie70":["Criar Calendario Mestre de Campanhas (anual/trimestral): campanhas e temas, objetivos, janelas de tempo, owner (supervisor) e prioridade - ligado ao plano tatico","Definir Guidelines Taticos por Canal (1-2 paginas cada): papel no funil, KPIs principais, regras de ouro (do/dont), faixas de budget","Documentar 1 Ritual de Gestao da Area: cadencia de reunioes (semanais com supervisores, mensal com CEO), pauta padrao, quem traz dado, quem leva problema, quem propoe solucao"],"pie20":["Conversar com 1 gerente/head de outra empresa com sistema de campanhas/canais bem definido, entender como organizam calendario e responsabilidade por nivel","Fazer 1 workshop interno com os supervisores para mapear: dores do fluxo atual, gargalos, sobreposicao de canais, gaps de dono e coletar ideias para o novo modelo"],"pie10":["Estudar 1 conteudo sobre gestao de portfolio de campanhas/canais e organizacao de marketing por funil ou jobs-to-be-done","Ler sobre modelos simples de RACI e rituais de gestao leve para desenhar esqueleto para a area"],"ciclo":"Mai/26 - Nov/26","ev":"Documentos usados pelos supervisores + ritual rodando","icon":"MAPA","evidencias":["ClickUp workspace architecture redesign concluida","mLabs automation para social media criada","Spun Voices modelo operacional documentado"]},{"id":"p4","status":"acompanhamento","progress":20,"cargoAtual":"Marketing Manager Senior","cargoAlvo":"Head de Marketing","cicloLabel":"PDI 2026.1 Jun-Dez/26","comp":"Competencia D - Narrativa Executiva e Relacionamento com C-level","obj":"Falar a lingua de C-level, construindo narrativas claras, seguras e estrategicas sobre o que marketing esta fazendo, por que e o que vem depois.","porqueImporta":"Head nao e titulo, e postura. A percepcao do CEO e do board precisa evoluir de executa muito bem para pensa como a empresa. Isso se constroi com comunicacao proativa, antecipacao e presenca em pautas de negocio.","criterioSucesso":"1 case de marketing apresentado por trimestre em forum relevante + template padrao de deck executivo criado e usado + feedback positivo do CEO sobre evolucao de postura","pie70":["A cada trimestre, apresentar 1 case de marketing em forum relevante (reuniao de diretoria, comite de crescimento, all-hands): problema, tese, plano, resultado, aprendizados, proximos passos","Criar um template padrao de deck executivo de marketing (para plano, resultados, business case) e usar esse formato em todas as conversas com C-level"],"pie20":["Combinar com o CEO 1 espaco fixo bimestral de 30-45 min para apresentar um case ou atualizacao executiva (nao status de tarefa) e pedir feedback sobre clareza, foco e confianca","Pedir para 1 lideranca revisar 1 deck importante antes de ir para forum maior, pedindo sugestoes diretas de como subir o nivel da apresentacao"],"pie10":["Fazer 1 curso de comunicacao/apresentacoes estrategicas com foco em business storytelling (ate mes 4)","Estudar 2-3 decks publicos de CMOs/diretores prestando atencao em como estruturam: contexto, tese, dados, recomendacao"],"ciclo":"Jun/26 - Dez/26","ev":"Decks salvos + feedbacks positivos registrados","icon":"MIC","evidencias":["Sistema de voz documentado para MIBR, Spun, Joao Manetti","Apresentacoes para Joao e board rodando","Infoproduto Centelha como laboratorio de narrativa"]}],"contratos":{"2026-06":{"mes":"2026-06","experimentos":[{"id":"c1","tipo":"start","ponto":"Operacional acumulando na agenda","acao":"Bloquear 2h as tercas para estrategia sem reunioes, sem Slack","recurso":"Google Calendar - bloco fixo protegido","status":"em_teste","resultado":""},{"id":"c2","tipo":"stop","ponto":"Responder mensagens fora do horario","acao":"Definir janela de resposta 9h-18h NL e comunicar pro time","recurso":"","status":"aguardando","resultado":""},{"id":"c3","tipo":"start","ponto":"Falta de documentacao de processos criticos","acao":"Criar 1 SOP por semana, comecar pelo relatorio LOS Grandes","recurso":"ClickUp - secao SOPs","status":"em_teste","resultado":""},{"id":"c4","tipo":"continue","ponto":"Qualidade de copy e consistencia de voz - ponto forte","acao":"Manter o nivel + documentar sistema de voz do Absol e WIBR","recurso":"Claude skills de voz","status":"funcionou","resultado":"Sistema de voz documentado para MIBR, Spun, Joao Manetti."},{"id":"c5","tipo":"start","ponto":"Pouca visibilidade publica de autoridade","acao":"1 post por semana no LinkedIn com lente estrategica","recurso":"Conteudo da Centelha como base","status":"aguardando","resultado":""}]},"2026-05":{"mes":"2026-05","experimentos":[{"id":"m1","tipo":"start","ponto":"Entregas do time sem criterio de qualidade formalizado","acao":"Criar checklist de aprovacao para cada entregavel antes de subir pro cliente","recurso":"ClickUp - campo de checklist","status":"funcionou","resultado":"Checklist criado e adotado pelo time de design."},{"id":"m2","tipo":"stop","ponto":"Assumir tarefas do time quando estao atrasadas","acao":"Escalar bloqueio antes de resolver sozinha, comunicar risco pro CEO","recurso":"","status":"em_teste","resultado":""},{"id":"m3","tipo":"continue","ponto":"Rituais de cultura e comunicacao interna","acao":"Manter Spun Voices, SPUNmers e 1:1s mensais com estrutura","recurso":"Discord, Notion, ClickUp","status":"funcionou","resultado":"SPUNmers com pauta de cultura interna estruturada."}]}},"curadoria":[{"id":"r1","title":"Obviously Awesome - April Dunford","desc":"Framework de posicionamento de produto. Referencia direta para o posicionamento B2B da Spun.","url":"https://www.aprildunford.com","tags":["posicionamento","estrategia","B2B"],"icon":"LIVRO"},{"id":"r2","title":"Marketing Strategy - Mark Ritson","desc":"Curso intensivo sobre estrategia com base empirica. Base para OKRs de marketing com rigor.","url":"https://minicoursesbymarkritson.com","tags":["estrategia","metricas","marca"],"icon":"ESCOLA"},{"id":"r3","title":"Docencia Digital - Clara Marques","desc":"Metodologia de infoprodutos aplicada ao MAPA DIGITAL e Centelha.","url":"#","tags":["infoproduto","lancamento","metodo"],"icon":"LAMPADA"},{"id":"r4","title":"Radical Candor - Kim Scott","desc":"Framework de lideranca e feedback direto. Aplicar nos 1:1s para evoluir para postura de Head.","url":"https://www.radicalcandor.com","tags":["lideranca","feedback","gestao"],"icon":"CEREBRO"},{"id":"r5","title":"Esports Business and Media","desc":"Visao de negocio, monetizacao e patrocinio em esports. Relevante para MIBR e LOS Grandes.","url":"https://www.coursera.org","tags":["esports","monetizacao","midia"],"icon":"GAME"},{"id":"r6","title":"Maia Santos - Conteudo de Autoridade","desc":"Pilares de conteudo aspiracional e narrativa para marca pessoal.","url":"#","tags":["marca pessoal","conteudo","autoridade"],"icon":"ESTRELA"},{"id":"r7","title":"Business Storytelling","desc":"Comunicacao e apresentacoes estrategicas com foco em C-level storytelling - Competencia D do PDI.","url":"#","tags":["narrativa","apresentacao","C-level"],"icon":"MIC"}]};
 
-const KEY = 'spun_pdi_mari_v3';
-function loadS(){try{var r=localStorage.getItem(KEY);return r?JSON.parse(r):JSON.parse(JSON.stringify(INIT_DATA));}catch(e){return JSON.parse(JSON.stringify(INIT_DATA));}}
-function saveS(d){localStorage.setItem(KEY,JSON.stringify(d));}
+var KEY="spun_pdi_v4";
+function loadS(){try{var r=localStorage.getItem(KEY);return r?JSON.parse(r):JSON.parse(JSON.stringify(IDATA));}catch(e){return JSON.parse(JSON.stringify(IDATA));}}
+function saveS(d){try{localStorage.setItem(KEY,JSON.stringify(d));}catch(e){}}
 var S=loadS();
 
-var AUTO_DESCS=['Executora operacional','Executa com checkpoints','Autonomia funcional','Autonomia estratégica','Antecipa e influencia'];
-var SM={'nao-atende':{lbl:'Não atende',cls:'p-nao',val:0},'desenvolvendo':{lbl:'Desenvolvendo',cls:'p-dev',val:33},'atende':{lbl:'Atende',cls:'p-ok',val:66},'supera':{lbl:'Supera',cls:'p-sup',val:100}};
-var CAT_NAMES={estrategia:'Estratégia e Posicionamento',lideranca:'Liderança e Gestão de Time',performance:'Performance e Dados',comunicacao:'Comunicação e Branding',gestao:'Marketing Ops e Gestão'};
-var PDI_ST={
-  acompanhamento:{lbl:'Em Acompanhamento',bar:'#7c3aed',pill:'background:rgba(124,58,237,.1);color:#7c3aed;border:1px solid rgba(124,58,237,.2)'},
-  desenvolvimento:{lbl:'Em Desenvolvimento',bar:'#d97706',pill:'background:rgba(217,119,6,.1);color:#d97706;border:1px solid rgba(217,119,6,.2)'},
-  concluido:{lbl:'Concluído',bar:'#0d9488',pill:'background:rgba(13,148,136,.1);color:#0d9488;border:1px solid rgba(13,148,136,.2)'}
+var ADESCS=["Executora operacional","Executa com checkpoints","Autonomia funcional","Autonomia estrategica","Antecipa e influencia"];
+var SM={"nao-atende":{lbl:"Nao atende",cls:"p-nao",v:0},"desenvolvendo":{lbl:"Desenvolvendo",cls:"p-dev",v:33},"atende":{lbl:"Atende",cls:"p-ok",v:66},"supera":{lbl:"Supera",cls:"p-sup",v:100}};
+var CATS={estrategia:"Estrategia e Posicionamento",lideranca:"Lideranca e Gestao de Time",performance:"Performance e Dados",comunicacao:"Comunicacao e Branding",gestao:"Marketing Ops e Gestao"};
+var PDIST={
+  acompanhamento:{lbl:"Em Acompanhamento",bar:"#7c3aed",pill:"background:rgba(124,58,237,.1);color:#7c3aed;border:1px solid rgba(124,58,237,.2)"},
+  desenvolvimento:{lbl:"Em Desenvolvimento",bar:"#d97706",pill:"background:rgba(217,119,6,.1);color:#d97706;border:1px solid rgba(217,119,6,.2)"},
+  concluido:{lbl:"Concluido",bar:"#0d9488",pill:"background:rgba(13,148,136,.1);color:#0d9488;border:1px solid rgba(13,148,136,.2)"}
 };
 
-function go(id,btn){
-  document.querySelectorAll('.view').forEach(function(v){v.classList.remove('active');});
-  document.querySelectorAll('.nav-btn').forEach(function(b){b.classList.remove('active');});
-  document.getElementById('view-'+id).classList.add('active');
-  btn.classList.add('active');
-  var fns={overview:renderOverview,score:renderScore,skills:renderSkills,pdi:renderPDIs,contrato:renderContrato,curadoria:renderCuradoria};
-  if(fns[id]) fns[id]();
+/* ── navigation ── */
+var VIEWS=["overview","score","skills","pdi","contrato","curadoria"];
+var RENDERS={overview:renderOverview,score:renderScore,skills:renderSkills,pdi:renderPDIs,contrato:renderContrato,curadoria:renderCuradoria};
+function goView(id){
+  VIEWS.forEach(function(v){
+    var el=document.getElementById("view-"+v);
+    if(el) el.classList.remove("active");
+    var nb=document.getElementById("nb-"+v);
+    if(nb) nb.classList.remove("active");
+  });
+  var target=document.getElementById("view-"+id);
+  if(target) target.classList.add("active");
+  var nbTarget=document.getElementById("nb-"+id);
+  if(nbTarget) nbTarget.classList.add("active");
+  if(RENDERS[id]) RENDERS[id]();
 }
 
-function calcScore(){
+/* ── score calc ── */
+function calcSc(){
   var l=S.kpis[S.kpis.length-1]||{};
-  var prazo=l.prazo||90,okrs=l.okrs||70,inf=l.inf||4,auto=l.auto||3;
+  var prazo=l.prazo||0,okrs=l.okrs||0,inf=l.inf||0,auto=l.auto||0;
   var exec=prazo>=95?25:prazo>=90?20:prazo>=80?14:8;
   var okrS=okrs>=80?20:okrs>=70?15:okrs>=60?10:6;
   var autoS=[5,8,12,16,20][Math.min(4,auto)];
-  var sk=S.skills||[];var maxP=sk.length*2;
-  var got=sk.reduce(function(a,s){return a+({'nao-atende':0,'desenvolvendo':1,'atende':2,'supera':3}[s.status]||0);},0);
+  var sk=S.skills||[],maxP=sk.length*2;
+  var got=sk.reduce(function(a,s){return a+({"nao-atende":0,"desenvolvendo":1,"atende":2,"supera":3}[s.status]||0);},0);
   var pct=maxP>0?got/maxP:0;
   var sklS=pct>=0.7?20:pct>=0.5?14:pct>=0.3?8:4;
   var infS=inf>=7?15:inf>=5?10:inf>=3?6:3;
   return{total:exec+okrS+autoS+sklS+infS,exec:exec,okrS:okrS,autoS:autoS,sklS:sklS,infS:infS,autoLvl:auto,prazo:prazo,okrs:okrs,inf:inf};
 }
-
 function getRB(sc){
-  if(sc.total>=85&&sc.autoLvl>=4)return{cls:'rb-ready',label:'ELEGÍVEL PARA HEAD'};
-  if(sc.total>=72)return{cls:'rb-transition',label:'EM TRANSIÇÃO'};
-  return{cls:'rb-developing',label:'EM DESENVOLVIMENTO'};
+  if(sc.total>=85&&sc.autoLvl>=4)return{cls:"rb-ready",lbl:"ELEGIVEL PARA HEAD"};
+  if(sc.total>=72)return{cls:"rb-trans",lbl:"EM TRANSICAO"};
+  return{cls:"rb-dev",lbl:"EM DESENVOLVIMENTO"};
+}
+function fmtMes(m){
+  var p=m.split("-"),mn=["Jan","Fev","Mar","Abr","Mai","Jun","Jul","Ago","Set","Out","Nov","Dez"];
+  return (mn[parseInt(p[1])-1]||p[1])+"/"+p[0].slice(2);
 }
 
-function fmt(mes){
-  var parts=mes.split('-');var y=parts[0];var m=parts[1];
-  var mn=['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
-  return (mn[parseInt(m)-1]||m)+'/'+y.slice(2);
-}
-
-var cPrazo,cOkrs,cTend,cRadar,cHist;
-
+/* ── overview ── */
+var cP,cO,cT;
 function renderOverview(){
-  var sc=calcScore();var rb=getRB(sc);
-  document.getElementById('ov-badge').innerHTML='<span class="rb '+rb.cls+'"><span class="rb-dot"></span>'+rb.label+'</span>';
-  var l=S.kpis[S.kpis.length-1]||{};
-  var prev=S.kpis.length>1?S.kpis[S.kpis.length-2]:{};
-  setKPI('ov-prazo',(l.prazo||0)+'%','ov-prazo-bar',l.prazo||0,'ov-prazo-d',l.prazo||0,prev.prazo,'%');
-  setKPI('ov-okrs',(l.okrs||0)+'%','ov-okrs-bar',l.okrs||0,'ov-okrs-d',l.okrs||0,prev.okrs,'%');
-  setKPI('ov-inf',(l.inf||0),'ov-inf-bar',(l.inf||0)/10*100,'ov-inf-d',l.inf||0,prev.inf,' pautas');
-  document.getElementById('hs-prazo').textContent=(l.prazo||0)+'%';
-  document.getElementById('i-auto-val').textContent='N'+(l.auto||0);
-  document.getElementById('i-auto-lbl').textContent=AUTO_DESCS[l.auto||0]||'—';
-  var bar=document.getElementById('i-auto-bar');bar.innerHTML='';
-  for(var i=0;i<5;i++){var b=document.createElement('div');b.className='auto-step'+(i<=(l.auto||0)?' filled':'');bar.appendChild(b);}
+  var sc=calcSc(),rb=getRB(sc);
+  document.getElementById("ov-rb").innerHTML="<span class='rb "+rb.cls+"'><span class='rb-dot'></span>"+rb.lbl+"</span>";
+  var l=S.kpis[S.kpis.length-1]||{},prev=S.kpis.length>1?S.kpis[S.kpis.length-2]:{};
+  setKV("kv-prazo",(l.prazo||0)+"%","kb-prazo",l.prazo||0,"kd-prazo",l.prazo||0,prev.prazo,"%");
+  setKV("kv-okrs",(l.okrs||0)+"%","kb-okrs",l.okrs||0,"kd-okrs",l.okrs||0,prev.okrs,"%");
+  setKV("kv-inf",(l.inf||0),"kb-inf",(l.inf||0)*10,"kd-inf",l.inf||0,prev.inf," pautas");
+  document.getElementById("hs-prazo").textContent=(l.prazo||0)+"%";
+  document.getElementById("av-val").textContent="N"+(l.auto||0);
+  document.getElementById("av-lbl").textContent=ADESCS[l.auto||0]||"-";
+  var bar=document.getElementById("av-bar");bar.innerHTML="";
+  for(var i=0;i<5;i++){var b=document.createElement("div");b.className="ast"+(i<=(l.auto||0)?" on":"");bar.appendChild(b);}
   var q1=S.kpis.slice(0,3);
-  var avgP=Math.round(q1.reduce(function(a,k){return a+(k.prazo||0);},0)/q1.length);
-  var avgO=Math.round(q1.reduce(function(a,k){return a+(k.okrs||0);},0)/q1.length);
-  document.getElementById('ov-baseline').innerHTML=buildBaseline(avgP,avgO,l.prazo||0,l.okrs||0);
-  if(cPrazo)cPrazo.destroy();
-  if(cOkrs)cOkrs.destroy();
-  if(cTend)cTend.destroy();
-  var labs=S.kpis.map(function(k){return fmt(k.mes);});
-  cPrazo=mkChart('prazoChart',labs,[
-    {label:'Prazo %',data:S.kpis.map(function(k){return k.prazo;}),color:'#1a9e4a',bg:'rgba(26,158,74,.08)',fill:true},
-    {label:'Meta 100%',data:S.kpis.map(function(){return 100;}),color:'rgba(13,148,136,.5)',dash:[5,3],fill:false},
-    {label:'Baseline Q1 ('+avgP+'%)',data:S.kpis.map(function(){return avgP;}),color:'rgba(217,119,6,.5)',dash:[2,4],fill:false}
-  ],80,105,'%');
-  cOkrs=mkChart('okrsChart',labs,[
-    {label:'OKRs %',data:S.kpis.map(function(k){return k.okrs;}),color:'#d97706',bg:'rgba(217,119,6,.08)',fill:true},
-    {label:'Meta 80%',data:S.kpis.map(function(){return 80;}),color:'rgba(13,148,136,.5)',dash:[5,3],fill:false}
-  ],50,100,'%');
-  cTend=mkChart('tendChart',labs,[
-    {label:'Prazo %',data:S.kpis.map(function(k){return k.prazo;}),color:'#1a9e4a',fill:false},
-    {label:'OKRs %',data:S.kpis.map(function(k){return k.okrs;}),color:'#d97706',fill:false},
-    {label:'Influência x10',data:S.kpis.map(function(k){return k.inf*10;}),color:'#7c3aed',fill:false},
-    {label:'Baseline Prazo ('+avgP+'%)',data:S.kpis.map(function(){return avgP;}),color:'rgba(26,158,74,.35)',dash:[3,4],fill:false},
-    {label:'Baseline OKRs ('+avgO+'%)',data:S.kpis.map(function(){return avgO;}),color:'rgba(217,119,6,.35)',dash:[3,4],fill:false}
-  ],0,110,'%');
+  var avgP=Math.round(q1.reduce(function(a,k){return a+(k.prazo||0);},0)/Math.max(q1.length,1));
+  var avgO=Math.round(q1.reduce(function(a,k){return a+(k.okrs||0);},0)/Math.max(q1.length,1));
+  document.getElementById("ov-baseline").innerHTML=buildBL(avgP,avgO,l.prazo||0,l.okrs||0);
+  if(cP)cP.destroy();if(cO)cO.destroy();if(cT)cT.destroy();
+  var labs=S.kpis.map(function(k){return fmtMes(k.mes);});
+  cP=mkLine("ch-prazo",labs,[
+    {l:"Prazo %",d:S.kpis.map(function(k){return k.prazo;}),c:"#1a9e4a",bg:"rgba(26,158,74,.08)",fill:true},
+    {l:"Meta 100%",d:S.kpis.map(function(){return 100;}),c:"rgba(13,148,136,.5)",dash:[5,3]},
+    {l:"Baseline Q1 ("+avgP+"%)",d:S.kpis.map(function(){return avgP;}),c:"rgba(217,119,6,.5)",dash:[2,4]}
+  ],80,105,"%");
+  cO=mkLine("ch-okrs",labs,[
+    {l:"OKRs %",d:S.kpis.map(function(k){return k.okrs;}),c:"#d97706",bg:"rgba(217,119,6,.08)",fill:true},
+    {l:"Meta 80%",d:S.kpis.map(function(){return 80;}),c:"rgba(13,148,136,.5)",dash:[5,3]}
+  ],50,100,"%");
+  cT=mkLine("ch-tend",labs,[
+    {l:"Prazo %",d:S.kpis.map(function(k){return k.prazo;}),c:"#1a9e4a"},
+    {l:"OKRs %",d:S.kpis.map(function(k){return k.okrs;}),c:"#d97706"},
+    {l:"Influencia x10",d:S.kpis.map(function(k){return k.inf*10;}),c:"#7c3aed"},
+    {l:"BL Prazo ("+avgP+"%)",d:S.kpis.map(function(){return avgP;}),c:"rgba(26,158,74,.35)",dash:[3,4]},
+    {l:"BL OKRs ("+avgO+"%)",d:S.kpis.map(function(){return avgO;}),c:"rgba(217,119,6,.35)",dash:[3,4]}
+  ],0,110,"%");
 }
-
-function buildBaseline(avgP,avgO,curP,curO){
-  var dP=curP-avgP;var dO=curO-avgO;
-  return '<div style="background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:14px;padding:20px 24px;display:flex;align-items:center;gap:32px;flex-wrap:wrap">'
-    +'<div style="font-size:11px;text-transform:uppercase;letter-spacing:1.2px;color:#9a9896;font-weight:600">Comparativo Q1 2026 · Baseline Jan–Mar</div>'
-    +mkCmpBlock('Prazo',avgP,curP,dP,'%')
-    +mkCmpBlock('OKRs',avgO,curO,dO,'%')
-    +'</div>';
-}
-function mkCmpBlock(lbl,base,cur,diff,suf){
-  var up=diff>=0;var col=up?'#1a9e4a':'#e04a38';
-  return '<div style="display:flex;align-items:center;gap:14px">'
-    +'<div><div style="font-size:11px;color:#9a9896;margin-bottom:4px">'+lbl+' Baseline Q1</div><div style="font-family:Bebas Neue,sans-serif;font-size:28px;color:#9a9896">'+base+suf+'</div></div>'
-    +'<div style="font-size:20px;color:#c8c6c4">→</div>'
-    +'<div><div style="font-size:11px;color:#9a9896;margin-bottom:4px">'+lbl+' Atual</div><div style="font-family:Bebas Neue,sans-serif;font-size:28px;color:'+col+'">'+cur+suf+'</div><div style="font-size:11px;color:'+col+'">'+(up?'+':'')+diff+suf+' vs baseline</div></div>'
-    +'</div>';
-}
-
-function setKPI(vid,val,bid,pct,did,cur,prev,suf){
+function setKV(vid,val,bid,pct,did,cur,prev,suf){
   var el=document.getElementById(vid);if(el)el.textContent=val;
-  var bar=document.getElementById(bid);if(bar)bar.style.width=Math.min(pct,100)+'%';
-  var d=document.getElementById(did);if(d){
-    if(prev!=null&&prev!==undefined){var diff=cur-prev;d.textContent=(diff>=0?'+':'')+diff+suf+' vs mês anterior';d.style.color=diff>=0?'#1a9e4a':'#e04a38';}
-    else d.textContent='';
-  }
+  var bf=document.getElementById(bid);if(bf)bf.style.width=Math.min(pct,100)+"%";
+  var dd=document.getElementById(did);if(dd&&prev!=null&&prev!==undefined){var df=cur-prev;dd.textContent=(df>=0?"+":"")+df+suf+" vs mes anterior";dd.style.color=df>=0?"#1a9e4a":"#e04a38";}
+}
+function buildBL(avgP,avgO,cP2,cO2){
+  return "<div style='background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:13px;padding:18px 22px;display:flex;align-items:center;gap:28px;flex-wrap:wrap'>"
+    +"<div style='font-size:11px;text-transform:uppercase;letter-spacing:1.2px;color:#9a9896;font-weight:600'>Comparativo Q1 2026 &middot; Baseline Jan-Mar</div>"
+    +blk("Prazo",avgP,cP2,cP2-avgP,"%")+blk("OKRs",avgO,cO2,cO2-avgO,"%")
+    +"</div>";
+}
+function blk(lbl,base,cur,diff,suf){
+  var c=diff>=0?"#1a9e4a":"#e04a38";
+  return "<div style='display:flex;align-items:center;gap:12px'>"
+    +"<div><div style='font-size:11px;color:#9a9896;margin-bottom:3px'>"+lbl+" Baseline Q1</div><div style='font-family:Bebas Neue,sans-serif;font-size:26px;color:#9a9896'>"+base+suf+"</div></div>"
+    +"<div style='font-size:18px;color:#c4c2c0'>&#8594;</div>"
+    +"<div><div style='font-size:11px;color:#9a9896;margin-bottom:3px'>"+lbl+" Atual</div><div style='font-family:Bebas Neue,sans-serif;font-size:26px;color:"+c+"'>"+cur+suf+"</div><div style='font-size:11px;color:"+c+"'>"+(diff>=0?"+":"")+diff+suf+" vs baseline</div></div>"
+    +"</div>";
 }
 
+/* ── score ── */
+var cR,cH;
 function renderScore(){
-  var sc=calcScore();var rb=getRB(sc);
-  document.getElementById('score-rb').innerHTML='<span class="rb '+rb.cls+'"><span class="rb-dot"></span>'+rb.label+'</span>';
-  document.getElementById('score-num').textContent=sc.total;
-  document.getElementById('score-circle').style.setProperty('--pct',sc.total);
-  document.getElementById('score-lbl').textContent=sc.total>=85?'Pronta para Head':sc.total>=72?'Em transição para Head':'Desenvolvimento ativo';
-  document.getElementById('score-desc').textContent='Score mensal · '+fmt(S.kpis[S.kpis.length-1].mes);
-  var dims=[
-    {l:'EXECUÇÃO',v:sc.exec,m:25,c:'#1a9e4a'},
-    {l:'OKRs',v:sc.okrS,m:20,c:'#d97706'},
-    {l:'AUTONOMIA',v:sc.autoS,m:20,c:'#7c3aed'},
-    {l:'SKILLS',v:sc.sklS,m:20,c:'#0d9488'},
-    {l:'INFLUÊNCIA',v:sc.infS,m:15,c:'#e04a38'}
-  ];
-  document.getElementById('score-dims').innerHTML=dims.map(function(d){
-    return '<div class="score-dim"><div class="sd-label">'+d.l+'</div><div class="sd-bar"><div class="sd-fill" style="width:'+(d.v/d.m*100)+'%;background:'+d.c+'"></div></div><div class="sd-val">'+d.v+'/'+d.m+'</div></div>';
-  }).join('');
-  if(cRadar)cRadar.destroy();
-  var ctx=document.getElementById('radarChart');
-  cRadar=new Chart(ctx,{type:'radar',data:{labels:['Execução','OKRs','Autonomia','Skills','Influência'],datasets:[
-    {label:'Atual',data:[sc.exec/25*100,sc.okrS/20*100,sc.autoS/20*100,sc.sklS/20*100,sc.infS/15*100],backgroundColor:'rgba(26,158,74,.12)',borderColor:'#1a9e4a',borderWidth:2,pointBackgroundColor:'#1a9e4a',pointRadius:4},
-    {label:'Meta Head',data:[88,80,80,75,80],backgroundColor:'transparent',borderColor:'rgba(13,148,136,.35)',borderDash:[4,2],borderWidth:1.5,pointRadius:0}
-  ]},options:{responsive:true,plugins:{legend:{display:true,position:'top',labels:{usePointStyle:true,font:{size:10},color:'#9a9896'}}},scales:{r:{beginAtZero:true,max:100,ticks:{font:{size:9},color:'#9a9896',stepSize:33},grid:{color:'rgba(0,0,0,.06)'},pointLabels:{font:{size:11},color:'#4a4846'}}}}});
-  if(cHist)cHist.destroy();
+  var sc=calcSc(),rb=getRB(sc);
+  document.getElementById("sc-rb").innerHTML="<span class='rb "+rb.cls+"'><span class='rb-dot'></span>"+rb.lbl+"</span>";
+  document.getElementById("sc-num").textContent=sc.total;
+  document.getElementById("sc-ring").style.setProperty("--p",sc.total);
+  document.getElementById("sc-lbl").textContent=sc.total>=85?"Pronta para Head":sc.total>=72?"Em transicao para Head":"Desenvolvimento ativo";
+  document.getElementById("sc-ds").textContent="Score mensal "+fmtMes(S.kpis[S.kpis.length-1].mes);
+  var dims=[{l:"EXECUCAO",v:sc.exec,m:25,c:"#1a9e4a"},{l:"OKRs",v:sc.okrS,m:20,c:"#d97706"},{l:"AUTONOMIA",v:sc.autoS,m:20,c:"#7c3aed"},{l:"SKILLS",v:sc.sklS,m:20,c:"#0d9488"},{l:"INFLUENCIA",v:sc.infS,m:15,c:"#e04a38"}];
+  document.getElementById("sc-dims").innerHTML=dims.map(function(d){return "<div class='sdim'><div class='sdl'>"+d.l+"</div><div class='sdb'><div class='sdf' style='width:"+(d.v/d.m*100)+"%;background:"+d.c+"'></div></div><div class='sdv'>"+d.v+"/"+d.m+"</div></div>";}).join("");
+  if(cR)cR.destroy();
+  cR=new Chart(document.getElementById("ch-radar"),{type:"radar",data:{labels:["Execucao","OKRs","Autonomia","Skills","Influencia"],datasets:[
+    {label:"Atual",data:[sc.exec/25*100,sc.okrS/20*100,sc.autoS/20*100,sc.sklS/20*100,sc.infS/15*100],backgroundColor:"rgba(26,158,74,.12)",borderColor:"#1a9e4a",borderWidth:2,pointBackgroundColor:"#1a9e4a",pointRadius:4},
+    {label:"Meta Head",data:[88,80,80,75,80],backgroundColor:"transparent",borderColor:"rgba(13,148,136,.35)",borderDash:[4,2],borderWidth:1.5,pointRadius:0}
+  ]},options:{responsive:true,plugins:{legend:{display:true,position:"top",labels:{usePointStyle:true,font:{size:10},color:"#9a9896"}}},scales:{r:{beginAtZero:true,max:100,ticks:{font:{size:9},color:"#9a9896",stepSize:33},grid:{color:"rgba(0,0,0,.06)"},pointLabels:{font:{size:11},color:"#4a4846"}}}}});
+  if(cH)cH.destroy();
   var scores=S.kpis.map(function(k){
-    var pr=k.prazo||90,ok=k.okrs||70,i=k.inf||4,a=k.auto||3;
-    var e=pr>=95?25:pr>=90?20:14,o=ok>=80?20:ok>=70?15:10,au=[5,8,12,16,20][Math.min(4,a)];
-    var sk2=S.skills||[];var mp=sk2.length*2;var g=sk2.reduce(function(a2,s){return a2+({'nao-atende':0,'desenvolvendo':1,'atende':2,'supera':3}[s.status]||0);},0);
-    var p2=mp?g/mp:0;var sl=p2>=0.7?20:p2>=0.5?14:8;var inf=i>=7?15:i>=5?10:6;
-    return{mes:fmt(k.mes),total:e+o+au+sl+inf};
+    var pr=k.prazo||0,ok=k.okrs||0,ai=k.inf||0,au=k.auto||0;
+    var e=pr>=95?25:pr>=90?20:14,o=ok>=80?20:ok>=70?15:10,a=[5,8,12,16,20][Math.min(4,au)];
+    var sk2=S.skills||[],mp=sk2.length*2,g=sk2.reduce(function(ac,s){return ac+({"nao-atende":0,"desenvolvendo":1,"atende":2,"supera":3}[s.status]||0);},0);
+    var p2=mp?g/mp:0,sl=p2>=0.7?20:p2>=0.5?14:8,ii=ai>=7?15:ai>=5?10:6;
+    return{mes:fmtMes(k.mes),t:e+o+a+sl+ii};
   });
-  cHist=mkChart('histChart',scores.map(function(s){return s.mes;}),[
-    {label:'Score Total',data:scores.map(function(s){return s.total;}),color:'#1a9e4a',bg:'rgba(26,158,74,.08)',fill:true},
-    {label:'Meta Head (85)',data:scores.map(function(){return 85;}),color:'rgba(13,148,136,.45)',dash:[4,2],fill:false}
-  ],0,100,'');
-  var sk=S.skills||[];var ok2=sk.filter(function(s){return s.status==='atende'||s.status==='supera';}).length;var pct2=sk.length?ok2/sk.length:0;
-  var crit=[
-    {lbl:'Score ≥ 85',chk:sc.total>=85,val:'Atual: '+sc.total},
-    {lbl:'Autonomia ≥ N4',chk:sc.autoLvl>=4,val:'Atual: N'+sc.autoLvl},
-    {lbl:'OKRs ≥ 80%',chk:sc.okrs>=80,val:'Atual: '+sc.okrs+'%'},
-    {lbl:'Skills ≥ 70% ok',chk:pct2>=0.7,val:'Atual: '+Math.round(pct2*100)+'%'},
-    {lbl:'Influência ≥ 7/mês',chk:sc.inf>=7,val:'Atual: '+sc.inf+'/mês'},
-    {lbl:'Prazo ≥ 95%',chk:sc.prazo>=95,val:'Atual: '+sc.prazo+'%'}
-  ];
-  document.getElementById('crit-list').innerHTML=crit.map(function(c){
-    return '<div class="crit-row"><div><div class="crit-name">'+c.lbl+'</div><div class="crit-val">'+c.val+'</div></div><span class="'+(c.chk?'ps-done':'ps-prog')+'">'+(c.chk?'✓ Atingido':'Pendente')+'</span></div>';
-  }).join('');
+  cH=mkLine("ch-hist",scores.map(function(s){return s.mes;}),[
+    {l:"Score",d:scores.map(function(s){return s.t;}),c:"#1a9e4a",bg:"rgba(26,158,74,.08)",fill:true},
+    {l:"Meta 85",d:scores.map(function(){return 85;}),c:"rgba(13,148,136,.45)",dash:[4,2]}
+  ],0,100,"");
+  var sk=S.skills||[],ok2=sk.filter(function(s){return s.status==="atende"||s.status==="supera";}).length,pct2=sk.length?ok2/sk.length:0;
+  var crit=[{lbl:"Score >= 85",chk:sc.total>=85,val:"Atual: "+sc.total},{lbl:"Autonomia >= N4",chk:sc.autoLvl>=4,val:"Atual: N"+sc.autoLvl},{lbl:"OKRs >= 80%",chk:sc.okrs>=80,val:"Atual: "+sc.okrs+"%"},{lbl:"Skills >= 70% ok",chk:pct2>=0.7,val:"Atual: "+Math.round(pct2*100)+"%"},{lbl:"Influencia >= 7/mes",chk:sc.inf>=7,val:"Atual: "+sc.inf+"/mes"},{lbl:"Prazo >= 95%",chk:sc.prazo>=95,val:"Atual: "+sc.prazo+"%"}];
+  document.getElementById("sc-crit").innerHTML=crit.map(function(c){return "<div class='cr'><div><div class='crn'>"+c.lbl+"</div><div class='crv'>"+c.val+"</div></div><span class='"+(c.chk?"ps-done":"ps-prog")+"'>"+(c.chk?"&#10003; Atingido":"Pendente")+"</span></div>";}).join("");
 }
 
-var activeCat='all';
+/* ── skills ── */
+var activeCat="all";
 function filterCat(cat,btn){
   activeCat=cat;
-  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});
-  btn.classList.add('active');
+  document.querySelectorAll(".tab").forEach(function(t){t.classList.remove("active");});
+  btn.classList.add("active");
   renderSkills();
 }
 function renderSkills(){
-  var sk=S.skills||[];
-  var filtered=activeCat==='all'?sk:sk.filter(function(s){return s.cat===activeCat;});
-  var grouped={};
-  filtered.forEach(function(s){if(!grouped[s.cat])grouped[s.cat]=[];grouped[s.cat].push(s);});
-  document.getElementById('skills-body').innerHTML=Object.keys(grouped).map(function(cat){
-    var items=grouped[cat];
-    return '<div class="cat-row">'+(CAT_NAMES[cat]||cat)+'</div>'+items.map(function(s){
-      var st=SM[s.status]||SM['desenvolvendo'];
-      return '<div class="skill-row"><div><div class="skill-name">'+s.name+'</div><div class="skill-desc">'+s.desc+'</div>'+(s.obs?'<div class="skill-obs">&#8627; '+s.obs+'</div>':'')+'</div><span class="pill '+st.cls+'">'+st.lbl+'</span></div>';
-    }).join('');
-  }).join('');
+  var sk=S.skills||[],f=activeCat==="all"?sk:sk.filter(function(s){return s.cat===activeCat;}),g={};
+  f.forEach(function(s){if(!g[s.cat])g[s.cat]=[];g[s.cat].push(s);});
+  document.getElementById("sk-body").innerHTML=Object.keys(g).map(function(cat){
+    return "<div class='catr'>"+(CATS[cat]||cat)+"</div>"+g[cat].map(function(s){
+      var st=SM[s.status]||SM["desenvolvendo"];
+      return "<div class='skrow'><div><div class='skn'>"+s.name+"</div><div class='skd'>"+s.desc+"</div>"+(s.obs?"<div class='sko'>&#8627; "+s.obs+"</div>":"")+"</div><span class='pill "+st.cls+"'>"+st.lbl+"</span></div>";
+    }).join("");
+  }).join("");
 }
 
+/* ── PDIs ── */
 function renderPDIs(){
-  document.getElementById('pdi-body').innerHTML=(S.pdis||[]).map(function(p){
-    var st=PDI_ST[p.status]||PDI_ST['desenvolvimento'];
-    var mk=function(arr){return (arr||[]).map(function(a){return '<div class="pie-item">'+a+'</div>';}).join('');};
-    var evids=(p.evidencias&&p.evidencias.length)?'<div class="pdi-lbl" style="margin-top:14px">Evidências Registradas</div><div>'+(p.evidencias.map(function(e){return '<div class="ev-item"><span class="ev-dot">&#9658;</span><span>'+e+'</span></div>';}).join(''))+'</div>':'';
-    return '<div class="pdi-card">'
-      +'<div class="pdi-bar" style="background:'+st.bar+'"></div>'
-      +'<div class="pdi-header">'
-        +'<div class="pdi-icon">'+(p.icon||'🎯')+'</div>'
-        +'<div style="flex:1"><div class="pdi-title">'+p.comp+'</div><div class="pdi-sub">'+p.cicloLabel+' &middot; '+p.cargoAtual+' &rarr; '+p.cargoAlvo+'</div></div>'
-        +'<span class="pdi-st-pill" style="'+st.pill+'">'+st.lbl+'</span>'
-      +'</div>'
-      +'<div class="pdi-prog-row">'
-        +'<div class="pdi-prog-lbl">Progresso</div>'
-        +'<div class="pdi-prog-bar"><div class="pdi-prog-fill" style="width:'+p.progress+'%;background:'+st.bar+'"></div></div>'
-        +'<div class="pdi-prog-pct">'+p.progress+'%</div>'
-      +'</div>'
-      +'<div class="pdi-lbl">Objetivo</div><div class="pdi-txt">'+p.obj+'</div>'
-      +'<div class="pdi-lbl">Por que importa</div><div class="pdi-txt">'+p.porqueImporta+'</div>'
-      +'<div class="pdi-lbl">Critério de Sucesso</div><div class="pdi-txt">'+p.criterioSucesso+'</div>'
-      +'<div class="pdi-lbl">Plano 70 &middot; 20 &middot; 10</div>'
-      +'<div class="pie-grid">'
-        +'<div class="pie-block pie-70"><div class="pie-pct">70</div><div class="pie-label">Prática</div><div class="pie-items">'+mk(p.pie70)+'</div></div>'
-        +'<div class="pie-block pie-20"><div class="pie-pct">20</div><div class="pie-label">Social</div><div class="pie-items">'+mk(p.pie20)+'</div></div>'
-        +'<div class="pie-block pie-10"><div class="pie-pct">10</div><div class="pie-label">Formal</div><div class="pie-items">'+mk(p.pie10)+'</div></div>'
-      +'</div>'
-      +'<div><span class="ev-tag">&#128203; '+p.ev+'</span><span class="ev-tag">&#128197; '+p.ciclo+'</span></div>'
-      +evids
-      +'<div class="update-row">'
-        +'<label>Progresso:</label>'
-        +'<input type="range" min="0" max="100" value="'+p.progress+'" oninput="updProg(\''+p.id+'\',this.value,this)">'
-        +'<span id="prog-lbl-'+p.id+'" style="font-size:12px;color:#9a9896;min-width:28px">'+p.progress+'%</span>'
-        +'<select class="exp-sel" onchange="updPDISt(\''+p.id+'\',this.value)" style="margin-left:8px">'
-          +Object.keys(PDI_ST).map(function(k){return '<option value="'+k+'"'+(p.status===k?' selected':'')+'>'+PDI_ST[k].lbl+'</option>';}).join('')
-        +'</select>'
-      +'</div>'
-      +'</div>';
-  }).join('');
+  document.getElementById("pdi-body").innerHTML=(S.pdis||[]).map(function(p){
+    var st=PDIST[p.status]||PDIST["desenvolvimento"];
+    var mk=function(arr){return(arr||[]).map(function(a){return "<div class='pbitm'>"+a+"</div>";}).join("");};
+    var evs=(p.evidencias&&p.evidencias.length)?"<div class='plbl' style='margin-top:12px'>Evidencias</div><div>"+p.evidencias.map(function(e){return "<div class='evit'><span class='evdot'>&#9658;</span>"+e+"</div>";}).join("")+"</div>":"";
+    var iconMap={"ALVO":"&#127919;","GRAFICO":"&#128202;","MAPA":"&#128506;","MIC":"&#127908;"};
+    var iconHTML=iconMap[p.icon]||p.icon||"&#127919;";
+    return "<div class='pc'>"
+      +"<div class='pcbar' style='background:"+st.bar+"'></div>"
+      +"<div class='pch'>"
+        +"<div class='pci'>"+iconHTML+"</div>"
+        +"<div style='flex:1'><div class='pct'>"+p.comp+"</div><div class='pcs'>"+p.cicloLabel+" &middot; "+p.cargoAtual+" &rarr; "+p.cargoAlvo+"</div></div>"
+        +"<span class='pcpill' style='"+st.pill+"'>"+st.lbl+"</span>"
+      +"</div>"
+      +"<div class='ppr'><div class='ppl'>Progresso</div><div class='ppb'><div class='ppf' id='pf-"+p.id+"' style='width:"+p.progress+"%;background:"+st.bar+"'></div></div><div class='ppv' id='pv-"+p.id+"'>"+p.progress+"%</div></div>"
+      +"<div class='plbl'>Objetivo</div><div class='ptxt'>"+p.obj+"</div>"
+      +"<div class='plbl'>Por que importa</div><div class='ptxt'>"+p.porqueImporta+"</div>"
+      +"<div class='plbl'>Criterio de Sucesso</div><div class='ptxt'>"+p.criterioSucesso+"</div>"
+      +"<div class='plbl'>Plano 70 &middot; 20 &middot; 10</div>"
+      +"<div class='pgrid'>"
+        +"<div class='pblk pb70'><div class='pbpct'>70</div><div class='pblab'>Pratica</div><div>"+mk(p.pie70)+"</div></div>"
+        +"<div class='pblk pb20'><div class='pbpct'>20</div><div class='pblab'>Social</div><div>"+mk(p.pie20)+"</div></div>"
+        +"<div class='pblk pb10'><div class='pbpct'>10</div><div class='pblab'>Formal</div><div>"+mk(p.pie10)+"</div></div>"
+      +"</div>"
+      +"<div><span class='etag'>"+p.ev+"</span><span class='etag'>"+p.ciclo+"</span></div>"
+      +evs
+      +"<div class='updr'><label>Progresso:</label>"
+        +"<input type='range' min='0' max='100' value='"+p.progress+"' oninput='updProg(\""+p.id+"\",this.value)'>"
+        +"<select onchange='updSt(\""+p.id+"\",this.value)'>"
+          +Object.keys(PDIST).map(function(k){return "<option value='"+k+"'"+(p.status===k?" selected":"")+">"+PDIST[k].lbl+"</option>";}).join("")
+        +"</select>"
+      +"</div>"
+      +"</div>";
+  }).join("");
 }
-
-function updProg(id,val,el){
+function updProg(id,val){
   var i=S.pdis.findIndex(function(p){return p.id===id;});if(i<0)return;
   S.pdis[i].progress=parseInt(val);saveS(S);
-  var lbl=document.getElementById('prog-lbl-'+id);if(lbl)lbl.textContent=val+'%';
-  var fill=el.closest('.pdi-card').querySelector('.pdi-prog-fill');if(fill)fill.style.width=val+'%';
+  var pf=document.getElementById("pf-"+id);if(pf)pf.style.width=val+"%";
+  var pv=document.getElementById("pv-"+id);if(pv)pv.textContent=val+"%";
 }
-function updPDISt(id,val){
-  var i=S.pdis.findIndex(function(p){return p.id===id;});if(i<0)return;
-  S.pdis[i].status=val;saveS(S);renderPDIs();toast('Status atualizado!');
-}
-function openPDIModal(){document.getElementById('modal-pdi').classList.add('open');}
+function updSt(id,val){var i=S.pdis.findIndex(function(p){return p.id===id;});if(i<0)return;S.pdis[i].status=val;saveS(S);renderPDIs();toast("Status atualizado!");}
 function savePDI(){
-  S.pdis.push({id:'p'+Date.now(),status:'desenvolvimento',progress:0,cargoAtual:'Marketing Manager Sênior',cargoAlvo:'Head de Marketing',cicloLabel:'PDI 2026',comp:document.getElementById('m-comp').value,obj:document.getElementById('m-obj').value,porqueImporta:document.getElementById('m-por').value,criterioSucesso:document.getElementById('m-crit').value,ciclo:document.getElementById('m-ciclo').value,pie70:[],pie20:[],pie10:[],ev:'',icon:document.getElementById('m-icon').value||'🎯',evidencias:[]});
-  saveS(S);closeModal('modal-pdi');renderPDIs();toast('PDI criado!');
+  S.pdis.push({id:"p"+Date.now(),status:"desenvolvimento",progress:0,cargoAtual:"Marketing Manager Senior",cargoAlvo:"Head de Marketing",cicloLabel:"PDI 2026",comp:gv("mp-comp"),obj:gv("mp-obj"),porqueImporta:gv("mp-por"),criterioSucesso:gv("mp-crit"),ciclo:gv("mp-ciclo"),pie70:[],pie20:[],pie10:[],ev:"",icon:"ALVO",evidencias:[]});
+  saveS(S);closeModal("modal-pdi");renderPDIs();toast("PDI criado!");
 }
 
-var currentMes='2026-06';
+/* ── contrato ── */
+var curMes="2026-06";
 function renderContrato(){
   var meses=Object.keys(S.contratos||{}).sort(function(a,b){return b.localeCompare(a);});
-  if(meses.indexOf(currentMes)<0)currentMes=meses[0]||'2026-06';
-  document.getElementById('mes-btns').innerHTML=meses.map(function(m){
-    return '<button class="mes-btn'+(m===currentMes?' active':'')+'" onclick="selMes(\''+m+'\',this)">'+fmt(m)+'</button>';
-  }).join('');
-  var exp=((S.contratos[currentMes]||{}).experimentos)||[];
-  var TM={start:'🟢',stop:'🔴',continue:'🟡'};
-  document.getElementById('contrato-body').innerHTML=exp.length?exp.map(function(item){
-    return '<div class="exp-card">'
-      +'<div class="exp-tipo">'+(TM[item.tipo]||'⚪')+'</div>'
-      +'<div><div class="exp-ponto">'+item.ponto+'</div><div class="exp-acao">'+item.acao+'</div>'
-      +(item.recurso?'<div class="exp-recurso">&#128204; '+item.recurso+'</div>':'')
-      +(item.resultado?'<div class="exp-result">&#10003; '+item.resultado+'</div>':'')
-      +'</div>'
-      +'<select class="exp-sel" onchange="updExp(\''+currentMes+'\',\''+item.id+'\',this.value)">'
-        +'<option value="aguardando"'+(item.status==='aguardando'?' selected':'')+'>Aguardando</option>'
-        +'<option value="em_teste"'+(item.status==='em_teste'?' selected':'')+'>Em teste</option>'
-        +'<option value="funcionou"'+(item.status==='funcionou'?' selected':'')+'>Funcionou</option>'
-        +'<option value="nao_funcionou"'+(item.status==='nao_funcionou'?' selected':'')+'>Não funcionou</option>'
-      +'</select>'
-      +'</div>';
-  }).join(''):'<div class="card" style="text-align:center;padding:32px;color:#9a9896">Nenhum experimento para '+fmt(currentMes)+'.</div>';
+  if(meses.indexOf(curMes)<0)curMes=meses[0]||"2026-06";
+  document.getElementById("mes-btns").innerHTML=meses.map(function(m){return "<button class='mbtn"+(m===curMes?" active":"")+"' onclick='selMes(\""+m+"\",this)'>"+fmtMes(m)+"</button>";}).join("");
+  var exp=((S.contratos[curMes]||{}).experimentos)||[];
+  var TM={start:"&#129001;",stop:"&#128308;",continue:"&#128993;"};
+  document.getElementById("ct-body").innerHTML=exp.length?exp.map(function(item){
+    return "<div class='ec'>"
+      +"<div class='etp'>"+(TM[item.tipo]||"&#9898;")+"</div>"
+      +"<div><div class='epn'>"+item.ponto+"</div><div class='eac'>"+item.acao+"</div>"
+      +(item.recurso?"<div class='ere'>"+item.recurso+"</div>":"")
+      +(item.resultado?"<div class='erg'>&#10003; "+item.resultado+"</div>":"")
+      +"</div>"
+      +"<select class='esel' onchange='updExp(\""+curMes+"\",\""+item.id+"\",this.value)'>"
+        +"<option value='aguardando'"+(item.status==="aguardando"?" selected":"")+">Aguardando</option>"
+        +"<option value='em_teste'"+(item.status==="em_teste"?" selected":"")+">Em teste</option>"
+        +"<option value='funcionou'"+(item.status==="funcionou"?" selected":"")+">Funcionou</option>"
+        +"<option value='nao_funcionou'"+(item.status==="nao_funcionou"?" selected":"")+">Nao funcionou</option>"
+      +"</select>"
+      +"</div>";
+  }).join(""):"<div class='card' style='text-align:center;padding:28px;color:#9a9896'>Nenhum experimento para "+fmtMes(curMes)+".</div>";
 }
-function selMes(m,btn){currentMes=m;document.querySelectorAll('.mes-btn').forEach(function(b){b.classList.remove('active');});btn.classList.add('active');renderContrato();}
-function updExp(mes,id,val){var m=S.contratos[mes];if(!m)return;var i=m.experimentos.findIndex(function(e){return e.id===id;});if(i>=0)m.experimentos[i].status=val;saveS(S);toast('Atualizado!');}
-function openExpModal(){document.getElementById('modal-exp').classList.add('open');}
+function selMes(m,btn){curMes=m;document.querySelectorAll(".mbtn").forEach(function(b){b.classList.remove("active");});btn.classList.add("active");renderContrato();}
+function updExp(mes,id,val){var m=S.contratos[mes];if(!m)return;var i=m.experimentos.findIndex(function(e){return e.id===id;});if(i>=0)m.experimentos[i].status=val;saveS(S);toast("Atualizado!");}
 function saveExp(){
-  if(!S.contratos[currentMes])S.contratos[currentMes]={mes:currentMes,experimentos:[]};
-  S.contratos[currentMes].experimentos.push({id:'e'+Date.now(),tipo:document.getElementById('e-tipo').value,ponto:document.getElementById('e-ponto').value,acao:document.getElementById('e-acao').value,recurso:document.getElementById('e-recurso').value,status:'aguardando',resultado:''});
-  saveS(S);closeModal('modal-exp');renderContrato();toast('Experimento adicionado!');
+  if(!S.contratos[curMes])S.contratos[curMes]={mes:curMes,experimentos:[]};
+  S.contratos[curMes].experimentos.push({id:"e"+Date.now(),tipo:gv("ep-tipo"),ponto:gv("ep-ponto"),acao:gv("ep-acao"),recurso:gv("ep-recurso"),status:"aguardando",resultado:""});
+  saveS(S);closeModal("modal-exp");renderContrato();toast("Experimento adicionado!");
 }
 
+/* ── curadoria ── */
 function renderCuradoria(){
   var items=S.curadoria||[];
-  document.getElementById('curadoria-body').innerHTML=items.length?items.map(function(item){
-    return '<a class="cur-card" href="'+(item.url||'#')+'" target="_blank" rel="noopener">'
-      +'<div class="cur-emoji">'+(item.icon||'📚')+'</div>'
-      +'<div><div class="cur-title">'+item.title+'</div><div class="cur-desc">'+item.desc+'</div>'
-      +'<div class="cur-tags">'+(item.tags||[]).map(function(t){return '<span class="cur-tag">'+t+'</span>';}).join('')+'</div></div>'
-      +'</a>';
-  }).join(''):'<div class="card" style="text-align:center;padding:32px;color:#9a9896">Nenhum recurso ainda.</div>';
+  var iconMap={"LIVRO":"&#128218;","ESCOLA":"&#127979;","LAMPADA":"&#128161;","CEREBRO":"&#129504;","GAME":"&#127918;","ESTRELA":"&#10024;","MIC":"&#127908;"};
+  document.getElementById("cur-body").innerHTML=items.length?items.map(function(item){
+    var ic=iconMap[item.icon]||item.icon||"&#128218;";
+    return "<a class='cu' href='"+(item.url||"#")+"' target='_blank' rel='noopener'>"
+      +"<div class='cue'>"+ic+"</div>"
+      +"<div><div class='cut'>"+item.title+"</div><div class='cud'>"+item.desc+"</div>"
+      +"<div class='cutg'>"+(item.tags||[]).map(function(t){return "<span class='ctg'>"+t+"</span>";}).join("")+"</div></div>"
+      +"</a>";
+  }).join(""):"<div class='card' style='text-align:center;padding:28px;color:#9a9896'>Nenhum recurso ainda.</div>";
 }
-function openCurModal(){document.getElementById('modal-cur').classList.add('open');}
 function saveCur(){
   if(!S.curadoria)S.curadoria=[];
-  S.curadoria.push({id:'r'+Date.now(),title:document.getElementById('c-title').value,desc:document.getElementById('c-desc').value,url:document.getElementById('c-url').value,tags:document.getElementById('c-tags').value.split(',').map(function(t){return t.trim();}).filter(Boolean),icon:document.getElementById('c-icon').value||'📚'});
-  saveS(S);closeModal('modal-cur');renderCuradoria();toast('Recurso adicionado!');
+  S.curadoria.push({id:"r"+Date.now(),title:gv("cp-title"),desc:gv("cp-desc"),url:gv("cp-url"),tags:gv("cp-tags").split(",").map(function(t){return t.trim();}).filter(Boolean),icon:"LIVRO"});
+  saveS(S);closeModal("modal-cur");renderCuradoria();toast("Recurso adicionado!");
 }
 
-function mkChart(id,labels,datasets,yMin,yMax,ySuf){
+/* ── charts ── */
+function mkLine(id,labs,ds,yMin,yMax,ySuf){
   var ctx=document.getElementById(id);if(!ctx)return null;
-  return new Chart(ctx,{type:'line',data:{labels:labels,datasets:datasets.map(function(d){return {label:d.label,data:d.data,borderColor:d.color,backgroundColor:d.fill?(d.bg||'transparent'):'transparent',fill:d.fill||false,tension:.4,borderDash:d.dash||[],pointRadius:d.dash?0:4,pointBackgroundColor:d.color,borderWidth:d.dash?1.5:2};})},options:{responsive:true,plugins:{legend:{display:true,position:'top',labels:{usePointStyle:true,font:{size:10},color:'#9a9896'}}},scales:{x:{grid:{color:'rgba(0,0,0,.04)'},ticks:{font:{size:10},color:'#9a9896'}},y:{min:yMin,max:yMax,grid:{color:'rgba(0,0,0,.04)'},ticks:{font:{size:10},color:'#9a9896',callback:function(v){return v+(ySuf||'');}}}}}});
+  return new Chart(ctx,{type:"line",data:{labels:labs,datasets:ds.map(function(d){return{label:d.l,data:d.d,borderColor:d.c,backgroundColor:d.fill?(d.bg||"transparent"):"transparent",fill:d.fill||false,tension:.4,borderDash:d.dash||[],pointRadius:d.dash?0:4,pointBackgroundColor:d.c,borderWidth:d.dash?1.5:2};})},options:{responsive:true,plugins:{legend:{display:true,position:"top",labels:{usePointStyle:true,font:{size:10},color:"#9a9896"}}},scales:{x:{grid:{color:"rgba(0,0,0,.04)"},ticks:{font:{size:10},color:"#9a9896"}},y:{min:yMin,max:yMax,grid:{color:"rgba(0,0,0,.04)"},ticks:{font:{size:10},color:"#9a9896",callback:function(v){return v+ySuf;}}}}}});
 }
 
-function toast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2600);}
-function closeModal(id){document.getElementById(id).classList.remove('open');}
-document.addEventListener('click',function(e){['modal-pdi','modal-exp','modal-cur'].forEach(function(id){var m=document.getElementById(id);if(m&&e.target===m)m.classList.remove('open');});});
-document.addEventListener('DOMContentLoaded',function(){renderOverview();});
+/* ── utils ── */
+function gv(id){var el=document.getElementById(id);return el?el.value:"";}
+function toast(msg){var t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(function(){t.classList.remove("show");},2400);}
+function openModal(id){document.getElementById(id).classList.add("open");}
+function closeModal(id){document.getElementById(id).classList.remove("open");}
+document.addEventListener("click",function(e){["modal-pdi","modal-exp","modal-cur"].forEach(function(id){var m=document.getElementById(id);if(m&&e.target===m)m.classList.remove("open");});});
+
+/* ── init ── */
+window.addEventListener("load",function(){renderOverview();});
 </script>
 </body>
 </html>
